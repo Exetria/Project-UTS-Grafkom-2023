@@ -16,7 +16,8 @@ public class MouseInput {
     private boolean leftButtonReleased;
     private boolean rightButtonReleased;
 
-    public MouseInput(long windowHandle) {
+    public MouseInput(long windowHandle)
+    {
         previousPos = new Vector2f(-1, -1);
         currentPos = new Vector2f();
         scroll = new Vector2f();

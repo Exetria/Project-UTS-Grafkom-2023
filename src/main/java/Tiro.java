@@ -46,9 +46,11 @@ public class Tiro
                         Arrays.asList
                                 (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                         new ArrayList<>(),
-                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.1, 0.1, 0.1, 0, 0, 0, 1
+                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.1, 0.1, 0.1, 0, 0, 0, 2
                 )
         );
+
+//        spheres.get(0).rotateObject(90, 0, 0, 0);
 
 //        spheres.get(0).getChildObjects().add(new Sphere
 //                (
@@ -65,78 +67,117 @@ public class Tiro
 
     public void input()
     {
-        if(window.isKeyPressed(GLFW_KEY_Q))
         {
-            for (Sphere i: spheres)
+            if(window.isKeyPressed(GLFW_KEY_Q))
             {
-                i.rotateObject(0.01f, 0, 0, 1);
-                //, (float) i.getCpx(), (float) i.getCpy()
+                for (Sphere i: spheres)
+                {
+                    i.rotateObject(0.01f, 0, 0, 1);
+                }
+            }
+
+            if(window.isKeyPressed(GLFW_KEY_E))
+            {
+                for (Sphere i: spheres)
+                {
+                    i.rotateObject(-0.01f, 0, 0, 1);
+                }
+            }
+
+            if(window.isKeyPressed(GLFW_KEY_W))
+            {
+                for (Sphere i: spheres)
+                {
+                    i.rotateObject(0.01f, 1, 0, 0);
+                }
+            }
+
+            if(window.isKeyPressed(GLFW_KEY_S))
+            {
+                for (Sphere i: spheres)
+                {
+                    i.rotateObject(-0.01f, 1, 0, 0);
+                }
+            }
+
+            if(window.isKeyPressed(GLFW_KEY_A))
+            {
+                for (Sphere i: spheres)
+                {
+                    i.rotateObject(0.01f, 0, 1, 0);
+                }
+            }
+
+            if(window.isKeyPressed(GLFW_KEY_D))
+            {
+                for (Sphere i: spheres)
+                {
+                    i.rotateObject(-0.01f, 0, 1, 0);
+                }
             }
         }
 
-        if(window.isKeyPressed(GLFW_KEY_E))
-        {
-            for (Sphere i: spheres)
-            {
-                i.rotateObject(-0.01f, 0, 0, 1);
-                //, (float) i.getCpx(), (float) i.getCpy()
-            }
-        }
+        //================================================================================
 
-        if(window.isKeyPressed(GLFW_KEY_A))
         {
-            for (Sphere i: spheres)
+            if(window.isKeyPressed(GLFW_KEY_U))
             {
-                i.rotateObject(0.01f, 0, 1, 0);
-                //, (float) i.getCpx(), (float) i.getCpy()
+                for (Sphere i: spheres)
+                {
+                    i.translateObject(0f, 0, 0.001f);
+                }
             }
-        }
 
-        if(window.isKeyPressed(GLFW_KEY_D))
-        {
-            for (Sphere i: spheres)
+            if(window.isKeyPressed(GLFW_KEY_O))
             {
-                i.rotateObject(-0.01f, 0, 1, 0);
-                //, (float) i.getCpx(), (float) i.getCpy()
+                for (Sphere i: spheres)
+                {
+                    i.translateObject(0f, 0, -0.001f);
+                }
             }
-        }
 
-        if(window.isKeyPressed(GLFW_KEY_W))
-        {
-            for (Sphere i: spheres)
+            if(window.isKeyPressed(GLFW_KEY_I))
             {
-                i.rotateObject(0.01f, 1, 0, 0);
-                //, (float) i.getCpx(), (float) i.getCpy()
+                for (Sphere i: spheres)
+                {
+                    i.translateObject(0f, 0.001f, 0f);
+                }
             }
-        }
 
-        if(window.isKeyPressed(GLFW_KEY_S))
-        {
-            for (Sphere i: spheres)
+            if(window.isKeyPressed(GLFW_KEY_K))
             {
-                i.rotateObject(-0.01f, 1, 0, 0);
-                //, (float) i.getCpx(), (float) i.getCpy()
+                for (Sphere i: spheres)
+                {
+                    i.translateObject(0f, -0.001f, 0f);
+                }
+            }
+
+            if(window.isKeyPressed(GLFW_KEY_J))
+            {
+                for (Sphere i: spheres)
+                {
+                    i.translateObject(-0.001f, 0f, 0f);
+                }
+            }
+
+            if(window.isKeyPressed(GLFW_KEY_L))
+            {
+                for (Sphere i: spheres)
+                {
+                    i.translateObject(0.001f, 0f, 0f);
+                }
             }
         }
 
         if(window.isKeyPressed(GLFW_KEY_LEFT_SHIFT))
         {
-            for (Sphere i: spheres)
-            {
-                camera.moveForward(0.01f);
-                //, (float) i.getCpx(), (float) i.getCpy()
-            }
+            camera.moveForward(0.01f);
         }
 
         if(window.isKeyPressed(GLFW_KEY_LEFT_CONTROL))
         {
-            for (Sphere i: spheres)
-            {
-                camera.moveBackwards(0.01f);
-                //, (float) i.getCpx(), (float) i.getCpy()
-            }
+            camera.moveBackwards(0.01f);
         }
-
 
         if(window.getMouseInput().isLeftButtonPressed())
         {
@@ -148,7 +189,6 @@ public class Tiro
             //if buat cek kalo value lebih dari 1/-1 tidak usah ditampilkan
             if((!(pos.x > 1 || pos.x < -0.997) && !(pos.y > 1 || pos.y < -1)))
             {
-                System.out.println("x: " + pos.x + "   y: " + pos.y);
 //                objectsPointControl.get(0).addVertices(new Vector3f(pos.x, -pos.y, 0));
             }
         }
@@ -164,32 +204,13 @@ public class Tiro
             GL.createCapabilities();
 
             //Code
-//            for (Objects objects : this.objects)
-//            {
-//                //1 warna
-//                objects.draw();
-//            }
-
             for (Sphere objects : this.spheres)
             {
                 //gambar sekalian child
-                objects.draw(true, camera, projection);
+                objects.draw(camera, projection);
             }
 
-//            for (Objects objects : multipleColorObjects)
-//            {
-//                //banyak warna
-//                objects.drawWithVerticesColor();
-//            }
-//
-//            for (Objects objects : objectsPointControl)
-//            {
-//                //banyak warna
-//                objects.drawLine();
-//            }
-
             //Poll for window event
-            //
             glDisableVertexAttribArray(0);
             glfwPollEvents();
 

@@ -77,6 +77,7 @@ public class Objects extends ShaderProgram
         glBufferData(GL_ARRAY_BUFFER, Utils.listoFloat(verticesColor), GL_STATIC_DRAW);
     }
 
+    //draw setup tanpa kamera
     public void drawSetup()
     {
         bind();
@@ -89,6 +90,7 @@ public class Objects extends ShaderProgram
         glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
     }
 
+    //draw setup pake kamera
     public void drawSetup(Camera camera, Projection projection)
     {
         bind();
@@ -103,6 +105,7 @@ public class Objects extends ShaderProgram
         glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
     }
 
+    //drawsetup pake warna vertices
     public void drawSetupWithVerticesColor()
     {
         bind();
@@ -115,12 +118,14 @@ public class Objects extends ShaderProgram
         glVertexAttribPointer(1, 3, GL_FLOAT, false, 0, 0);
     }
 
+    //tambah vertices ke ArrayList
     public void addVertices(Vector3f newVector)
     {
         vertices.add(newVector);
         setupVAOVBO();
     }
 
+    //bikin ArrayList baru isinya 3 vertices untuk garis bezier
     public void addVertices(double firstX, double firstY, double secondX, double secondY, double thirdX, double thirdY)
     {
         vertices.clear();
@@ -141,27 +146,44 @@ public class Objects extends ShaderProgram
         setupVAOVBO();
     }
 
+    //update vertices dalam ArrayList index ke x
     public void updateVertice(int index, Vector3f value)
     {
         vertices.set(index, value);
         setupVAOVBO();
     }
 
-    public Vector3f updateCenterPoint()
+    //get child
+    public List<Objects> getChildObjects()
+    {
+        return childObjects;
+    }
+
+    //set child
+    public void setChildObjects(List<Objects> childObjects)
+    {
+        this.childObjects = childObjects;
+    }
+
+    //getCenterPoint dari objek (jangan dipake, belum jadi pasti)
+    public Vector3f getCenterPoint()
     {
         Vector3f centerTemp = new Vector3f();
         model.transformPosition(0, 0, 0, centerTemp);           //kalo dikali 0 semua nnti dapat posisi sekarang
         return centerTemp;
     }
 
+    //translate objek + childnya
     public void translateObject(float offsetX, float offsetY, float offsetZ)
     {
         model = new Matrix4f().translate(offsetX, offsetY, offsetZ).mul(new Matrix4f(model));
-        for (Objects i: childObjects) {
+        for (Objects i: childObjects)
+        {
             i.translateObject(offsetX, offsetY, offsetZ);
         }
     }
 
+    //rotate objek + childnya
     public void rotateObject(float degree, float offsetX, float offsetY, float offsetZ)
     {
         //offset x, y, sama z itu maksudnya rotasi terhadap sumbunya misal z=1 berarti rotasi thd sb z
@@ -171,6 +193,7 @@ public class Objects extends ShaderProgram
         }
     }
 
+    //scale object + childnya
     public void scaleObject(float x, float y, float z)
     {
         model = new Matrix4f().scale(x, y, z).mul(new Matrix4f(model));
@@ -179,40 +202,52 @@ public class Objects extends ShaderProgram
         }
     }
 
+    //clear semua vertices di ArrayList
     public void clearVertices()
     {
         vertices.clear();
     }
 
+    //draw standar tanpa
     public void draw()
     {
         drawSetup();
         glLineWidth(1);
         glPointSize(0);
-        glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+        glDrawArrays(GL_POLYGON, 0, vertices.size());
+        for (Objects i: childObjects)
+        {
+            i.draw();
+        }
     }
 
+    //draw pake kamera + child
     public void draw(Camera camera, Projection projection)
     {
         drawSetup(camera, projection);
         glLineWidth(1);
         glPointSize(0);
-        glDrawArrays(GL_TRIANGLES, 0, vertices.size());
+        glDrawArrays(GL_POLYGON, 0, vertices.size());
+        for (Objects i: childObjects)
+        {
+            i.draw(camera, projection);
+        }
     }
 
-    public void draw(boolean child, Camera camera, Projection projection)
+    //method draw pake kamera + child tapi gambarnya pake garis
+    public void draw(Camera camera, Projection projection, boolean garis)
     {
         drawSetup(camera, projection);
         glLineWidth(1);
         glPointSize(0);
         glDrawArrays(GL_LINE_STRIP, 0, vertices.size());
-
         for (Objects i: childObjects)
         {
-            i.draw(true, camera, projection);
+            i.draw(camera, projection);
         }
     }
 
+    //draw pake warna banyak
     public void drawWithVerticesColor()
     {
         drawSetupWithVerticesColor();
@@ -221,21 +256,12 @@ public class Objects extends ShaderProgram
         glDrawArrays(GL_TRIANGLES, 0, vertices.size());
     }
 
+    //draw garis
     public void drawLine()
     {
-//        drawSetup();
-        glLineWidth(4);
+        drawSetup();
+        glLineWidth(1);
         glPointSize(0);
         glDrawArrays(GL_LINE_STRIP, 0, vertices.size());
-    }
-
-    public List<Objects> getChildObjects()
-    {
-        return childObjects;
-    }
-
-    public void setChildObjects(List<Objects> childObjects)
-    {
-        this.childObjects = childObjects;
     }
 }
