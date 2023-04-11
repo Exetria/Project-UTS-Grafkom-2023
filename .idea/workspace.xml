@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7265bded-3803-4b65-8f98-d5b995e8343e" name="Changes" comment="Week 8 - Camera (early)" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="shader-template" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2Lfs4RwwdP0bVXlxLaU3QLq79W4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Vince/Downloads/project&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propGUI&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Vince\OneDrive\Documents\GitHub\Exetria-Grafkom-2022-2023\resources\shaders" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="Exetria-Grafkom-2022-2023" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProjectUTS" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Project.ProjectUTS" />
+      <module name="Exetria-Grafkom-2022-2023" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Project.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TugasWeekII" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Tugas.TugasWeekII" />
+      <module name="Exetria-Grafkom-2022-2023" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Tugas.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TugasWeekIII" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Tugas.TugasWeekIII" />
+      <module name="Exetria-Grafkom-2022-2023" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Tugas.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TugasWeekIV" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Tugas.TugasWeekIV" />
+      <module name="Exetria-Grafkom-2022-2023" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Tugas.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.ProjectUTS" />
+        <item itemvalue="Application.TugasWeekIV" />
+        <item itemvalue="Application.TugasWeekII" />
+        <item itemvalue="Application.TugasWeekIII" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7265bded-3803-4b65-8f98-d5b995e8343e" name="Changes" comment="" />
+      <created>1676273283351</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1676273283351</updated>
+    </task>
+    <task id="LOCAL-00001" summary="tugas 1/2 selesai">
+      <created>1676900975406</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1676900975406</updated>
+    </task>
+    <task id="LOCAL-00002" summary="tugas week3 bagian rumah selesai">
+      <created>1676904796179</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1676904796179</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Tugas week 3 tinggal bintang">
+      <created>1676910219271</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1676910219271</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Tugas week 3 SELESAI">
+      <created>1676996795657</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1676996795657</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Tugas Week III - smape kotak bisa spawn + collision detection">
+      <created>1677685006953</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1677685006953</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Tugas Week III - tinggal drag and drop">
+      <created>1677778699664</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1677778699664</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Tugas Week III - Finish">
+      <created>1678064436443</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1678064436443</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Tugas Week IV - Finish">
+      <created>1678689250129</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1678689250129</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Tugas Week V - Finish (bulan salah)">
+      <created>1678716565333</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1678716565333</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Week 8 - Camera (early)">
+      <created>1681110639644</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1681110639644</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="tugas 1/2 selesai" />
+    <MESSAGE value="tugas week3 bagian rumah selesai" />
+    <MESSAGE value="Tugas week 3 tinggal bintang" />
+    <MESSAGE value="Tugas week 3 SELESAI" />
+    <MESSAGE value="Tugas Week III - smape kotak bisa spawn + collision detection" />
+    <MESSAGE value="Tugas Week III - tinggal drag and drop" />
+    <MESSAGE value="Tugas Week III - Finish" />
+    <MESSAGE value="Tugas Week IV - Finish" />
+    <MESSAGE value="Tugas Week V - Finish (bulan salah)" />
+    <MESSAGE value="Week 8 - Camera (early)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Week 8 - Camera (early)" />
+  </component>
+</project>
