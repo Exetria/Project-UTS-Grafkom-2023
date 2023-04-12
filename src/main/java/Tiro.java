@@ -17,10 +17,7 @@ public class Tiro
     Camera camera = new Camera();
     Projection projection = new Projection(window.getWidth(), window.getHeight());
 
-    ArrayList<Objects> objects = new ArrayList<>();
     ArrayList<Sphere> spheres = new ArrayList<>();
-    ArrayList<Objects> multipleColorObjects = new ArrayList<>();
-    ArrayList<Objects> objectsPointControl =  new ArrayList<>();
 
     public static void main(String[] args)
     {
@@ -46,11 +43,39 @@ public class Tiro
                         Arrays.asList
                                 (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                         new ArrayList<>(),
-                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.1, 0.1, 0.1, 0, 0, 0, 2
+                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.1, 0.1, 0.1, 0f, 0, 0, 1
+                )
+        );
+        spheres.get(0).translateObject(0.1f, 0, 0);
+
+        spheres.add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.1, 0.1, 0.1, 0f, 0, 0, 1
+                )
+        );
+        spheres.get(1).translateObject(-0.1f, 0, 0);
+
+        spheres.add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.07, 0.07, 0.5, 0f, 0, 0, 3
                 )
         );
 
-//        spheres.get(0).rotateObject(90, 0, 0, 0);
+        spheres.add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.07, 0.07, 0.1, 0f, 0, 0, 1
+                )
+        );
+        spheres.get(3).translateObject(0.0f, 0, -0.5f);
 
 //        spheres.get(0).getChildObjects().add(new Sphere
 //                (
@@ -60,6 +85,7 @@ public class Tiro
 //                        new Vector4f(0.0f, 0.0f, 1.0f, 1.0f),0.1, 0.1, 0.1, 0, 0, 0, 1
 //                )
 //        );
+
 
 //        spheres.get(0).translateObject(-0.25f, -0.25f, 0);
 //        spheres.get(0).getChildObjects().get(0).translateObject(0.5f, 0.5f, 0.5f);
@@ -171,12 +197,12 @@ public class Tiro
 
         if(window.isKeyPressed(GLFW_KEY_LEFT_SHIFT))
         {
-            camera.moveForward(0.01f);
+            camera.moveForward(0.02f);
         }
 
         if(window.isKeyPressed(GLFW_KEY_LEFT_CONTROL))
         {
-            camera.moveBackwards(0.01f);
+            camera.moveBackwards(0.02f);
         }
 
         if(window.getMouseInput().isLeftButtonPressed())

@@ -244,13 +244,13 @@ public class Sphere extends Circle
         vertices.clear();
         ArrayList<Vector3f> temp = new ArrayList<>();
 
-        for (double i = 0; i < 360; i+=0.01)
+        for (double i = 0; i < 360; i+=0.1)
         {
             x = cpx + r * (float)Math.cos(Math.toRadians(i));
             y = cpy + r * (float)Math.sin(Math.toRadians(i));
 
             temp.add(new Vector3f((float)x, (float)y, 0.0f));
-            temp.add(new Vector3f((float)x, (float)y, radiusZ));
+            temp.add(new Vector3f((float)x, (float)y, -radiusZ));
         }
 
         vertices = temp;
@@ -279,9 +279,9 @@ public class Sphere extends Circle
 
         for(double v = -Math.PI/2; v<= Math.PI/2; v+=Math.PI/60){
             for(double u = -Math.PI/2; u<= Math.PI/2; u+=Math.PI/60){
-                float x = 0.5f * (float)((1/Math.cos(v)) * Math.cos(u));
-                float y = 0.5f * (float)((1/Math.cos(v)) * Math.sin(u));
-                float z = 0.5f * (float)(Math.tan(v));
+                float x = radiusX * (float)((1/Math.cos(v)) * Math.cos(u));
+                float y = radiusY * (float)((1/Math.cos(v)) * Math.sin(u));
+                float z = radiusZ * (float)(Math.tan(v));
                 temp.add(new Vector3f(x,y,z));
             }
         }
@@ -295,16 +295,16 @@ public class Sphere extends Circle
 
         for(double v = -Math.PI/2; v<= Math.PI/2; v+=Math.PI/60){
             for(double u = -Math.PI/2; u<= Math.PI/2; u+=Math.PI/60){
-                float x = 0.5f * (float)(Math.tan(v) * Math.cos(u));
-                float y = 0.5f * (float)(Math.tan(v) * Math.sin(u));
-                float z = 0.5f * (float)(1/Math.cos(v));
+                float x = radiusX * (float)(Math.tan(v) * Math.cos(u));
+                float y = radiusY * (float)(Math.tan(v) * Math.sin(u));
+                float z = radiusZ * (float)(1/Math.cos(v));
                 temp.add(new Vector3f(x,y,z));
             }
 
             for(double u = Math.PI/2; u<= 3 * Math.PI / 2; u+=Math.PI/60){
-                float x = 0.5f * (float)(Math.tan(v) * Math.cos(u));
-                float y = 0.5f * (float)(Math.tan(v) * Math.sin(u));
-                float z = 0.5f * (float)(1/Math.cos(v));
+                float x = -radiusX * (float)(Math.tan(v) * Math.cos(u));
+                float y = -radiusY * (float)(Math.tan(v) * Math.sin(u));
+                float z = -radiusZ * (float)(1/Math.cos(v));
                 temp.add(new Vector3f(x,y,z));
             }
         }
