@@ -323,9 +323,9 @@ public class Sphere extends Circle
 
         for(double v = 0; v<= 2 * Math.PI; v+=Math.PI/60){
             for(double u = -Math.PI; u<= Math.PI; u+=Math.PI/60){
-                float x = (float) (0.5 * v * Math.cos(u));
-                float y = (float) (0.5 * v * Math.sin(u));
-                float z = (float) (0.5f * v);
+                float x = (float) (radiusX * v * Math.cos(u));
+                float y = (float) (radiusY * v * Math.sin(u));
+                float z = (float) (radiusZ * v);
                 temp.add(new Vector3f(x,y,z));
             }
         }
@@ -339,8 +339,8 @@ public class Sphere extends Circle
 
         for(double v = 0; v<= 2 * Math.PI; v+=Math.PI/60){
             for(double u = -Math.PI; u<= Math.PI; u+=Math.PI/60){
-                float x = (float) (0.5 * v * Math.cos(u));
-                float y = (float) (0.5 * v * Math.sin(u));
+                float x = (float) (radiusX * v * Math.cos(u));
+                float y = (float) (radiusY * v * Math.sin(u));
                 float z = (float) (Math.pow(v, 2));
                 temp.add(new Vector3f(x,y,z));
             }
@@ -355,9 +355,9 @@ public class Sphere extends Circle
 
         for(double v = 0; v<= 2 * Math.PI; v+=Math.PI/60){
             for(double u = -Math.PI; u<= Math.PI; u+=Math.PI/60){
-                float x = 0.5f * (float) (v * Math.tan(u));
-                float y = 0.5f * (float) (v * 1/Math.cos(u));
-                float z = 0.5f * (float)(Math.pow(v, 2));
+                float x = radiusX * (float) (v * Math.tan(u));
+                float y = radiusY * (float) (v * 1/Math.cos(u));
+                float z = radiusZ * (float)(Math.pow(v, 2));
                 temp.add(new Vector3f(x,y,z));
             }
         }

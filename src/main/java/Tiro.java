@@ -37,59 +37,14 @@ public class Tiro
         camera.setPosition(0, 0,  0.5f);
         camera.setRotation((float) Math.toRadians(0f),  (float) Math.toRadians(0f));
 
-        //bikin sphere
         spheres.add(new Sphere
-            (
-                    Arrays.asList
-                            (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
-                    new ArrayList<>(),
-                    new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.07, 0.07, 0.07, 0f, 0, 0, 1
-            )
-    );
-        spheres.get(0).translateObject(0.0f, 0, - 0.5f);
-
-
-        spheres.get(0).getChildObjects().add(new Sphere
                 (
                         Arrays.asList
                                 (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                         new ArrayList<>(),
-                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.1, 0.1, 0.1, 0f, 0, 0, 1
+                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.07, 0.07, 0.07, 0f, 0, 0, 8
                 )
         );
-        spheres.get(0).getChildObjects().get(0).translateObject(-0.1f, 0, 0);
-
-        spheres.get(0).getChildObjects().add(new Sphere
-                (
-                        Arrays.asList
-                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
-                        new ArrayList<>(),
-                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.07, 0.07, 0.5, 0f, 0, 0, 3
-                )
-        );
-
-        spheres.get(0).getChildObjects().add(new Sphere
-            (
-                    Arrays.asList
-                            (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
-                    new ArrayList<>(),
-                    new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.1, 0.1, 0.1, 0f, 0, 0, 1
-            )
-    );
-        spheres.get(0).getChildObjects().get(2).translateObject(0.1f, 0, 0);
-
-//        spheres.get(0).getChildObjects().add(new Sphere
-//                (
-//                        Arrays.asList
-//                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
-//                        new ArrayList<>(),
-//                        new Vector4f(0.0f, 0.0f, 1.0f, 1.0f),0.1, 0.1, 0.1, 0, 0, 0, 1
-//                )
-//        );
-
-
-//        spheres.get(0).translateObject(-0.25f, -0.25f, 0);
-//        spheres.get(0).getChildObjects().get(0).translateObject(0.5f, 0.5f, 0.5f);
     }
 
     public void input()
