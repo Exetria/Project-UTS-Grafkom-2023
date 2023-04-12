@@ -39,6 +39,17 @@ public class Tiro
 
         //bikin sphere
         spheres.add(new Sphere
+            (
+                    Arrays.asList
+                            (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                    new ArrayList<>(),
+                    new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.07, 0.07, 0.07, 0f, 0, 0, 1
+            )
+    );
+        spheres.get(0).translateObject(0.0f, 0, - 0.5f);
+
+
+        spheres.get(0).getChildObjects().add(new Sphere
                 (
                         Arrays.asList
                                 (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
@@ -46,19 +57,9 @@ public class Tiro
                         new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.1, 0.1, 0.1, 0f, 0, 0, 1
                 )
         );
-        spheres.get(0).translateObject(0.1f, 0, 0);
+        spheres.get(0).getChildObjects().get(0).translateObject(-0.1f, 0, 0);
 
-        spheres.add(new Sphere
-                (
-                        Arrays.asList
-                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
-                        new ArrayList<>(),
-                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.1, 0.1, 0.1, 0f, 0, 0, 1
-                )
-        );
-        spheres.get(1).translateObject(-0.1f, 0, 0);
-
-        spheres.add(new Sphere
+        spheres.get(0).getChildObjects().add(new Sphere
                 (
                         Arrays.asList
                                 (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
@@ -67,15 +68,15 @@ public class Tiro
                 )
         );
 
-        spheres.add(new Sphere
-                (
-                        Arrays.asList
-                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
-                        new ArrayList<>(),
-                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.07, 0.07, 0.1, 0f, 0, 0, 1
-                )
-        );
-        spheres.get(3).translateObject(0.0f, 0, -0.5f);
+        spheres.get(0).getChildObjects().add(new Sphere
+            (
+                    Arrays.asList
+                            (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                    new ArrayList<>(),
+                    new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.1, 0.1, 0.1, 0f, 0, 0, 1
+            )
+    );
+        spheres.get(0).getChildObjects().get(2).translateObject(0.1f, 0, 0);
 
 //        spheres.get(0).getChildObjects().add(new Sphere
 //                (
@@ -241,7 +242,7 @@ public class Tiro
             for (Sphere objects : this.spheres)
             {
                 //gambar sekalian child
-                objects.draw(camera, projection, true);
+                objects.draw(camera, projection);
             }
 
             //Poll for window event

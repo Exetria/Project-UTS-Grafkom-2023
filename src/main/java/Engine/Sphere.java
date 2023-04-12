@@ -110,6 +110,11 @@ public class Sphere extends Circle
         cpy = newcpy;
 
         translateObject(rotateX, rotateY, rotateZ);
+
+        for (Objects i: childObjects)
+        {
+            ((Sphere)i).rotateObjectOnPoint(degree, offsetX, offsetY, offsetZ, rotateX, rotateY, rotateZ);
+        }
     }
 
     public void centralize()
