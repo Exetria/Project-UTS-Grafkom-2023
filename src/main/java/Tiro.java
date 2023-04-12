@@ -98,7 +98,8 @@ public class Tiro
             {
                 for (Sphere i: spheres)
                 {
-                    i.rotateObject(0.01f, 0, 0, 1);
+//                    i.rotateObject(0.01f, 0, 0, 1);
+                    i.rotateObjectOnPoint(0.01f, 0, 0, 1, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
 
@@ -106,7 +107,8 @@ public class Tiro
             {
                 for (Sphere i: spheres)
                 {
-                    i.rotateObject(-0.01f, 0, 0, 1);
+//                    i.rotateObject(-0.01f, 0, 0, 1);
+                    i.rotateObjectOnPoint(-0.01f, 0, 0, 1, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
 
@@ -114,7 +116,8 @@ public class Tiro
             {
                 for (Sphere i: spheres)
                 {
-                    i.rotateObject(0.01f, 1, 0, 0);
+//                    i.rotateObject(0.01f, 1, 0, 0);
+                    i.rotateObjectOnPoint(0.01f, 1, 0, 0, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
 
@@ -122,7 +125,8 @@ public class Tiro
             {
                 for (Sphere i: spheres)
                 {
-                    i.rotateObject(-0.01f, 1, 0, 0);
+//                    i.rotateObject(-0.01f, 1, 0, 0);
+                    i.rotateObjectOnPoint(-0.01f, 1, 0, 0, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
 
@@ -130,7 +134,8 @@ public class Tiro
             {
                 for (Sphere i: spheres)
                 {
-                    i.rotateObject(0.01f, 0, 1, 0);
+//                    i.rotateObject(0.01f, 0, 1, 0);
+                    i.rotateObjectOnPoint(0.01f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
 
@@ -138,7 +143,8 @@ public class Tiro
             {
                 for (Sphere i: spheres)
                 {
-                    i.rotateObject(-0.01f, 0, 1, 0);
+//                    i.rotateObject(-0.01f, 0, 1, 0);
+                    i.rotateObjectOnPoint(-0.01f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
         }
@@ -205,6 +211,7 @@ public class Tiro
             camera.moveBackwards(0.02f);
         }
 
+        /*
         if(window.getMouseInput().isLeftButtonPressed())
         {
             Vector2f pos = window.getMouseInput().getCurrentPos();
@@ -215,9 +222,10 @@ public class Tiro
             //if buat cek kalo value lebih dari 1/-1 tidak usah ditampilkan
             if((!(pos.x > 1 || pos.x < -0.997) && !(pos.y > 1 || pos.y < -1)))
             {
-//                objectsPointControl.get(0).addVertices(new Vector3f(pos.x, -pos.y, 0));
+                objectsPointControl.get(0).addVertices(new Vector3f(pos.x, -pos.y, 0));
             }
         }
+        */
     }
 
     public void loop()
@@ -233,7 +241,7 @@ public class Tiro
             for (Sphere objects : this.spheres)
             {
                 //gambar sekalian child
-                objects.draw(camera, projection);
+                objects.draw(camera, projection, true);
             }
 
             //Poll for window event

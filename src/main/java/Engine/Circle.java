@@ -129,14 +129,14 @@ public class Circle extends Objects
         setupVAOVBO();
     }
 
-    public double getCpx()
+    public float getCpx()
     {
-        return cpx;
+        return (float) cpx;
     }
 
-    public double getCpy()
+    public float getCpy()
     {
-        return cpy;
+        return (float) cpy;
     }
 
     public void updateCP(double cpx, double cpy)

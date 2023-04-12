@@ -97,9 +97,9 @@ public class Sphere extends Circle
         }
     }
 
-    public void rotateObjectOnPoint(float degree, float offsetX, float offsetY, float offsetZ, float rotateX, float rotateY)
+    public void rotateObjectOnPoint(float degree, float offsetX, float offsetY, float offsetZ, float rotateX, float rotateY, float rotateZ)
     {
-        translateObject(-rotateX, -rotateY, 0);
+        translateObject(-rotateX, -rotateY, -rotateZ);
 
         model = new Matrix4f().rotate(degree, offsetX, offsetY, offsetZ).mul(new Matrix4f(model));
 
@@ -109,7 +109,7 @@ public class Sphere extends Circle
         cpx = newcpx;
         cpy = newcpy;
 
-        translateObject(rotateX, rotateY, 0);
+        translateObject(rotateX, rotateY, rotateZ);
     }
 
     public void centralize()
@@ -357,6 +357,11 @@ public class Sphere extends Circle
             }
         }
         vertices = temp;
+    }
+
+    public float getCpz()
+    {
+        return (float) cpz;
     }
 
     public float getRadiusX() {
