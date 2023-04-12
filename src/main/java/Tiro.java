@@ -37,25 +37,83 @@ public class Tiro
         camera.setPosition(0, 0,  0.5f);
         camera.setRotation((float) Math.toRadians(0f),  (float) Math.toRadians(0f));
 
+        //NOSE (PARENT)
         spheres.add(new Sphere
                 (
                         Arrays.asList
                                 (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                         new ArrayList<>(),
-                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.07, 0.07, 0.07, 0f, 0, 0, 8
+                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.1, 0.1, 0.1, 0f, 0, 0, 8
                 )
         );
+        spheres.get(0).scaleObject(0.1f, 0.1f, 0.1f);
+        spheres.get(0).scaleObject(0.9f, 1f, 1f);
+        spheres.get(0).rotateObject(-4f, 1f, 0f, 0f);
+
+
+        //TABUNG BELAKANG NOSE
+        spheres.get(0).getChildObjects().add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.1, 0.1, 0.1, 0f, 0, 0, 3
+                )
+        );
+        spheres.get(0).getChildObjects().get(0).scaleObject(0.65f, 0.65f, 3f);
+        spheres.get(0).getChildObjects().get(0).scaleObject(0.9f, 1f, 1f);
+        spheres.get(0).getChildObjects().get(0).translateObject(0f, 0.0233f, 0.63f);
+
+        //COCKPIT
+        spheres.get(0).getChildObjects().add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.1, 0.1, 0.1, 0f, 0, 0, 4
+                )
+        );
+        spheres.get(0).getChildObjects().get(1).rotateObject(90f, 0f, 1f, 0f);
+        spheres.get(0).getChildObjects().get(1).rotateObject(-15f, 1f, 0f, 0f);
+
+        spheres.get(0).getChildObjects().get(1).scaleObject(0.75f, 0.77f, 1.3f);
+        spheres.get(0).getChildObjects().get(1).translateObject(0f, 0.073f, 0.33f);
+
+        //INTAKE KIRI
+        spheres.get(0).getChildObjects().add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.1, 0.1, 0.5, 0f, 0, 0, 2
+                )
+        );
+        spheres.get(0).getChildObjects().get(2).translateObject(-0.11f, 0.02f, 0.65f);
+
+        //INTAKE KANAN
+        spheres.get(0).getChildObjects().add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.1, 0.1, 0.5, 0f, 0, 0, 2
+                )
+        );
+        spheres.get(0).getChildObjects().get(3).translateObject(0.11f, 0.02f, 0.65f);
+
     }
 
     public void input()
     {
+
+
         {
             if(window.isKeyPressed(GLFW_KEY_Q))
             {
                 for (Sphere i: spheres)
                 {
 //                    i.rotateObject(0.01f, 0, 0, 1);
-                    i.rotateObjectOnPoint(0.01f, 0, 0, 1, i.getCpx(), i.getCpy(), i.getCpz());
+                    i.rotateObjectOnPoint(1f, 0, 0, 1, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
 
@@ -64,7 +122,7 @@ public class Tiro
                 for (Sphere i: spheres)
                 {
 //                    i.rotateObject(-0.01f, 0, 0, 1);
-                    i.rotateObjectOnPoint(-0.01f, 0, 0, 1, i.getCpx(), i.getCpy(), i.getCpz());
+                    i.rotateObjectOnPoint(-1f, 0, 0, 1, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
 
@@ -73,7 +131,7 @@ public class Tiro
                 for (Sphere i: spheres)
                 {
 //                    i.rotateObject(0.01f, 1, 0, 0);
-                    i.rotateObjectOnPoint(0.01f, 1, 0, 0, i.getCpx(), i.getCpy(), i.getCpz());
+                    i.rotateObjectOnPoint(1f, 1, 0, 0, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
 
@@ -82,7 +140,7 @@ public class Tiro
                 for (Sphere i: spheres)
                 {
 //                    i.rotateObject(-0.01f, 1, 0, 0);
-                    i.rotateObjectOnPoint(-0.01f, 1, 0, 0, i.getCpx(), i.getCpy(), i.getCpz());
+                    i.rotateObjectOnPoint(-1f, 1, 0, 0, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
 
@@ -91,7 +149,7 @@ public class Tiro
                 for (Sphere i: spheres)
                 {
 //                    i.rotateObject(0.01f, 0, 1, 0);
-                    i.rotateObjectOnPoint(0.01f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
+                    i.rotateObjectOnPoint(1f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
 
@@ -100,7 +158,7 @@ public class Tiro
                 for (Sphere i: spheres)
                 {
 //                    i.rotateObject(-0.01f, 0, 1, 0);
-                    i.rotateObjectOnPoint(-0.01f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
+                    i.rotateObjectOnPoint(-1f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
         }

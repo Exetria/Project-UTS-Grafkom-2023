@@ -187,7 +187,7 @@ public class Objects extends ShaderProgram
     public void rotateObject(float degree, float offsetX, float offsetY, float offsetZ)
     {
         //offset x, y, sama z itu maksudnya rotasi terhadap sumbunya misal z=1 berarti rotasi thd sb z
-        model = new Matrix4f().rotate(degree, offsetX, offsetY, offsetZ).mul(new Matrix4f(model));
+        model = new Matrix4f().rotate((float)(Math.toRadians(degree)), offsetX, offsetY, offsetZ).mul(new Matrix4f(model));
         for (Objects i: childObjects) {
             i.rotateObject(degree, offsetX, offsetY, offsetZ);
         }
@@ -243,7 +243,7 @@ public class Objects extends ShaderProgram
         glDrawArrays(GL_LINE_STRIP, 0, vertices.size());
         for (Objects i: childObjects)
         {
-            i.draw(camera, projection);
+            i.draw(camera, projection, true);
         }
     }
 

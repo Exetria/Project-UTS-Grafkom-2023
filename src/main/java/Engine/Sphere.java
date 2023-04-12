@@ -81,7 +81,7 @@ public class Sphere extends Circle
     public void rotateObject(float degree, float offsetX, float offsetY, float offsetZ)
     {
         //offset x, y, sama z itu maksudnya rotasi terhadap sumbunya misal z=1 berarti rotasi thd sb z
-        model = new Matrix4f().rotate(degree, offsetX, offsetY, offsetZ).mul(new Matrix4f(model));
+        model = new Matrix4f().rotate((float)(Math.toRadians(degree)), offsetX, offsetY, offsetZ).mul(new Matrix4f(model));
 
         float newcpx =(float) (cpx * Math.cos((double) degree) - cpy * Math.sin((double) degree));
         float newcpy =(float) (cpx * Math.sin((double) degree) + cpy * Math.cos((double) degree));
@@ -101,10 +101,10 @@ public class Sphere extends Circle
     {
         translateObject(-rotateX, -rotateY, -rotateZ);
 
-        model = new Matrix4f().rotate(degree, offsetX, offsetY, offsetZ).mul(new Matrix4f(model));
+        model = new Matrix4f().rotate((float)(Math.toRadians(degree)), offsetX, offsetY, offsetZ).mul(new Matrix4f(model));
 
-        float newcpx =(float) (cpx * Math.cos((double) degree) - cpy * Math.sin((double) degree));
-        float newcpy =(float) (cpx * Math.sin((double) degree) + cpy * Math.cos((double) degree));
+        float newcpx =(float) (cpx * Math.cos((double) (float)(Math.toRadians(degree))) - cpy * Math.sin((double) (float)(Math.toRadians(degree))));
+        float newcpy =(float) (cpx * Math.sin((double) (float)(Math.toRadians(degree))) + cpy * Math.cos((double) (float)(Math.toRadians(degree))));
 
         cpx = newcpx;
         cpy = newcpy;
@@ -251,8 +251,8 @@ public class Sphere extends Circle
 
         for (double i = 0; i < 360; i+=0.1)
         {
-            x = cpx + r * (float)Math.cos(Math.toRadians(i));
-            y = cpy + r * (float)Math.sin(Math.toRadians(i));
+            x = cpx + radiusX * (float)Math.cos(Math.toRadians(i));
+            y = cpy + radiusY * (float)Math.sin(Math.toRadians(i));
 
             temp.add(new Vector3f((float)x, (float)y, 0.0f));
             temp.add(new Vector3f((float)x, (float)y, -radiusZ));
@@ -341,7 +341,7 @@ public class Sphere extends Circle
             for(double u = -Math.PI; u<= Math.PI; u+=Math.PI/60){
                 float x = (float) (radiusX * v * Math.cos(u));
                 float y = (float) (radiusY * v * Math.sin(u));
-                float z = (float) (Math.pow(v, 2));
+                float z = (float) (Math.pow(v, 2)/11);
                 temp.add(new Vector3f(x,y,z));
             }
         }
