@@ -65,51 +65,59 @@ public class Okky
 
     public void input()
     {
-        if(window.isKeyPressed(GLFW_KEY_Q))
         {
-            for (Sphere i: spheres)
+            if(window.isKeyPressed(GLFW_KEY_Q))
             {
-                i.rotateObject(0.01f, 0, 0, 1);
+                for (Sphere i: spheres)
+                {
+//                    i.rotateObject(0.01f, 0, 0, 1);
+                    i.rotateObjectOnPoint(1f, 0, 0, 1, i.getCpx(), i.getCpy(), i.getCpz());
+                }
             }
-        }
 
-        if(window.isKeyPressed(GLFW_KEY_E))
-        {
-            for (Sphere i: spheres)
+            if(window.isKeyPressed(GLFW_KEY_E))
             {
-                i.rotateObject(-0.01f, 0, 0, 1);
+                for (Sphere i: spheres)
+                {
+//                    i.rotateObject(-0.01f, 0, 0, 1);
+                    i.rotateObjectOnPoint(-1f, 0, 0, 1, i.getCpx(), i.getCpy(), i.getCpz());
+                }
             }
-        }
 
-        if(window.isKeyPressed(GLFW_KEY_W))
-        {
-            for (Sphere i: spheres)
+            if(window.isKeyPressed(GLFW_KEY_W))
             {
-                i.rotateObject(0.01f, 1, 0, 0);
+                for (Sphere i: spheres)
+                {
+//                    i.rotateObject(0.01f, 1, 0, 0);
+                    i.rotateObjectOnPoint(1f, 1, 0, 0, i.getCpx(), i.getCpy(), i.getCpz());
+                }
             }
-        }
 
-        if(window.isKeyPressed(GLFW_KEY_S))
-        {
-            for (Sphere i: spheres)
+            if(window.isKeyPressed(GLFW_KEY_S))
             {
-                i.rotateObject(-0.01f, 1, 0, 0);
+                for (Sphere i: spheres)
+                {
+//                    i.rotateObject(-0.01f, 1, 0, 0);
+                    i.rotateObjectOnPoint(-1f, 1, 0, 0, i.getCpx(), i.getCpy(), i.getCpz());
+                }
             }
-        }
 
-        if(window.isKeyPressed(GLFW_KEY_A))
-        {
-            for (Sphere i: spheres)
+            if(window.isKeyPressed(GLFW_KEY_A))
             {
-                i.rotateObject(0.01f, 0, 1, 0);
+                for (Sphere i: spheres)
+                {
+//                    i.rotateObject(0.01f, 0, 1, 0);
+                    i.rotateObjectOnPoint(1f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
+                }
             }
-        }
 
-        if(window.isKeyPressed(GLFW_KEY_D))
-        {
-            for (Sphere i: spheres)
+            if(window.isKeyPressed(GLFW_KEY_D))
             {
-                i.rotateObject(-0.01f, 0, 1, 0);
+                for (Sphere i: spheres)
+                {
+//                    i.rotateObject(-0.01f, 0, 1, 0);
+                    i.rotateObjectOnPoint(-1f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
+                }
             }
         }
 
@@ -167,20 +175,15 @@ public class Okky
 
         if(window.isKeyPressed(GLFW_KEY_LEFT_SHIFT))
         {
-            for (Sphere i: spheres)
-            {
-                camera.moveForward(0.01f);
-            }
+            camera.moveForward(0.02f);
         }
 
         if(window.isKeyPressed(GLFW_KEY_LEFT_CONTROL))
         {
-            for (Sphere i: spheres)
-            {
-                camera.moveBackwards(0.01f);
-            }
+            camera.moveBackwards(0.02f);
         }
 
+        /*
         if(window.getMouseInput().isLeftButtonPressed())
         {
             Vector2f pos = window.getMouseInput().getCurrentPos();
@@ -191,9 +194,10 @@ public class Okky
             //if buat cek kalo value lebih dari 1/-1 tidak usah ditampilkan
             if((!(pos.x > 1 || pos.x < -0.997) && !(pos.y > 1 || pos.y < -1)))
             {
-//                objectsPointControl.get(0).addVertices(new Vector3f(pos.x, -pos.y, 0));
+                objectsPointControl.get(0).addVertices(new Vector3f(pos.x, -pos.y, 0));
             }
         }
+        */
     }
 
     public void loop()

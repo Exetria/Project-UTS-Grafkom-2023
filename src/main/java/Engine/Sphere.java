@@ -62,6 +62,14 @@ public class Sphere extends Circle
         {
             createHyperboloidParaboloid();
         }
+        else if(option == 10)
+        {
+            createWing();
+        }
+        else if(option == 11)
+        {
+            createFrontIntake();
+        }
 
         setupVAOVBO();
     }
@@ -103,8 +111,8 @@ public class Sphere extends Circle
 
         model = new Matrix4f().rotate((float)(Math.toRadians(degree)), offsetX, offsetY, offsetZ).mul(new Matrix4f(model));
 
-        float newcpx =(float) (cpx * Math.cos((double) (float)(Math.toRadians(degree))) - cpy * Math.sin((double) (float)(Math.toRadians(degree))));
-        float newcpy =(float) (cpx * Math.sin((double) (float)(Math.toRadians(degree))) + cpy * Math.cos((double) (float)(Math.toRadians(degree))));
+        float newcpx =(float) (cpx * Math.cos((float)(Math.toRadians(degree))) - cpy * Math.sin((float)(Math.toRadians(degree))));
+        float newcpy =(float) (cpx * Math.sin((float)(Math.toRadians(degree))) + cpy * Math.cos((float)(Math.toRadians(degree))));
 
         cpx = newcpx;
         cpy = newcpy;
@@ -362,6 +370,170 @@ public class Sphere extends Circle
             }
         }
         vertices = temp;
+    }
+
+    //sayap (kanan)
+    public void createWing()
+    {
+        Vector3f temp = new Vector3f();
+        ArrayList<Vector3f> tempVertices = new ArrayList<>();
+
+        //titik 1 depan sayap (0, 1)
+        temp.x = 0;
+        temp.y = 0;
+        temp.z = (float)cpz - radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        temp.x = 0;
+        temp.y = -radiusY;
+        temp.z = (float)cpz - radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 2 belakang sayap (2, 3)
+        temp.x = 0;
+        temp.y = 0;
+        temp.z = (float)cpz + radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        temp.x = 0;
+        temp.y = -radiusY;
+        temp.z = (float)cpz + radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 3 ujung paling jauh sayap (4, 5)
+        temp.x = (float)cpx + radiusX * 1.15f;
+        temp.y = 0;
+        temp.z = (float)cpz + radiusZ/4;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        temp.x = (float)cpx + radiusX * 1.15f;
+        temp.y = -radiusY;
+        temp.z = (float)cpz + radiusZ/4;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 4 ujung belakang sayap yg agak kelebihan (6, 7)
+        temp.x = (float)cpx + radiusX;
+        temp.y = 0;
+        temp.z = (float)cpz + radiusZ * 0.55f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        temp.x = (float)cpx + radiusX;
+        temp.y = -radiusY;
+        temp.z = (float)cpz + radiusZ * 0.55f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 5 ujung belakang sayap yg rata (8, 9)
+        temp.x = (float)cpx + radiusX/2;
+        temp.y = 0;
+        temp.z = (float)cpz + radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        temp.x = (float)cpx + radiusX/2;
+        temp.y = -radiusY;
+        temp.z = (float)cpz + radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+
+        vertices.clear();
+        {
+            vertices.add(tempVertices.get(0));
+            vertices.add(tempVertices.get(1));
+            vertices.add(tempVertices.get(3));
+            vertices.add(tempVertices.get(2));
+            vertices.add(tempVertices.get(0));
+
+            vertices.add(tempVertices.get(4));
+            vertices.add(tempVertices.get(5));
+            vertices.add(tempVertices.get(1));
+
+            vertices.add(tempVertices.get(5));
+            vertices.add(tempVertices.get(7));
+            vertices.add(tempVertices.get(6));
+            vertices.add(tempVertices.get(4));
+            vertices.add(tempVertices.get(6));
+
+            vertices.add(tempVertices.get(8));
+            vertices.add(tempVertices.get(9));
+            vertices.add(tempVertices.get(7));
+            vertices.add(tempVertices.get(9));
+
+            vertices.add(tempVertices.get(3));
+            vertices.add(tempVertices.get(2));
+            vertices.add(tempVertices.get(8));
+        }
+    }
+
+    public void createFrontIntake()
+    {
+        Vector3f temp = new Vector3f();
+        ArrayList<Vector3f> tempVertices = new ArrayList<>();
+
+        //titik 2 atas intake (0, 1)
+        temp.x = -0.5f * radiusX;
+        temp.y = 0.5f * radiusY;
+        temp.z = 0;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        temp.x = 0.5f * radiusX;
+        temp.y = 0.5f * radiusY;
+        temp.z = 0;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 2 depan intake (2, 3)
+        temp.x = -0.5f * radiusX;
+        temp.y = 0.5f * radiusY * 0.7f;
+        temp.z = -radiusZ;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        temp.x = 0.5f * radiusX;
+        temp.y = 0.5f * radiusY * 0.7f;
+        temp.z = -radiusZ;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 2 bawah intake (4, 5)
+        temp.x = -0.5f * radiusX;
+        temp.y = -0.5f * radiusY;
+        temp.z = 0;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        temp.x = 0.5f * radiusX;
+        temp.y = -0.5f * radiusY;
+        temp.z = 0;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        vertices.clear();
+        {
+            vertices.add(tempVertices.get(0));
+            vertices.add(tempVertices.get(1));
+            vertices.add(tempVertices.get(3));
+            vertices.add(tempVertices.get(2));
+            vertices.add(tempVertices.get(0));
+
+            vertices.add(tempVertices.get(4));
+            vertices.add(tempVertices.get(2));
+            vertices.add(tempVertices.get(0));
+            vertices.add(tempVertices.get(1));
+
+            vertices.add(tempVertices.get(5));
+            vertices.add(tempVertices.get(3));
+            vertices.add(tempVertices.get(1));
+        }
     }
 
     public float getCpz()
