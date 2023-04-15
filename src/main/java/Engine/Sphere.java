@@ -13,7 +13,7 @@ public class Sphere extends Circle
 
     int ibo, stackCount, sectorCount;
     double cpz;
-    float radiusX, radiusY, radiusZ;
+    float radiusX, radiusY, radiusZ, rotateX, rotateY, rotateZ;
 
     public Sphere(List<ShaderModuleData> shaderModuleDataList, List<Vector3f> vertices, Vector4f color, double rx, double ry, double rz, double cpx, double cpy, double cpz, int option)
     {
@@ -115,6 +115,13 @@ public class Sphere extends Circle
         //offset x, y, sama z itu maksudnya rotasi terhadap sumbunya misal z=1 berarti rotasi thd sb z
         model = new Matrix4f().rotate((float)(Math.toRadians(degree)), offsetX, offsetY, offsetZ).mul(new Matrix4f(model));
 
+        this.rotateX += degree * offsetX;
+        this.rotateX %= 360;
+        this.rotateY += degree * offsetY;
+        this.rotateY %= 360;
+        this.rotateZ += degree * offsetZ;
+        this.rotateZ %= 360;
+
         float newcpx =(float) (cpx * Math.cos(degree) - cpy * Math.sin(degree));
         float newcpy =(float) (cpx * Math.sin(degree) + cpy * Math.cos(degree));
 
@@ -134,6 +141,41 @@ public class Sphere extends Circle
         translateObject(-rotateX, -rotateY, -rotateZ);
 
         model = new Matrix4f().rotate((float)(Math.toRadians(degree)), offsetX, offsetY, offsetZ).mul(new Matrix4f(model));
+
+        this.rotateX += degree * offsetX;
+        this.rotateX %= 360;
+        this.rotateY += degree * offsetY;
+        this.rotateY %= 360;
+        this.rotateZ += degree * offsetZ;
+        this.rotateZ %= 360;
+
+        float newcpx =(float) (cpx * Math.cos((float)(Math.toRadians(degree))) - cpy * Math.sin((float)(Math.toRadians(degree))));
+        float newcpy =(float) (cpx * Math.sin((float)(Math.toRadians(degree))) + cpy * Math.cos((float)(Math.toRadians(degree))));
+
+        cpx = newcpx;
+        cpy = newcpy;
+
+        translateObject(rotateX, rotateY, rotateZ);
+
+        for (Objects i: childObjects)
+        {
+            ((Sphere)i).rotateObjectOnPoint(degree, offsetX, offsetY, offsetZ, rotateX, rotateY, rotateZ);
+        }
+    }
+
+    public void experimentRotate(float degree, float offsetX, float offsetY, float offsetZ, float rotateX, float rotateY, float rotateZ)
+    {
+        translateObject(-rotateX, -rotateY, -rotateZ);
+
+        model = new Matrix4f().rotate((float)(Math.toRadians(-this.rotateX)), 1, 0, 0).mul(new Matrix4f(model));
+        model = new Matrix4f().rotate((float)(Math.toRadians(-this.rotateY)), 0, 1, 0).mul(new Matrix4f(model));
+        model = new Matrix4f().rotate((float)(Math.toRadians(-this.rotateZ)), 0, 0, 1).mul(new Matrix4f(model));
+
+        model = new Matrix4f().rotate((float)(Math.toRadians(degree)), offsetX, offsetY, offsetZ).mul(new Matrix4f(model));
+
+        model = new Matrix4f().rotate((float)(Math.toRadians(this.rotateX)), 1, 0, 0).mul(new Matrix4f(model));
+        model = new Matrix4f().rotate((float)(Math.toRadians(this.rotateY)), 0, 1, 0).mul(new Matrix4f(model));
+        model = new Matrix4f().rotate((float)(Math.toRadians(this.rotateZ)), 0, 0, 1).mul(new Matrix4f(model));
 
         float newcpx =(float) (cpx * Math.cos((float)(Math.toRadians(degree))) - cpy * Math.sin((float)(Math.toRadians(degree))));
         float newcpy =(float) (cpx * Math.sin((float)(Math.toRadians(degree))) + cpy * Math.cos((float)(Math.toRadians(degree))));

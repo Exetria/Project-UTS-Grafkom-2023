@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7265bded-3803-4b65-8f98-d5b995e8343e" name="Changes" comment="perbaikan sphere&#10;- Tiro">
+    <list default="true" id="7265bded-3803-4b65-8f98-d5b995e8343e" name="Changes" comment="Model selesai&#10;- Tiro">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Engine/Sphere.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Engine/Sphere.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Tiro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tiro.java" afterDir="false" />
@@ -290,7 +290,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681538491034</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Model selesai&#10;- Tiro">
+      <created>1681550308264</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1681550308264</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -323,6 +330,7 @@
     <MESSAGE value="perbaiki 0.5 jadi radius xyz&#10;- Tiro" />
     <MESSAGE value="progress setengah jadi&#10;- Tiro" />
     <MESSAGE value="perbaikan sphere&#10;- Tiro" />
-    <option name="LAST_COMMIT_MESSAGE" value="perbaikan sphere&#10;- Tiro" />
+    <MESSAGE value="Model selesai&#10;- Tiro" />
+    <option name="LAST_COMMIT_MESSAGE" value="Model selesai&#10;- Tiro" />
   </component>
 </project>

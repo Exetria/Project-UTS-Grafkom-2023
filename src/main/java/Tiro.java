@@ -35,7 +35,6 @@ public class Tiro
         window.init();
         GL.createCapabilities();
         glEnable(GL_DEPTH_TEST);
-        glEnable(GL_TEXTURE);
         camera.setPosition(0, 0, 0.5f);
         camera.setRotation((float) Math.toRadians(0f), (float) Math.toRadians(0f));
 
@@ -201,7 +200,7 @@ public class Tiro
             );
             spheres.get(0).getChildObjects().get(9).scaleObject(0.1f, 0.1f, 0.2f);
             spheres.get(0).getChildObjects().get(9).scaleObject(0.9f, 0.9f, 1f);
-            spheres.get(0).getChildObjects().get(9).translateObject(-0.0585f, 0.025f, 0.8f);
+            spheres.get(0).getChildObjects().get(9).translateObject(-0.0585f, 0.027f, 0.8f);
         }
 
 
@@ -217,7 +216,7 @@ public class Tiro
             );
             spheres.get(0).getChildObjects().get(10).scaleObject(0.1f, 0.1f, 0.2f);
             spheres.get(0).getChildObjects().get(10).scaleObject(0.9f, 0.9f, 1f);
-            spheres.get(0).getChildObjects().get(10).translateObject(0.0585f, 0.025f, 0.8f);
+            spheres.get(0).getChildObjects().get(10).translateObject(0.0585f, 0.027f, 0.8f);
         }
 
 
