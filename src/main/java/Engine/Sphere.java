@@ -14,11 +14,13 @@ public class Sphere extends Circle
     int ibo, stackCount, sectorCount;
     double cpz;
     float radiusX, radiusY, radiusZ, rotateX, rotateY, rotateZ;
+    public double rotationLimit;
 
     public Sphere(List<ShaderModuleData> shaderModuleDataList, List<Vector3f> vertices, Vector4f color, double rx, double ry, double rz, double cpx, double cpy, double cpz, int option)
     {
         super(shaderModuleDataList, vertices, color, rx, cpx, cpy);
         this.cpz = cpz;
+
         this.radiusX = (float) rx;
         this.radiusY = (float) ry;
         this.radiusZ = (float) rz;
@@ -161,6 +163,7 @@ public class Sphere extends Circle
         {
             ((Sphere)i).rotateObjectOnPoint(degree, offsetX, offsetY, offsetZ, rotateX, rotateY, rotateZ);
         }
+
     }
 
     public void experimentRotate(float degree, float offsetX, float offsetY, float offsetZ, float rotateX, float rotateY, float rotateZ)
@@ -757,6 +760,8 @@ public class Sphere extends Circle
         Vector3f temp = new Vector3f();
         ArrayList<Vector3f> tempVertices = new ArrayList<>();
 
+        this.rotationLimit = 45;
+
         //titik 1 depan sayap (0, 1)
         temp.x = 0;
         temp.y = 0;
@@ -1023,15 +1028,39 @@ public class Sphere extends Circle
         return (float) cpz;
     }
 
-    public float getRadiusX() {
+    public float getRadiusX()
+    {
         return radiusX;
     }
 
-    public float getRadiusY() {
+    public float getRadiusY()
+    {
         return radiusY;
     }
 
-    public float getRadiusZ() {
+    public float getRadiusZ()
+    {
         return radiusZ;
     }
+
+    public float getRotateX()
+    {
+        return rotateX;
+    }
+
+    public float getRotateY()
+    {
+        return rotateY;
+    }
+
+    public float getRotateZ()
+    {
+        return rotateZ;
+    }
+
+    public double getRotationLimit()
+    {
+        return rotationLimit;
+    }
+
 }

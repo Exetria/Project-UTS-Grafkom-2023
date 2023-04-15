@@ -289,7 +289,7 @@ public class Tiro
                     )
             );
             spheres.get(0).getChildObjects().get(15).rotateObject(180f, 0f, 0f, 1f);
-            spheres.get(0).getChildObjects().get(15).translateObject(-0.16f, 0.06f, 1.45f);
+            spheres.get(0).getChildObjects().get(15).translateObject(-0.1619f, 0.06f, 1.45f);
         }
 
 
@@ -309,59 +309,126 @@ public class Tiro
 
     public void input()
     {
+
+        if(window.isKeyPressed(GLFW_KEY_N))
+        {
+            Sphere i = ((Sphere) spheres.get(0).getChildObjects().get(15));
+            Sphere j = ((Sphere) spheres.get(0).getChildObjects().get(16));
+
+            System.out.println(i.getRotateX());
+            System.out.println(i.getRotateY());
+            System.out.println(i.getRotateZ());
+            System.out.println();
+            if(i.getRotateX() > -i.getRotationLimit() && i.getRotateX() < i.getRotationLimit())
+            {
+                i.rotateObjectOnPoint(1f, 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
+                j.rotateObjectOnPoint(1f, 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+            }
+            else
+            {
+                i.rotateObjectOnPoint(-(float) (i.getRotateX()-i.getRotationLimit() + 1), 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
+                j.rotateObjectOnPoint(-(float) (j.getRotateX()-j.getRotationLimit() + 1), 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+            }
+        }
+
+        if(window.isKeyPressed(GLFW_KEY_M))
+        {
+            Sphere i = ((Sphere) spheres.get(0).getChildObjects().get(15));
+            Sphere j = ((Sphere) spheres.get(0).getChildObjects().get(16));
+
+            System.out.println(i.getRotateX());
+            System.out.println(i.getRotateY());
+            System.out.println(i.getRotateZ());
+            System.out.println();
+            if(i.getRotateX() > -i.getRotationLimit() && i.getRotateX() < i.getRotationLimit())
+            {
+                i.rotateObjectOnPoint(-1f, 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
+                j.rotateObjectOnPoint(-1f, 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+            }
+            else
+            {
+                i.rotateObjectOnPoint((float) (i.getRotateX()+i.getRotationLimit() + 1), 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
+                j.rotateObjectOnPoint((float) (j.getRotateX()+j.getRotationLimit() + 1), 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+            }
+        }
+
         {
             if(window.isKeyPressed(GLFW_KEY_Q))
             {
+                camera.moveForward(0.01f);
                 for (Sphere i: spheres)
                 {
-//                    i.rotateObject(1f, 0, 0, 1);
-                    i.rotateObjectOnPoint(1f, 0, 0, 1, i.getCpx(), i.getCpy(), i.getCpz());
+//                    i.rotateObjectOnPoint(1f, 0, 0, 1, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
 
             if(window.isKeyPressed(GLFW_KEY_E))
             {
+                camera.moveBackwards(0.01f);
                 for (Sphere i: spheres)
                 {
-//                    i.rotateObject(-1f, 0, 0, 1);
-                    i.rotateObjectOnPoint(-1f, 0, 0, 1, i.getCpx(), i.getCpy(), i.getCpz());
+//                    i.rotateObjectOnPoint(-1f, 0, 0, 1, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
 
             if(window.isKeyPressed(GLFW_KEY_W))
             {
+                camera.moveUp(0.01f);
                 for (Sphere i: spheres)
                 {
-//                    i.rotateObject(1f, 1, 0, 0);
-                    i.rotateObjectOnPoint(1f, 1, 0, 0, i.getCpx(), i.getCpy(), i.getCpz());
+//                    i.rotateObjectOnPoint(1f, 1, 0, 0, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
 
             if(window.isKeyPressed(GLFW_KEY_S))
             {
+                camera.moveDown(0.01f);
                 for (Sphere i: spheres)
                 {
-//                    i.rotateObject(-1f, 1, 0, 0);
-                    i.rotateObjectOnPoint(-1f, 1, 0, 0, i.getCpx(), i.getCpy(), i.getCpz());
+//                    i.rotateObjectOnPoint(-1f, 1, 0, 0, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
 
             if(window.isKeyPressed(GLFW_KEY_A))
             {
+                camera.moveLeft(0.01f);
                 for (Sphere i: spheres)
                 {
-//                    i.rotateObject(1f, 0, 1, 0);
-                    i.rotateObjectOnPoint(1f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
+//                    i.rotateObjectOnPoint(1f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
 
             if(window.isKeyPressed(GLFW_KEY_D))
             {
+                camera.moveRight(0.01f);
                 for (Sphere i: spheres)
                 {
-//                    i.rotateObject(-1f, 0, 1, 0);
-                    i.rotateObjectOnPoint(-1f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
+//                    i.rotateObjectOnPoint(-1f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
                 }
+            }
+        }
+
+        //================================================================================
+
+        {
+            if(window.isKeyPressed(GLFW_KEY_UP))
+            {
+                camera.addRotation(0.01f, 0);
+            }
+
+            if(window.isKeyPressed(GLFW_KEY_DOWN))
+            {
+                camera.addRotation(-0.01f, 0);
+            }
+
+            if(window.isKeyPressed(GLFW_KEY_LEFT))
+            {
+                camera.addRotation(0f, -0.01f);
+            }
+
+            if(window.isKeyPressed(GLFW_KEY_RIGHT))
+            {
+                camera.addRotation(0f, 0.01f);
             }
         }
 
@@ -372,7 +439,7 @@ public class Tiro
             {
                 for (Sphere i: spheres)
                 {
-                    i.translateObject(0f, 0, 0.01f);
+                    i.translateObject(0f, 0, 0.1f);
                 }
             }
 
@@ -380,7 +447,7 @@ public class Tiro
             {
                 for (Sphere i: spheres)
                 {
-                    i.translateObject(0f, 0, -0.01f);
+                    i.translateObject(0f, 0, -0.1f);
                 }
             }
 
@@ -388,7 +455,7 @@ public class Tiro
             {
                 for (Sphere i: spheres)
                 {
-                    i.translateObject(0f, 0.01f, 0f);
+                    i.translateObject(0f, 0.1f, 0f);
                 }
             }
 
@@ -396,7 +463,7 @@ public class Tiro
             {
                 for (Sphere i: spheres)
                 {
-                    i.translateObject(0f, -0.01f, 0f);
+                    i.translateObject(0f, -0.1f, 0f);
                 }
             }
 
@@ -404,7 +471,7 @@ public class Tiro
             {
                 for (Sphere i: spheres)
                 {
-                    i.translateObject(-0.01f, 0f, 0f);
+                    i.translateObject(-0.1f, 0f, 0f);
                 }
             }
 
@@ -412,7 +479,7 @@ public class Tiro
             {
                 for (Sphere i: spheres)
                 {
-                    i.translateObject(0.01f, 0f, 0f);
+                    i.translateObject(0.1f, 0f, 0f);
                 }
             }
         }
