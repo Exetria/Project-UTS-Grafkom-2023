@@ -34,6 +34,8 @@ public class Tiro
     {
         window.init();
         GL.createCapabilities();
+        glEnable(GL_DEPTH_TEST);
+        glEnable(GL_TEXTURE);
         camera.setPosition(0, 0, 0.5f);
         camera.setRotation((float) Math.toRadians(0f), (float) Math.toRadians(0f));
 
@@ -137,7 +139,7 @@ public class Tiro
                             Arrays.asList
                                     (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                             new ArrayList<>(),
-                            new Vector4f(0.0f, 0.0f, 1.0f, 1.0f), 0.6, 0.01, 0.6, 0f, 0, 0, 10
+                            new Vector4f(0.0f, 0.0f, 1.0f, 1.0f), 0.55, 0.01, 0.55, 0f, 0, 0, 10
                     )
             );
             spheres.get(0).getChildObjects().get(5).translateObject(0.161f, 0.05f, 0.9f);
@@ -151,7 +153,7 @@ public class Tiro
                             Arrays.asList
                                     (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                             new ArrayList<>(),
-                            new Vector4f(0.0f, 0.0f, 1.0f, 1.0f), 0.6, 0.01, 0.6, 0f, 0, 0, 10
+                            new Vector4f(0.0f, 0.0f, 1.0f, 1.0f), 0.55, 0.01, 0.55, 0f, 0, 0, 10
                     )
             );
             spheres.get(0).getChildObjects().get(6).rotateObject(180f, 0f, 0f, 1f);
@@ -194,12 +196,12 @@ public class Tiro
                             Arrays.asList
                                     (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                             new ArrayList<>(),
-                            new Vector4f(0.44f, 0.44f, 0.44f, 1.0f), 0.1, 0.1, 0.2, 0f, 0, 0, 3
+                            new Vector4f(0.44f, 0.44f, 0.44f, 1.0f), 0.1, 0.1, 0.2, 0f, 0, 0, 8
                     )
             );
-            spheres.get(0).getChildObjects().get(9).scaleObject(0.65f, 0.65f, 3f);
-            spheres.get(0).getChildObjects().get(9).scaleObject(0.9f, 1f, 1f);
-            spheres.get(0).getChildObjects().get(9).translateObject(-0.0585f, 0.0233f, 1.5f);  //0.0233
+            spheres.get(0).getChildObjects().get(9).scaleObject(0.1f, 0.1f, 0.2f);
+            spheres.get(0).getChildObjects().get(9).scaleObject(0.9f, 0.9f, 1f);
+            spheres.get(0).getChildObjects().get(9).translateObject(-0.0585f, 0.025f, 0.8f);
         }
 
 
@@ -210,12 +212,12 @@ public class Tiro
                             Arrays.asList
                                     (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                             new ArrayList<>(),
-                            new Vector4f(0.44f, 0.44f, 0.44f, 1.0f), 0.1, 0.1, 0.2, 0f, 0, 0, 3
+                            new Vector4f(0.44f, 0.44f, 0.44f, 1.0f), 0.1, 0.1, 0.2, 0f, 0, 0, 8
                     )
             );
-            spheres.get(0).getChildObjects().get(10).scaleObject(0.65f, 0.65f, 3f);
-            spheres.get(0).getChildObjects().get(10).scaleObject(0.9f, 1f, 1f);
-            spheres.get(0).getChildObjects().get(10).translateObject(0.0585f, 0.0233f, 1.5f);  //0.0233
+            spheres.get(0).getChildObjects().get(10).scaleObject(0.1f, 0.1f, 0.2f);
+            spheres.get(0).getChildObjects().get(10).scaleObject(0.9f, 0.9f, 1f);
+            spheres.get(0).getChildObjects().get(10).translateObject(0.0585f, 0.025f, 0.8f);
         }
     }
 
@@ -284,7 +286,7 @@ public class Tiro
             {
                 for (Sphere i: spheres)
                 {
-                    i.translateObject(0f, 0, 0.001f);
+                    i.translateObject(0f, 0, 0.01f);
                 }
             }
 
@@ -292,7 +294,7 @@ public class Tiro
             {
                 for (Sphere i: spheres)
                 {
-                    i.translateObject(0f, 0, -0.001f);
+                    i.translateObject(0f, 0, -0.01f);
                 }
             }
 
@@ -300,7 +302,7 @@ public class Tiro
             {
                 for (Sphere i: spheres)
                 {
-                    i.translateObject(0f, 0.001f, 0f);
+                    i.translateObject(0f, 0.01f, 0f);
                 }
             }
 
@@ -308,7 +310,7 @@ public class Tiro
             {
                 for (Sphere i: spheres)
                 {
-                    i.translateObject(0f, -0.001f, 0f);
+                    i.translateObject(0f, -0.01f, 0f);
                 }
             }
 
@@ -316,7 +318,7 @@ public class Tiro
             {
                 for (Sphere i: spheres)
                 {
-                    i.translateObject(-0.001f, 0f, 0f);
+                    i.translateObject(-0.01f, 0f, 0f);
                 }
             }
 
@@ -324,7 +326,7 @@ public class Tiro
             {
                 for (Sphere i: spheres)
                 {
-                    i.translateObject(0.001f, 0f, 0f);
+                    i.translateObject(0.01f, 0f, 0f);
                 }
             }
         }

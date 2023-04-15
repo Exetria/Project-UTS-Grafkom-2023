@@ -70,6 +70,18 @@ public class Sphere extends Circle
         {
             createFrontIntake();
         }
+        else if(option == 20)
+        {
+            createTrapesium();
+        }
+        else if(option == 21)
+        {
+            createRoda();
+        }
+        else if(option == 22)
+        {
+            createCorong();
+        }
 
         setupVAOVBO();
     }
@@ -534,6 +546,155 @@ public class Sphere extends Circle
             vertices.add(tempVertices.get(3));
             vertices.add(tempVertices.get(1));
         }
+    }
+
+    public void createCorong()
+    {
+        this.vertices.clear();
+        ArrayList<Vector3f> temp = new ArrayList();
+
+        for(double i = 0.0; i < 360.0; i += 0.1) {
+            this.x = this.cpx - this.r * (double)((float)Math.sin(Math.toRadians(i)));
+            this.y = this.cpy - this.r * (double)((float)Math.cos(Math.toRadians(i)));
+            temp.add(new Vector3f(0.0F, (float)this.x, (float)this.y));
+            temp.add(new Vector3f(-this.radiusZ, (float)this.x, (float)this.y));
+        }
+
+        this.vertices = temp;
+    }
+
+    public void createRoda()
+    {
+        this.vertices.clear();
+        ArrayList<Vector3f> temp = new ArrayList();
+
+        for(double i = 0.0; i < 360.0; i += 0.1) {
+            if (i >= 85.0 && i <= 95.0) {
+                this.x = this.cpx + (this.r - 0.03) * (double)((float)Math.cos(Math.toRadians(i)));
+                this.y = this.cpy + (this.r - 0.03) * (double)((float)Math.sin(Math.toRadians(i)));
+            } else if (i >= 175.0 && i <= 185.0) {
+                this.x = this.cpx + (this.r - 0.03) * (double)((float)Math.cos(Math.toRadians(i)));
+                this.y = this.cpy + (this.r - 0.03) * (double)((float)Math.sin(Math.toRadians(i)));
+            } else if (i >= 265.0 && i <= 275.0) {
+                this.x = this.cpx + (this.r - 0.03) * (double)((float)Math.cos(Math.toRadians(i)));
+                this.y = this.cpy + (this.r - 0.03) * (double)((float)Math.sin(Math.toRadians(i)));
+            } else if ((!(i >= 0.0) || !(i <= 5.0)) && (!(i >= 355.0) || !(i < 360.0))) {
+                this.x = this.cpx + this.r * (double)((float)Math.cos(Math.toRadians(i)));
+                this.y = this.cpy + this.r * (double)((float)Math.sin(Math.toRadians(i)));
+            } else {
+                this.x = this.cpx + (this.r - 0.03) * (double)((float)Math.cos(Math.toRadians(i)));
+                this.y = this.cpy + (this.r - 0.03) * (double)((float)Math.sin(Math.toRadians(i)));
+            }
+
+            temp.add(new Vector3f((float)this.x, (float)this.y, 0.0F));
+            temp.add(new Vector3f((float)this.x, (float)this.y, -this.radiusZ));
+        }
+
+        this.vertices = temp;
+    }
+
+    public void createTrapesium()
+    {
+        float a = 0.23F;
+        float b = 0.08F;
+        Vector3f temp = new Vector3f();
+        ArrayList<Vector3f> tempVertices = new ArrayList();
+        temp.x = (float)this.cpx - this.radiusX / 2.0F;
+        temp.y = (float)this.cpy + this.radiusY / 2.0F;
+        temp.z = (float)this.cpz - this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        temp.x = (float)this.cpx - this.radiusX / 2.0F;
+        temp.y = (float)this.cpy - this.radiusY / 2.0F;
+        temp.z = (float)this.cpz - this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        temp.x = (float)this.cpx + this.radiusX / 2.0F;
+        temp.y = (float)this.cpy - this.radiusY / 2.0F;
+        temp.z = (float)this.cpz - this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        temp.x = (float)this.cpx + this.radiusX / 2.0F;
+        temp.y = (float)this.cpy + this.radiusY / 2.0F;
+        temp.z = (float)this.cpz - this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        temp.x = (float)this.cpx - this.radiusX / 2.0F;
+        temp.y = (float)this.cpy + this.radiusY / 2.0F;
+        temp.z = (float)this.cpz + this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        temp.x = (float)this.cpx - this.radiusX / 2.0F;
+        temp.y = (float)this.cpy - this.radiusY / 2.0F;
+        temp.z = (float)this.cpz + this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        temp.x = (float)this.cpx + this.radiusX / 2.0F;
+        temp.y = (float)this.cpy - this.radiusY / 2.0F;
+        temp.z = (float)this.cpz + this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        temp.x = (float)this.cpx + this.radiusX / 2.0F;
+        temp.y = (float)this.cpy + this.radiusY / 2.0F;
+        temp.z = (float)this.cpz + this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        temp.x = (float)this.cpx - (this.radiusX - a) / 2.0F;
+        temp.y = (float)this.cpy - (this.radiusY + b) / 2.0F;
+        temp.z = (float)this.cpz - this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        temp.x = (float)this.cpx + (this.radiusX - a) / 2.0F;
+        temp.y = (float)this.cpy - (this.radiusY + b) / 2.0F;
+        temp.z = (float)this.cpz - this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        temp.x = (float)this.cpx + (this.radiusX - a) / 2.0F;
+        temp.y = (float)this.cpy - (this.radiusY + b) / 2.0F;
+        temp.z = (float)this.cpz + this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        temp.x = (float)this.cpx - (this.radiusX - a) / 2.0F;
+        temp.y = (float)this.cpy - (this.radiusY + b) / 2.0F;
+        temp.z = (float)this.cpz + this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        this.vertices.clear();
+        this.vertices.add((Vector3f)tempVertices.get(0));
+        this.vertices.add((Vector3f)tempVertices.get(1));
+        this.vertices.add((Vector3f)tempVertices.get(2));
+        this.vertices.add((Vector3f)tempVertices.get(3));
+        this.vertices.add((Vector3f)tempVertices.get(4));
+        this.vertices.add((Vector3f)tempVertices.get(5));
+        this.vertices.add((Vector3f)tempVertices.get(6));
+        this.vertices.add((Vector3f)tempVertices.get(7));
+        this.vertices.add((Vector3f)tempVertices.get(0));
+        this.vertices.add((Vector3f)tempVertices.get(4));
+        this.vertices.add((Vector3f)tempVertices.get(7));
+        this.vertices.add((Vector3f)tempVertices.get(3));
+        this.vertices.add((Vector3f)tempVertices.get(1));
+        this.vertices.add((Vector3f)tempVertices.get(5));
+        this.vertices.add((Vector3f)tempVertices.get(6));
+        this.vertices.add((Vector3f)tempVertices.get(2));
+        this.vertices.add((Vector3f)tempVertices.get(0));
+        this.vertices.add((Vector3f)tempVertices.get(1));
+        this.vertices.add((Vector3f)tempVertices.get(5));
+        this.vertices.add((Vector3f)tempVertices.get(4));
+        this.vertices.add((Vector3f)tempVertices.get(3));
+        this.vertices.add((Vector3f)tempVertices.get(2));
+        this.vertices.add((Vector3f)tempVertices.get(7));
+        this.vertices.add((Vector3f)tempVertices.get(6));
+        this.vertices.add((Vector3f)tempVertices.get(2));
+        this.vertices.add((Vector3f)tempVertices.get(9));
+        this.vertices.add((Vector3f)tempVertices.get(10));
+        this.vertices.add((Vector3f)tempVertices.get(6));
+        this.vertices.add((Vector3f)tempVertices.get(8));
+        this.vertices.add((Vector3f)tempVertices.get(1));
+        this.vertices.add((Vector3f)tempVertices.get(5));
+        this.vertices.add((Vector3f)tempVertices.get(11));
+        this.vertices.add((Vector3f)tempVertices.get(8));
+        this.vertices.add((Vector3f)tempVertices.get(9));
+        this.vertices.add((Vector3f)tempVertices.get(10));
+        this.vertices.add((Vector3f)tempVertices.get(11));
     }
 
     public float getCpz()
