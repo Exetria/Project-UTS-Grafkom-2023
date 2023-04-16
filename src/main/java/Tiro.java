@@ -310,52 +310,52 @@ public class Tiro
     public void input()
     {
 
-//        if(window.isKeyPressed(GLFW_KEY_N))
-//        {
-//            Sphere i = ((Sphere) spheres.get(0).getChildObjects().get(15));
-//            Sphere j = ((Sphere) spheres.get(0).getChildObjects().get(16));
-//
-//            System.out.println(i.getRotateX());
-//            System.out.println(i.getRotateY());
-//            System.out.println(i.getRotateZ());
-//            System.out.println();
-//            if(i.getRotateX() > -i.getRotationLimit() && i.getRotateX() < i.getRotationLimit())
-//            {
-//                i.rotateObjectOnPoint(1f, 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
-//                j.rotateObjectOnPoint(1f, 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
-//            }
-//            else
-//            {
-//                i.rotateObjectOnPoint(-(float) (i.getRotateX()-i.getRotationLimit() + 1), 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
-//                j.rotateObjectOnPoint(-(float) (j.getRotateX()-j.getRotationLimit() + 1), 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
-//            }
-//        }
-//
-//        if(window.isKeyPressed(GLFW_KEY_M))
-//        {
-//            Sphere i = ((Sphere) spheres.get(0).getChildObjects().get(15));
-//            Sphere j = ((Sphere) spheres.get(0).getChildObjects().get(16));
-//
-//            System.out.println(i.getRotateX());
-//            System.out.println(i.getRotateY());
-//            System.out.println(i.getRotateZ());
-//            System.out.println();
-//            if(i.getRotateX() > -i.getRotationLimit() && i.getRotateX() < i.getRotationLimit())
-//            {
-//                i.rotateObjectOnPoint(-1f, 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
-//                j.rotateObjectOnPoint(-1f, 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
-//            }
-//            else
-//            {
-//                i.rotateObjectOnPoint((float) (i.getRotateX()+i.getRotationLimit() + 1), 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
-//                j.rotateObjectOnPoint((float) (j.getRotateX()+j.getRotationLimit() + 1), 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
-//            }
-//        }
+        if(window.isKeyPressed(GLFW_KEY_N))
+        {
+            Sphere i = ((Sphere) spheres.get(0).getChildObjects().get(15));
+            Sphere j = ((Sphere) spheres.get(0).getChildObjects().get(16));
+
+            System.out.println(i.getRotateX());
+            System.out.println(i.getRotateY());
+            System.out.println(i.getRotateZ());
+            System.out.println();
+            if(i.getRotateX() > -i.getRotationLimit() && i.getRotateX() < i.getRotationLimit())
+            {
+                i.rotateObjectOnPoint(1f, 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
+                j.rotateObjectOnPoint(1f, 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+            }
+            else
+            {
+                i.rotateObjectOnPoint(-(float) (i.getRotateX()-i.getRotationLimit() + 1), 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
+                j.rotateObjectOnPoint(-(float) (j.getRotateX()-j.getRotationLimit() + 1), 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+            }
+        }
+
+        if(window.isKeyPressed(GLFW_KEY_M))
+        {
+            Sphere i = ((Sphere) spheres.get(0).getChildObjects().get(15));
+            Sphere j = ((Sphere) spheres.get(0).getChildObjects().get(16));
+
+            System.out.println(i.getRotateX());
+            System.out.println(i.getRotateY());
+            System.out.println(i.getRotateZ());
+            System.out.println();
+            if(i.getRotateX() > -i.getRotationLimit() && i.getRotateX() < i.getRotationLimit())
+            {
+                i.rotateObjectOnPoint(-1f, 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
+                j.rotateObjectOnPoint(-1f, 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+            }
+            else
+            {
+                i.rotateObjectOnPoint((float) (i.getRotateX()+i.getRotationLimit() + 1), 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
+                j.rotateObjectOnPoint((float) (j.getRotateX()+j.getRotationLimit() + 1), 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+            }
+        }
 
         {
             if(window.isKeyPressed(GLFW_KEY_Q))
             {
-                camera.moveForward(0.01f);
+                camera.moveForward(0.03f);
                 for (Sphere i: spheres)
                 {
 //                    i.rotateObjectOnPoint(1f, 0, 0, 1, i.getCpx(), i.getCpy(), i.getCpz());
@@ -364,7 +364,7 @@ public class Tiro
 
             if(window.isKeyPressed(GLFW_KEY_E))
             {
-                camera.moveBackwards(0.01f);
+                camera.moveBackwards(0.03f);
                 for (Sphere i: spheres)
                 {
 //                    i.rotateObjectOnPoint(-1f, 0, 0, 1, i.getCpx(), i.getCpy(), i.getCpz());
@@ -373,7 +373,7 @@ public class Tiro
 
             if(window.isKeyPressed(GLFW_KEY_W))
             {
-                camera.moveUp(0.01f);
+                camera.moveUp(0.03f);
                 for (Sphere i: spheres)
                 {
 //                    i.rotateObjectOnPoint(1f, 1, 0, 0, i.getCpx(), i.getCpy(), i.getCpz());
@@ -382,7 +382,7 @@ public class Tiro
 
             if(window.isKeyPressed(GLFW_KEY_S))
             {
-                camera.moveDown(0.01f);
+                camera.moveDown(0.03f);
                 for (Sphere i: spheres)
                 {
 //                    i.rotateObjectOnPoint(-1f, 1, 0, 0, i.getCpx(), i.getCpy(), i.getCpz());
@@ -391,7 +391,7 @@ public class Tiro
 
             if(window.isKeyPressed(GLFW_KEY_A))
             {
-                camera.moveLeft(0.01f);
+                camera.moveLeft(0.03f);
                 for (Sphere i: spheres)
                 {
 //                    i.rotateObjectOnPoint(1f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
@@ -400,7 +400,7 @@ public class Tiro
 
             if(window.isKeyPressed(GLFW_KEY_D))
             {
-                camera.moveRight(0.01f);
+                camera.moveRight(0.03f);
                 for (Sphere i: spheres)
                 {
 //                    i.rotateObjectOnPoint(-1f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());

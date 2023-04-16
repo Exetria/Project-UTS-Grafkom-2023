@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7265bded-3803-4b65-8f98-d5b995e8343e" name="Changes" comment="Merge Selesai - Clement" />
+    <list default="true" id="7265bded-3803-4b65-8f98-d5b995e8343e" name="Changes" comment="Camera selesai&#10;- Tiro">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Engine/Sphere.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Engine/Sphere.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Tiro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tiro.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -58,14 +62,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Clement">
-    <configuration name="Clement" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Clement" />
-      <module name="Project-Grafkom-2023" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Application.Tiro">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Exetria-Grafkom-2022-2023" />
@@ -95,7 +92,7 @@
     </configuration>
     <configuration name="Tiro" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Tiro" />
-      <module name="Project-Grafkom-2023" />
+      <module name="untitled" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -113,7 +110,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Clement" />
         <item itemvalue="Application.Tiro" />
         <item itemvalue="Application.Okky" />
         <item itemvalue="Application.Main" />
@@ -346,7 +342,7 @@
     <MESSAGE value="progress setengah jadi&#10;- Tiro" />
     <MESSAGE value="perbaikan sphere&#10;- Tiro" />
     <MESSAGE value="Model selesai&#10;- Tiro" />
-    <MESSAGE value="Merge Selesai - Clement" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge Selesai - Clement" />
+    <MESSAGE value="Camera selesai&#10;- Tiro" />
+    <option name="LAST_COMMIT_MESSAGE" value="Camera selesai&#10;- Tiro" />
   </component>
 </project>

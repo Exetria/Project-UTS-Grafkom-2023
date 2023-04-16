@@ -856,9 +856,30 @@ public class Sphere extends Circle
             vertices.add(tempVertices.get(2));
             vertices.add(tempVertices.get(0));
 
+            vertices.add(tempVertices.get(2));
+            vertices.add(tempVertices.get(4));
             vertices.add(tempVertices.get(5));
             vertices.add(tempVertices.get(3));
+            vertices.add(tempVertices.get(5));
+
+            vertices.add(tempVertices.get(7));
+            vertices.add(tempVertices.get(6));
+            vertices.add(tempVertices.get(4));
+            vertices.add(tempVertices.get(6));
+
+            vertices.add(tempVertices.get(8));
+            vertices.add(tempVertices.get(9));
+            vertices.add(tempVertices.get(7));
+            vertices.add(tempVertices.get(9));
+
+            vertices.add(tempVertices.get(11));
+            vertices.add(tempVertices.get(10));
+            vertices.add(tempVertices.get(8));
+            vertices.add(tempVertices.get(10));
+
+            vertices.add(tempVertices.get(0));
             vertices.add(tempVertices.get(1));
+            vertices.add(tempVertices.get(11));
         }
     }
 
@@ -1305,5 +1326,25 @@ public class Sphere extends Circle
     public float getRadiusZ()
     {
         return radiusZ;
+    }
+
+    public float getRotateX()
+    {
+        return rotateX;
+    }
+
+    public float getRotateY()
+    {
+        return rotateY;
+    }
+
+    public float getRotateZ()
+    {
+        return rotateZ;
+    }
+
+    public double getRotationLimit()
+    {
+        return rotationLimit;
     }
 }
