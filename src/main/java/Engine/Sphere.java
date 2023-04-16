@@ -113,6 +113,12 @@ public class Sphere extends Circle
         else if (option == 43) {
             createTireSupport();
         }
+        else if (option == 44) {
+            createGlass();
+        }
+        else if (option == 45) {
+            createKepalaTembakan();
+        }
 
         setupVAOVBO();
     }
@@ -1209,7 +1215,8 @@ public class Sphere extends Circle
         }
     }
 
-    public void createTireSupport() {
+    public void createTireSupport()
+    {
         Vector3f temp = new Vector3f();
         ArrayList<Vector3f> tempVertices = new ArrayList<>();
 
@@ -1444,6 +1451,64 @@ public class Sphere extends Circle
         this.vertices.add(tempVertices.get(11));
     }
 
+    public void createGlass()
+    {
+        Vector3f temp = new Vector3f();
+        ArrayList<Vector3f> tempVertices = new ArrayList<>();
+
+        //titik 1 kiri atas belakang
+        temp.x = (float)cpx - radiusX/2;
+        temp.y = (float)cpy + radiusY/2;
+        temp.z = (float)cpz - radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 2 kiri bawah belakang
+        temp.x = (float)cpx - radiusX/2f;
+        temp.y = (float)cpy - radiusY/2f;
+        temp.z = (float)cpz - radiusZ/2f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 3 kanan bawah belakang
+        temp.x = (float)cpx + radiusX/0.8f;
+        temp.y = (float)cpy - radiusY/2f;
+        temp.z = (float)cpz - radiusZ/2f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 4 kanan atas belakang
+        temp.x = (float)cpx + radiusX/2f;
+        temp.y = (float)cpy + radiusY/2;
+        temp.z = (float)cpz - radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        vertices.clear();
+        {
+            vertices.add(tempVertices.get(0));
+            vertices.add(tempVertices.get(3));
+            vertices.add(tempVertices.get(2));
+            vertices.add(tempVertices.get(1));
+            vertices.add(tempVertices.get(0));
+        }
+    }
+
+    public void createKepalaTembakan()
+    {
+        vertices.clear();
+        ArrayList<Vector3f> temp = new ArrayList<>();
+
+        for (double i = 0; i < 360; i+=0.1)
+        {
+            x = cpx + radiusX * (float)Math.cos(Math.toRadians(i));
+            y = cpy + radiusY * (float)Math.sin(Math.toRadians(i));
+
+            temp.add(new Vector3f((float)x, (float)y, 0.0f));
+            temp.add(new Vector3f((float)x * 1.5f, (float)y * 1.5f, -radiusZ));
+        }
+
+        vertices = temp;
+    }
     public float getCpz()
     {
         return (float) cpz;
