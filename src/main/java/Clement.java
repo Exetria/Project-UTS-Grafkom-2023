@@ -530,73 +530,91 @@ public class Clement
         spheres.get(0).getChildObjects().get(26).translateObject(0.164f, -0.018f, 0.123f);
 
     }
-
     public void input()
     {
+        if(window.isKeyPressed(GLFW_KEY_M))
         {
-            if(window.isKeyPressed(GLFW_KEY_M))
-            {
-                Sphere a = ((Sphere)spheres.get(0).getChildObjects().get(7));
-                a.rotateObjectOnPoint(
-                        1f,0f, 1f, 0f, a.getCpx(), a.getCpy(), a.getCpz());
-            }
-
+            Sphere a = ((Sphere)spheres.get(0).getChildObjects().get(7));
+            a.rotateObjectOnPoint(
+                    1f,0f, 1f, 0f, a.getCpx(), a.getCpy(), a.getCpz());
+        }
+        {
             if(window.isKeyPressed(GLFW_KEY_Q))
             {
+                camera.moveForward(0.03f);
                 for (Sphere i: spheres)
                 {
-//                    i.rotateObject(0.01f, 0, 0, 1);
-                    i.rotateObjectOnPoint(1f, 0, 0, 1, i.getCpx(), i.getCpy(), i.getCpz());
+//                    i.rotateObjectOnPoint(1f, 0, 0, 1, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
 
             if(window.isKeyPressed(GLFW_KEY_E))
             {
+                camera.moveBackwards(0.03f);
                 for (Sphere i: spheres)
                 {
-//                    i.rotateObject(-0.01f, 0, 0, 1);
-                    i.rotateObjectOnPoint(-1f, 0, 0, 1, i.getCpx(), i.getCpy(), i.getCpz());
+//                    i.rotateObjectOnPoint(-1f, 0, 0, 1, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
 
             if(window.isKeyPressed(GLFW_KEY_W))
             {
-                camera.addRotation(0.01f, 0);
+                camera.moveUp(0.03f);
                 for (Sphere i: spheres)
                 {
-//                    i.rotateObject(1f, 1, 0, 0);
-                    //i.rotateObjectOnPoint(1f, 1, 0, 0, i.getCpx(), i.getCpy(), i.getCpz());
+//                    i.rotateObjectOnPoint(1f, 1, 0, 0, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
 
             if(window.isKeyPressed(GLFW_KEY_S))
             {
-                camera.addRotation(-0.01f, 0);
+                camera.moveDown(0.03f);
                 for (Sphere i: spheres)
                 {
-//                    i.rotateObject(-1f, 1, 0, 0);
-                    //i.rotateObjectOnPoint(-1f, 1, 0, 0, i.getCpx(), i.getCpy(), i.getCpz());
+//                    i.rotateObjectOnPoint(-1f, 1, 0, 0, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
 
             if(window.isKeyPressed(GLFW_KEY_A))
             {
-                camera.addRotation(0, 0.01f);
+                camera.moveLeft(0.03f);
                 for (Sphere i: spheres)
                 {
-//                    i.rotateObject(1f, 0, 1, 0);
-                    //i.rotateObjectOnPoint(1f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
+//                    i.rotateObjectOnPoint(1f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
 
             if(window.isKeyPressed(GLFW_KEY_D))
             {
-                camera.addRotation(0, -0.01f);
+                camera.moveRight(0.03f);
                 for (Sphere i: spheres)
                 {
-//                    i.rotateObject(-1f, 0, 1, 0);
-                    //i.rotateObjectOnPoint(-1f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
+//                    i.rotateObjectOnPoint(-1f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
                 }
+            }
+        }
+
+        //================================================================================
+
+        {
+            if(window.isKeyPressed(GLFW_KEY_UP))
+            {
+                camera.addRotation(0.01f, 0);
+            }
+
+            if(window.isKeyPressed(GLFW_KEY_DOWN))
+            {
+                camera.addRotation(-0.01f, 0);
+            }
+
+            if(window.isKeyPressed(GLFW_KEY_LEFT))
+            {
+                camera.addRotation(0f, -0.01f);
+            }
+
+            if(window.isKeyPressed(GLFW_KEY_RIGHT))
+            {
+                camera.addRotation(0f, 0.01f);
             }
         }
 
@@ -607,7 +625,7 @@ public class Clement
             {
                 for (Sphere i: spheres)
                 {
-                    i.translateObject(0f, 0, 0.001f);
+                    i.translateObject(0f, 0, 0.1f);
                 }
             }
 
@@ -615,7 +633,7 @@ public class Clement
             {
                 for (Sphere i: spheres)
                 {
-                    i.translateObject(0f, 0, -0.001f);
+                    i.translateObject(0f, 0, -0.1f);
                 }
             }
 
@@ -623,7 +641,7 @@ public class Clement
             {
                 for (Sphere i: spheres)
                 {
-                    i.translateObject(0f, 0.001f, 0f);
+                    i.translateObject(0f, 0.1f, 0f);
                 }
             }
 
@@ -631,7 +649,7 @@ public class Clement
             {
                 for (Sphere i: spheres)
                 {
-                    i.translateObject(0f, -0.001f, 0f);
+                    i.translateObject(0f, -0.1f, 0f);
                 }
             }
 
@@ -639,7 +657,7 @@ public class Clement
             {
                 for (Sphere i: spheres)
                 {
-                    i.translateObject(-0.001f, 0f, 0f);
+                    i.translateObject(-0.1f, 0f, 0f);
                 }
             }
 
@@ -647,7 +665,7 @@ public class Clement
             {
                 for (Sphere i: spheres)
                 {
-                    i.translateObject(0.001f, 0f, 0f);
+                    i.translateObject(0.1f, 0f, 0f);
                 }
             }
         }
@@ -678,7 +696,6 @@ public class Clement
         }
         */
     }
-
     public void loop()
     {
         while (window.isOpen())

@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7265bded-3803-4b65-8f98-d5b995e8343e" name="Changes" comment="Camera selesai&#10;- Tiro">
+    <list default="true" id="7265bded-3803-4b65-8f98-d5b995e8343e" name="Changes" comment="Merge sama punya Clement&#10;- Tiro">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Engine/Sphere.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Engine/Sphere.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Tiro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tiro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Clement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Clement.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +61,14 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Tiro">
+  <component name="RunManager" selected="Application.Clement">
+    <configuration name="Clement" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Clement" />
+      <module name="untitled" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Exetria-Grafkom-2022-2023" />
@@ -110,8 +116,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Tiro" />
+        <item itemvalue="Application.Clement" />
         <item itemvalue="Application.Okky" />
+        <item itemvalue="Application.Tiro" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.ProjectUTS" />
       </list>
@@ -308,7 +315,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681624793254</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Merge sama punya Clement&#10;- Tiro">
+      <created>1681625478528</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1681625478528</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -343,6 +357,7 @@
     <MESSAGE value="perbaikan sphere&#10;- Tiro" />
     <MESSAGE value="Model selesai&#10;- Tiro" />
     <MESSAGE value="Camera selesai&#10;- Tiro" />
-    <option name="LAST_COMMIT_MESSAGE" value="Camera selesai&#10;- Tiro" />
+    <MESSAGE value="Merge sama punya Clement&#10;- Tiro" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge sama punya Clement&#10;- Tiro" />
   </component>
 </project>
