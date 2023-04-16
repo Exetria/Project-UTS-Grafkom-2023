@@ -1,11 +1,9 @@
 import Engine.*;
-import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 import org.lwjgl.opengl.GL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.glClearColor;
@@ -17,7 +15,13 @@ public class Tiro
     Camera camera = new Camera();
     Projection projection = new Projection(window.getWidth(), window.getHeight());
 
+    Sphere leftMissile, rightMissile;
+
     ArrayList<Sphere> spheres = new ArrayList<>();
+
+    ArrayList<Vector3f> leftPath, rightPath;
+
+    boolean leftMissileLaunch, rightMissileLaunch, rotateMode = false;
 
     public static void main(String[] args)
     {
@@ -37,6 +41,7 @@ public class Tiro
         glEnable(GL_DEPTH_TEST);
         camera.setPosition(0, 0, 0.5f);
         camera.setRotation((float) Math.toRadians(0f), (float) Math.toRadians(0f));
+        camera.moveBackwards(2.66f);
 
         //NOSE (PARENT)
         {
@@ -305,111 +310,264 @@ public class Tiro
             );
             spheres.get(0).getChildObjects().get(16).translateObject(0.16f, 0.06f, 1.45f);
         }
+
+
+        //PYLON KIRI
+        {
+            spheres.get(0).getChildObjects().add(new Sphere
+                    (
+                            Arrays.asList
+                                    (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                            new ArrayList<>(),
+                            new Vector4f(1.0f, 1.0f, 0.0f, 1.0f), 0.002, 0.04, 0.2, 0f, 0, 0, 2
+                    )
+            );
+            spheres.get(0).getChildObjects().get(17).translateObject(-0.3f, 0.027f, 0.83f);
+
+
+            spheres.get(0).getChildObjects().add(new Sphere
+                    (
+                            Arrays.asList
+                                    (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                            new ArrayList<>(),
+                            new Vector4f(1.0f, 1.0f, 0.0f, 1.0f), 0.003, 0.05, 0.2, 0f, 0, 0, 2
+                    )
+            );
+            spheres.get(0).getChildObjects().get(18).rotateObject(90f, 0, 0, 1);
+            spheres.get(0).getChildObjects().get(18).translateObject(-0.3f, 0.007f, 0.83f);
+        }
+
+
+        //PYLON KANAN
+        {
+            spheres.get(0).getChildObjects().add(new Sphere
+                    (
+                            Arrays.asList
+                                    (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                            new ArrayList<>(),
+                            new Vector4f(1.0f, 1.0f, 0.0f, 1.0f), 0.002, 0.04, 0.2, 0f, 0, 0, 2
+                    )
+            );
+            spheres.get(0).getChildObjects().get(19).translateObject(0.3f, 0.027f, 0.83f);
+
+
+            spheres.get(0).getChildObjects().add(new Sphere
+                    (
+                            Arrays.asList
+                                    (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                            new ArrayList<>(),
+                            new Vector4f(1.0f, 1.0f, 0.0f, 1.0f), 0.003, 0.05, 0.2, 0f, 0, 0, 2
+                    )
+            );
+            spheres.get(0).getChildObjects().get(20).rotateObject(90f, 0, 0, 1);
+            spheres.get(0).getChildObjects().get(20).translateObject(0.3f, 0.007f, 0.83f);
+        }
+
+
+        //MISIL KIRI
+        {
+            spheres.get(0).getChildObjects().add(new Sphere
+                    (
+                            Arrays.asList
+                                    (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                            new ArrayList<>(),
+                            new Vector4f(1.0f, 0.0f, 0.0f, 1.0f), 0.1, 0.1, 0.1, 0, 0, 0, 15
+                    )
+            );
+            spheres.get(0).getChildObjects().get(21).scaleObject(0.1f, 0.1f, 0.1f);
+            spheres.get(0).getChildObjects().get(21).rotateObject(45f, 0, 0, 1);
+            spheres.get(0).getChildObjects().get(21).translateObject(-0.335f, 0.007f, 0.73f);
+        }
+
+
+        //MISIL KANAN
+        {
+            spheres.get(0).getChildObjects().add(new Sphere
+                    (
+                            Arrays.asList
+                                    (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                            new ArrayList<>(),
+                            new Vector4f(1.0f, 0.0f, 0.0f, 1.0f), 0.1, 0.1, 0.1, 0, 0, 0, 15
+                    )
+            );
+            spheres.get(0).getChildObjects().get(22).scaleObject(0.1f, 0.1f, 0.1f);
+            spheres.get(0).getChildObjects().get(22).rotateObject(45f, 0, 0, 1);
+            spheres.get(0).getChildObjects().get(22).translateObject(0.335f, 0.007f, 0.73f);
+        }
     }
 
     public void input()
     {
-
-        if(window.isKeyPressed(GLFW_KEY_N))
+        //ANIMASI
         {
-            Sphere i = ((Sphere) spheres.get(0).getChildObjects().get(15));
-            Sphere j = ((Sphere) spheres.get(0).getChildObjects().get(16));
-
-            System.out.println(i.getRotateX());
-            System.out.println(i.getRotateY());
-            System.out.println(i.getRotateZ());
-            System.out.println();
-            if(i.getRotateX() > -i.getRotationLimit() && i.getRotateX() < i.getRotationLimit())
+            if(window.isKeyPressed(GLFW_KEY_V))
             {
-                i.rotateObjectOnPoint(1f, 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
-                j.rotateObjectOnPoint(1f, 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
-            }
-            else
-            {
-                i.rotateObjectOnPoint(-(float) (i.getRotateX()-i.getRotationLimit() + 1), 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
-                j.rotateObjectOnPoint(-(float) (j.getRotateX()-j.getRotationLimit() + 1), 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
-            }
-        }
-
-        if(window.isKeyPressed(GLFW_KEY_M))
-        {
-            Sphere i = ((Sphere) spheres.get(0).getChildObjects().get(15));
-            Sphere j = ((Sphere) spheres.get(0).getChildObjects().get(16));
-
-            System.out.println(i.getRotateX());
-            System.out.println(i.getRotateY());
-            System.out.println(i.getRotateZ());
-            System.out.println();
-            if(i.getRotateX() > -i.getRotationLimit() && i.getRotateX() < i.getRotationLimit())
-            {
-                i.rotateObjectOnPoint(-1f, 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
-                j.rotateObjectOnPoint(-1f, 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
-            }
-            else
-            {
-                i.rotateObjectOnPoint((float) (i.getRotateX()+i.getRotationLimit() + 1), 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
-                j.rotateObjectOnPoint((float) (j.getRotateX()+j.getRotationLimit() + 1), 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
-            }
-        }
-
-        {
-            if(window.isKeyPressed(GLFW_KEY_Q))
-            {
-                camera.moveForward(0.03f);
-                for (Sphere i: spheres)
+                if(leftMissileLaunch)
                 {
-//                    i.rotateObjectOnPoint(1f, 0, 0, 1, i.getCpx(), i.getCpy(), i.getCpz());
+                    leftMissile.moveToNextPoint(leftPath);
+                }
+                else
+                {
+                    leftMissile = ((Sphere) spheres.get(0).getChildObjects().get(21));
+                    leftPath = leftMissile.generateBezierPoints(leftMissile.getCpx(), leftMissile.getCpy(), leftMissile.getCpz(),
+                            leftMissile.getCpx(), leftMissile.getCpy(), -5,
+                            -5, -5, -5);
+                    leftMissileLaunch = true;
                 }
             }
 
-            if(window.isKeyPressed(GLFW_KEY_E))
+            if(window.isKeyPressed(GLFW_KEY_B))
             {
-                camera.moveBackwards(0.03f);
-                for (Sphere i: spheres)
+                if(rightMissileLaunch)
                 {
-//                    i.rotateObjectOnPoint(-1f, 0, 0, 1, i.getCpx(), i.getCpy(), i.getCpz());
+                    rightMissile.moveToNextPoint(rightPath);
+                }
+                else
+                {
+                    rightMissile = ((Sphere) spheres.get(0).getChildObjects().get(22));
+                    rightPath = rightMissile.generateBezierPoints(rightMissile.getCpx(), rightMissile.getCpy(), rightMissile.getCpz(),
+                            rightMissile.getCpx(), rightMissile.getCpy(), -5,
+                            5, -5, -5);
+                    rightMissileLaunch = true;
                 }
             }
 
-            if(window.isKeyPressed(GLFW_KEY_W))
+            if(window.isKeyPressed(GLFW_KEY_N))
             {
-                camera.moveUp(0.03f);
-                for (Sphere i: spheres)
+                Sphere i = ((Sphere) spheres.get(0).getChildObjects().get(15));
+                Sphere j = ((Sphere) spheres.get(0).getChildObjects().get(16));
+
+                if(i.getTotalRotateX() > -i.getRotationLimit() && i.getTotalRotateX() < i.getRotationLimit())
                 {
-//                    i.rotateObjectOnPoint(1f, 1, 0, 0, i.getCpx(), i.getCpy(), i.getCpz());
+                    i.rotateObjectOnPoint(1f, 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
+                    j.rotateObjectOnPoint(1f, 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+                }
+                else
+                {
+                    i.rotateObjectOnPoint(-(float) (i.getTotalRotateX()-i.getRotationLimit() + 1), 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
+                    j.rotateObjectOnPoint(-(float) (j.getTotalRotateX()-j.getRotationLimit() + 1), 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
                 }
             }
 
-            if(window.isKeyPressed(GLFW_KEY_S))
+            if(window.isKeyPressed(GLFW_KEY_M))
             {
-                camera.moveDown(0.03f);
-                for (Sphere i: spheres)
-                {
-//                    i.rotateObjectOnPoint(-1f, 1, 0, 0, i.getCpx(), i.getCpy(), i.getCpz());
-                }
-            }
+                Sphere i = ((Sphere) spheres.get(0).getChildObjects().get(15));
+                Sphere j = ((Sphere) spheres.get(0).getChildObjects().get(16));
 
-            if(window.isKeyPressed(GLFW_KEY_A))
-            {
-                camera.moveLeft(0.03f);
-                for (Sphere i: spheres)
+                if(i.getTotalRotateX() > -i.getRotationLimit() && i.getTotalRotateX() < i.getRotationLimit())
                 {
-//                    i.rotateObjectOnPoint(1f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
+                    i.rotateObjectOnPoint(-1f, 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
+                    j.rotateObjectOnPoint(-1f, 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
                 }
-            }
-
-            if(window.isKeyPressed(GLFW_KEY_D))
-            {
-                camera.moveRight(0.03f);
-                for (Sphere i: spheres)
+                else
                 {
-//                    i.rotateObjectOnPoint(-1f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
+                    i.rotateObjectOnPoint((float) (i.getTotalRotateX()+i.getRotationLimit() + 1), 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
+                    j.rotateObjectOnPoint((float) (j.getTotalRotateX()+j.getRotationLimit() + 1), 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
                 }
             }
         }
 
         //================================================================================
 
+        //WASDQE BUAT ROTATE ATAU TRANSLATE CAMERA
+        {
+            if(window.isKeyPressed(GLFW_KEY_Q))
+            {
+                if(rotateMode)
+                {
+                    for (Sphere i: spheres)
+                    {
+                        i.rotateObjectOnPoint(1f, 0, 0, 1, i.getCpx(), i.getCpy(), i.getCpz());
+                    }
+                }
+                else
+                {
+                    camera.moveForward(0.03f);
+                }
+
+            }
+
+            if(window.isKeyPressed(GLFW_KEY_E))
+            {
+
+                if(rotateMode)
+                {
+                    for (Sphere i: spheres)
+                    {
+                        i.rotateObjectOnPoint(-1f, 0, 0, 1, i.getCpx(), i.getCpy(), i.getCpz());
+                    }
+                }
+                else
+                {
+                    camera.moveBackwards(0.03f);
+                }
+            }
+
+            if(window.isKeyPressed(GLFW_KEY_W))
+            {
+
+                if(rotateMode)
+                {
+                    for (Sphere i: spheres)
+                    {
+                        i.rotateObjectOnPoint(1f, 1, 0, 0, i.getCpx(), i.getCpy(), i.getCpz());
+                    }
+                }
+                else
+                {
+                    camera.moveUp(0.003f);
+                }
+            }
+
+            if(window.isKeyPressed(GLFW_KEY_S))
+            {
+                if(rotateMode)
+                {
+                    for (Sphere i: spheres)
+                    {
+                        i.rotateObjectOnPoint(-1f, 1, 0, 0, i.getCpx(), i.getCpy(), i.getCpz());
+                    }
+                }
+                else
+                {
+                    camera.moveDown(0.003f);
+                }
+            }
+
+            if(window.isKeyPressed(GLFW_KEY_A))
+            {
+                if(rotateMode)
+                {
+                    for (Sphere i: spheres)
+                    {
+                        i.rotateObjectOnPoint(1f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
+                    }
+                }
+                else
+                {
+                    camera.moveLeft(0.003f);
+                }
+            }
+
+            if(window.isKeyPressed(GLFW_KEY_D))
+            {
+                if(rotateMode)
+                {
+                    for (Sphere i: spheres)
+                    {
+                    i.rotateObjectOnPoint(-1f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
+                    }
+                }
+                else
+                {
+                    camera.moveRight(0.003f);
+                }
+            }
+        }
+
+        //================================================================================
+
+        //ARROWS BUAT ROTATE CAMERA
         {
             if(window.isKeyPressed(GLFW_KEY_UP))
             {
@@ -434,6 +592,7 @@ public class Tiro
 
         //================================================================================
 
+        //IJKLUO BUAT TRANSLATE OBJECT
         {
             if(window.isKeyPressed(GLFW_KEY_U))
             {
@@ -484,15 +643,44 @@ public class Tiro
             }
         }
 
-        if(window.isKeyPressed(GLFW_KEY_LEFT_SHIFT))
+        //EXTRAS
         {
-            camera.moveForward(0.02f);
+            //ZOOM IN
+            if(window.isKeyPressed(GLFW_KEY_LEFT_SHIFT))
+            {
+                camera.moveForward(0.02f);
+            }
+
+            //ZOOM OUT
+            if(window.isKeyPressed(GLFW_KEY_LEFT_CONTROL))
+            {
+                camera.moveBackwards(0.02f);
+            }
+
+            //GANTI KE MODE ROTATE OBJECT
+            if(window.isKeyPressed(GLFW_KEY_R))
+            {
+                System.out.println("Rotate Mode");
+                rotateMode = true;
+            }
+
+            //GANTI KE MODE TRANSLATE CAMERA
+            if(window.isKeyPressed(GLFW_KEY_T))
+            {
+                System.out.println("Camera Mode");
+                rotateMode = false;
+            }
+
+            //REVERT SEMUA ROTASI YG ADA (JANGAN DIPAKE)
+            if(window.isKeyPressed(GLFW_KEY_SPACE))
+            {
+//                for (Sphere i: spheres)
+//                {
+//                    i.normalize();
+//                }
+            }
         }
 
-        if(window.isKeyPressed(GLFW_KEY_LEFT_CONTROL))
-        {
-            camera.moveBackwards(0.02f);
-        }
 
         /*
         if(window.getMouseInput().isLeftButtonPressed())
@@ -524,7 +712,7 @@ public class Tiro
             for (Sphere objects : this.spheres)
             {
                 //gambar sekalian child
-                objects.draw(camera, projection);
+                objects.draw(camera, projection, true);
             }
 
             //Poll for window event

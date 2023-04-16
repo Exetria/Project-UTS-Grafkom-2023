@@ -5,7 +5,11 @@ import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static org.lwjgl.opengl.GL20.GL_FRAGMENT_SHADER;
+import static org.lwjgl.opengl.GL20.GL_VERTEX_SHADER;
 
 public class Sphere extends Circle
 {
@@ -13,7 +17,7 @@ public class Sphere extends Circle
 
     int ibo, stackCount, sectorCount;
     double cpz;
-    float radiusX, radiusY, radiusZ, rotateX, rotateY, rotateZ;
+    float radiusX, radiusY, radiusZ, totalRotateX, totalRotateY, totalRotateZ;
     public double rotationLimit;
 
     public Sphere(List<ShaderModuleData> shaderModuleDataList, List<Vector3f> vertices, Vector4f color, double rx, double ry, double rz, double cpx, double cpy, double cpz, int option)
@@ -72,15 +76,6 @@ public class Sphere extends Circle
         {
             createFrontIntake();
         }
-        else if (option == 41) {
-            createTrapezoidwithSquare();
-        }
-        else if (option == 42) {
-            createTrapezoidwithLine();
-        }
-        else if (option == 43) {
-            createTireSupport();
-        }
         else if(option == 12)
         {
             createTrapezoid();
@@ -93,6 +88,10 @@ public class Sphere extends Circle
         {
             createEmpennage();
         }
+        else if(option == 15)
+        {
+            createMissile();
+        }
         else if(option == 20)
         {
             createTrapesium();
@@ -104,6 +103,15 @@ public class Sphere extends Circle
         else if(option == 22)
         {
             createCorong();
+        }
+        else if (option == 41) {
+            createTrapezoidwithSquare();
+        }
+        else if (option == 42) {
+            createTrapezoidwithLine();
+        }
+        else if (option == 43) {
+            createTireSupport();
         }
 
         setupVAOVBO();
@@ -126,12 +134,21 @@ public class Sphere extends Circle
         //offset x, y, sama z itu maksudnya rotasi terhadap sumbunya misal z=1 berarti rotasi thd sb z
         model = new Matrix4f().rotate((float)(Math.toRadians(degree)), offsetX, offsetY, offsetZ).mul(new Matrix4f(model));
 
-        this.rotateX += degree * offsetX;
-        this.rotateX %= 360;
-        this.rotateY += degree * offsetY;
-        this.rotateY %= 360;
-        this.rotateZ += degree * offsetZ;
-        this.rotateZ %= 360;
+        if(offsetX == 1f)
+        {
+            this.totalRotateX += degree;
+            this.totalRotateX %= 360;
+        }
+        else if (offsetY == 1f)
+        {
+            this.totalRotateY += degree;
+            this.totalRotateY %= 360;
+        }
+        else if (offsetZ == 1f)
+        {
+            this.totalRotateZ += degree;
+            this.totalRotateZ %= 360;
+        }
 
         float newcpx =(float) (cpx * Math.cos(degree) - cpy * Math.sin(degree));
         float newcpy =(float) (cpx * Math.sin(degree) + cpy * Math.cos(degree));
@@ -153,12 +170,21 @@ public class Sphere extends Circle
 
         model = new Matrix4f().rotate((float)(Math.toRadians(degree)), offsetX, offsetY, offsetZ).mul(new Matrix4f(model));
 
-        this.rotateX += degree * offsetX;
-        this.rotateX %= 360;
-        this.rotateY += degree * offsetY;
-        this.rotateY %= 360;
-        this.rotateZ += degree * offsetZ;
-        this.rotateZ %= 360;
+        if(offsetX == 1f)
+        {
+            this.totalRotateX += degree;
+            this.totalRotateX %= 360;
+        }
+        else if (offsetY == 1f)
+        {
+            this.totalRotateY += degree;
+            this.totalRotateY %= 360;
+        }
+        else if (offsetZ == 1f)
+        {
+            this.totalRotateZ += degree;
+            this.totalRotateZ %= 360;
+        }
 
         float newcpx =(float) (cpx * Math.cos((float)(Math.toRadians(degree))) - cpy * Math.sin((float)(Math.toRadians(degree))));
         float newcpy =(float) (cpx * Math.sin((float)(Math.toRadians(degree))) + cpy * Math.cos((float)(Math.toRadians(degree))));
@@ -172,6 +198,10 @@ public class Sphere extends Circle
         {
             ((Sphere)i).rotateObjectOnPoint(degree, offsetX, offsetY, offsetZ, rotateX, rotateY, rotateZ);
         }
+        System.out.println(totalRotateX);
+        System.out.println(totalRotateY);
+        System.out.println(totalRotateZ);
+        System.out.println();
 
     }
 
@@ -179,15 +209,15 @@ public class Sphere extends Circle
     {
         translateObject(-rotateX, -rotateY, -rotateZ);
 
-        model = new Matrix4f().rotate((float)(Math.toRadians(-this.rotateX)), 1, 0, 0).mul(new Matrix4f(model));
-        model = new Matrix4f().rotate((float)(Math.toRadians(-this.rotateY)), 0, 1, 0).mul(new Matrix4f(model));
-        model = new Matrix4f().rotate((float)(Math.toRadians(-this.rotateZ)), 0, 0, 1).mul(new Matrix4f(model));
+        model = new Matrix4f().rotate((float)(Math.toRadians(-this.totalRotateX)), 1, 0, 0).mul(new Matrix4f(model));
+        model = new Matrix4f().rotate((float)(Math.toRadians(-this.totalRotateY)), 0, 1, 0).mul(new Matrix4f(model));
+        model = new Matrix4f().rotate((float)(Math.toRadians(-this.totalRotateZ)), 0, 0, 1).mul(new Matrix4f(model));
 
         model = new Matrix4f().rotate((float)(Math.toRadians(degree)), offsetX, offsetY, offsetZ).mul(new Matrix4f(model));
 
-        model = new Matrix4f().rotate((float)(Math.toRadians(this.rotateX)), 1, 0, 0).mul(new Matrix4f(model));
-        model = new Matrix4f().rotate((float)(Math.toRadians(this.rotateY)), 0, 1, 0).mul(new Matrix4f(model));
-        model = new Matrix4f().rotate((float)(Math.toRadians(this.rotateZ)), 0, 0, 1).mul(new Matrix4f(model));
+        model = new Matrix4f().rotate((float)(Math.toRadians(this.totalRotateX)), 1, 0, 0).mul(new Matrix4f(model));
+        model = new Matrix4f().rotate((float)(Math.toRadians(this.totalRotateY)), 0, 1, 0).mul(new Matrix4f(model));
+        model = new Matrix4f().rotate((float)(Math.toRadians(this.totalRotateZ)), 0, 0, 1).mul(new Matrix4f(model));
 
         float newcpx =(float) (cpx * Math.cos((float)(Math.toRadians(degree))) - cpy * Math.sin((float)(Math.toRadians(degree))));
         float newcpy =(float) (cpx * Math.sin((float)(Math.toRadians(degree))) + cpy * Math.cos((float)(Math.toRadians(degree))));
@@ -201,6 +231,51 @@ public class Sphere extends Circle
         {
             ((Sphere)i).rotateObjectOnPoint(degree, offsetX, offsetY, offsetZ, rotateX, rotateY, rotateZ);
         }
+    }
+
+    public void moveToNextPoint(ArrayList<Vector3f> path)
+    {
+        if(path.size() != 0)
+        {
+            float diffX, diffY, diffZ;
+            diffX = (float) (path.get(0).x - cpx);
+            diffY = (float) (path.get(0).y - cpy);
+            diffZ = (float) (path.get(0).z - cpz);
+            translateObject(diffX, diffY, diffZ);
+            path.remove(0);
+        }
+        else
+        {
+            System.out.println("Out of points for path :(");
+        }
+    }
+
+    public ArrayList<Vector3f> generateBezierPoints(float firstX, float firstY, float firstZ, float secondX, float secondY, float secondZ, float thirdX, float thirdY, float thirdZ)
+    {
+        ArrayList<Vector3f> result = new ArrayList<>();
+        float newX, newY, newZ;
+        for(double i = 0; i <=1; i+= 0.01)
+        {
+            newX = (float) ((Math.pow((1-i), 2) * firstX) + (2 * (1-i) * i * secondX) + (Math.pow(i, 2) * thirdX));
+            newY = (float) ((Math.pow((1-i), 2) * firstY) + (2 * (1-i) * i * secondY) + (Math.pow(i, 2) * thirdY));
+            newZ = (float) ((Math.pow((1-i), 2) * firstZ) + (2 * (1-i) * i * secondZ) + (Math.pow(i, 2) * thirdZ));
+            result.add(new Vector3f(newX, newY, newZ));
+        }
+        return result;
+    }
+
+    //coba return ke normal state
+    public void normalize()
+    {
+        float x = getCpx();
+        float y = getCpy();
+        float z = getCpz();
+        rotateObjectOnPoint(-totalRotateX, 1f, 0, 0, x, y, z);
+        rotateObjectOnPoint(-totalRotateY, 0, 1f, 0, x, y, z);
+        rotateObjectOnPoint(-totalRotateZ, 0, 0, 1f, x, y, z);
+        totalRotateX = 0;
+        totalRotateY = 0;
+        totalRotateZ = 0;
     }
 
     public void createSphere()
@@ -883,6 +958,66 @@ public class Sphere extends Circle
         }
     }
 
+    public void createMissile()
+    {
+        //KEPALA MISIL
+        createSphere();
+
+        //BODY MISIL
+        childObjects.add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f), radiusX, radiusY, 20 * radiusZ, 0, 0, 0, 3
+                )
+        );
+        childObjects.get(0).rotateObject(180f, 1, 0, 0);
+
+        //SAYAP KIRI
+        childObjects.add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(1.0f, 1.0f, 1.0f, 1.0f), radiusX*2f, radiusY/20f, radiusZ*2f, 0f, 0, 0, 13                    )
+        );
+        childObjects.get(1).translateObject(0f, radiusY/2f, 19 * radiusZ);
+        childObjects.get(1).rotateObject(90f, 0, 0, 1);
+
+        //SAYAP ATAS
+        childObjects.add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(1.0f, 1.0f, 1.0f, 1.0f), radiusX*2f, radiusY/20f, radiusZ*2f, 0f, 0, 0, 13                    )
+        );
+        childObjects.get(2).translateObject(0f, radiusY/2f, 19 * radiusZ);
+
+        //SAYAP KANAN
+        childObjects.add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(1.0f, 1.0f, 1.0f, 1.0f), radiusX*2f, radiusY/20f, radiusZ*2f, 0f, 0, 0, 13                    )
+        );
+        childObjects.get(3).translateObject(0f, radiusY/2f, 19 * radiusZ);
+        childObjects.get(3).rotateObject(-90f, 0, 0, 1);
+
+        //SAYAP BAWAH
+        childObjects.add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(1.0f, 1.0f, 1.0f, 1.0f), radiusX*2f, radiusY/20f, radiusZ*2f, 0f, 0, 0, 13                    )
+        );
+        childObjects.get(4).translateObject(0f, radiusY/2f, 19 * radiusZ);
+        childObjects.get(4).rotateObject(180f, 0, 0, 1);
+    }
+
     public void createTrapezoidwithSquare()
     {
         Vector3f temp = new Vector3f();
@@ -1159,6 +1294,7 @@ public class Sphere extends Circle
 
         }
     }
+
     public void createCorong()
     {
         this.vertices.clear();
@@ -1328,19 +1464,19 @@ public class Sphere extends Circle
         return radiusZ;
     }
 
-    public float getRotateX()
+    public float getTotalRotateX()
     {
-        return rotateX;
+        return totalRotateX;
     }
 
-    public float getRotateY()
+    public float getTotalRotateY()
     {
-        return rotateY;
+        return totalRotateY;
     }
 
-    public float getRotateZ()
+    public float getTotalRotateZ()
     {
-        return rotateZ;
+        return totalRotateZ;
     }
 
     public double getRotationLimit()
