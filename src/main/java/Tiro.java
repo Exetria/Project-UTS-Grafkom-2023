@@ -515,7 +515,7 @@ public class Tiro
                 }
                 else
                 {
-                    camera.moveUp(0.003f);
+                    camera.moveUp(0.03f);
                 }
             }
 
@@ -530,7 +530,7 @@ public class Tiro
                 }
                 else
                 {
-                    camera.moveDown(0.003f);
+                    camera.moveDown(0.03f);
                 }
             }
 
@@ -545,7 +545,7 @@ public class Tiro
                 }
                 else
                 {
-                    camera.moveLeft(0.003f);
+                    camera.moveLeft(0.03f);
                 }
             }
 
@@ -560,7 +560,7 @@ public class Tiro
                 }
                 else
                 {
-                    camera.moveRight(0.003f);
+                    camera.moveRight(0.03f);
                 }
             }
         }
@@ -571,22 +571,22 @@ public class Tiro
         {
             if(window.isKeyPressed(GLFW_KEY_UP))
             {
-                camera.addRotation(0.01f, 0);
+                camera.addRotation(((float) Math.toRadians(-1)), 0);
             }
 
             if(window.isKeyPressed(GLFW_KEY_DOWN))
             {
-                camera.addRotation(-0.01f, 0);
+                camera.addRotation(((float) Math.toRadians(1)), 0);
             }
 
             if(window.isKeyPressed(GLFW_KEY_LEFT))
             {
-                camera.addRotation(0f, -0.01f);
+                camera.addRotation(0f, ((float) Math.toRadians(-1)));
             }
 
             if(window.isKeyPressed(GLFW_KEY_RIGHT))
             {
-                camera.addRotation(0f, 0.01f);
+                camera.addRotation(0f, ((float) Math.toRadians(1)));
             }
         }
 
@@ -643,6 +643,8 @@ public class Tiro
             }
         }
 
+        //================================================================================
+
         //EXTRAS
         {
             //ZOOM IN
@@ -670,33 +672,7 @@ public class Tiro
                 System.out.println("Camera Mode");
                 rotateMode = false;
             }
-
-            //REVERT SEMUA ROTASI YG ADA (JANGAN DIPAKE)
-            if(window.isKeyPressed(GLFW_KEY_SPACE))
-            {
-//                for (Sphere i: spheres)
-//                {
-//                    i.normalize();
-//                }
-            }
         }
-
-
-        /*
-        if(window.getMouseInput().isLeftButtonPressed())
-        {
-            Vector2f pos = window.getMouseInput().getCurrentPos();
-
-            pos.x = (pos.x - (window.getWidth())/2f) / (window.getWidth() / 2f);
-            pos.y = (pos.y - (window.getHeight())/2f) / (window.getHeight() / 2f);
-
-            //if buat cek kalo value lebih dari 1/-1 tidak usah ditampilkan
-            if((!(pos.x > 1 || pos.x < -0.997) && !(pos.y > 1 || pos.y < -1)))
-            {
-                objectsPointControl.get(0).addVertices(new Vector3f(pos.x, -pos.y, 0));
-            }
-        }
-        */
     }
 
     public void loop()
@@ -712,7 +688,7 @@ public class Tiro
             for (Sphere objects : this.spheres)
             {
                 //gambar sekalian child
-                objects.draw(camera, projection, true);
+                objects.draw(camera, projection);
             }
 
             //Poll for window event

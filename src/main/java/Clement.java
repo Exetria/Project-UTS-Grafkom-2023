@@ -609,7 +609,6 @@ public class Clement
         spheres.get(0).getChildObjects().get(30).translateObject(-0.12f, 0.163f, 0f);
 
         //TOMBOL TURRET
-
         spheres.get(0).getChildObjects().add(new Sphere
                 (
                         Arrays.asList
