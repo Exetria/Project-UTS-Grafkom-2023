@@ -149,22 +149,6 @@ public class Sphere extends Circle
         //offset x, y, sama z itu maksudnya rotasi terhadap sumbunya misal z=1 berarti rotasi thd sb z
         model = new Matrix4f().rotate((float)(Math.toRadians(degree)), offsetX, offsetY, offsetZ).mul(new Matrix4f(model));
 
-        if(offsetX == 1f)
-        {
-            this.totalRotateX += degree;
-            this.totalRotateX %= 360;
-        }
-        else if (offsetY == 1f)
-        {
-            this.totalRotateY += degree;
-            this.totalRotateY %= 360;
-        }
-        else if (offsetZ == 1f)
-        {
-            this.totalRotateZ += degree;
-            this.totalRotateZ %= 360;
-        }
-
         float newcpx =(float) (cpx * Math.cos(degree) - cpy * Math.sin(degree));
         float newcpy =(float) (cpx * Math.sin(degree) + cpy * Math.cos(degree));
 
@@ -248,7 +232,7 @@ public class Sphere extends Circle
         }
     }
 
-    public void moveToNextPoint(ArrayList<Vector3f> path)
+    public boolean moveToNextPoint(ArrayList<Vector3f> path)
     {
         if(path.size() != 0)
         {
@@ -258,10 +242,13 @@ public class Sphere extends Circle
             diffZ = (float) (path.get(0).z - cpz);
             translateObject(diffX, diffY, diffZ);
             path.remove(0);
+            return true;
         }
         else
         {
-            System.out.println("Out of points for path :(");
+            System.out.println("Out of points");
+            vertices.clear();
+            return false;
         }
     }
 

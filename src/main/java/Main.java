@@ -468,35 +468,35 @@ public class Main
                 //luncurkan misil kiri
                 if(window.isKeyPressed(GLFW_KEY_V))
                 {
-                    if(leftMissileLaunch)
-                    {
-                        leftMissile.moveToNextPoint(leftPath);
-                    }
-                    else
+                    if(!leftMissileLaunch)
                     {
                         leftMissile = ((Sphere) spheres.get(0).getChildObjects().get(21));
                         leftPath = leftMissile.generateBezierPoints(leftMissile.getCpx(), leftMissile.getCpy(), leftMissile.getCpz(),
                                 leftMissile.getCpx(), leftMissile.getCpy(), -5,
-                                -5, -5, -5);
+                                -5, leftMissile.getCpy()+2, -10);
                         leftMissileLaunch = true;
                     }
+                }
+                if(leftMissileLaunch)
+                {
+                    leftMissileLaunch = leftMissile.moveToNextPoint(leftPath);
                 }
 
                 //luncurkan misil kanan
                 if(window.isKeyPressed(GLFW_KEY_B))
                 {
-                    if(rightMissileLaunch)
-                    {
-                        rightMissile.moveToNextPoint(rightPath);
-                    }
-                    else
+                    if(!rightMissileLaunch)
                     {
                         rightMissile = ((Sphere) spheres.get(0).getChildObjects().get(22));
                         rightPath = rightMissile.generateBezierPoints(rightMissile.getCpx(), rightMissile.getCpy(), rightMissile.getCpz(),
                                 rightMissile.getCpx(), rightMissile.getCpy(), -5,
-                                5, -5, -5);
+                                5, rightMissile.getCpy()+5, -20);
                         rightMissileLaunch = true;
                     }
+                }
+                if(rightMissileLaunch)
+                {
+                    rightMissileLaunch = rightMissile.moveToNextPoint(rightPath);
                 }
 
                 //sayap belakang keatas
