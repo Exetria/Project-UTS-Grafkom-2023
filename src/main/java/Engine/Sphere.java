@@ -197,11 +197,6 @@ public class Sphere extends Circle
         {
             ((Sphere)i).rotateObjectOnPoint(degree, offsetX, offsetY, offsetZ, rotateX, rotateY, rotateZ);
         }
-        System.out.println(totalRotateX);
-        System.out.println(totalRotateY);
-        System.out.println(totalRotateZ);
-        System.out.println();
-
     }
 
     public void experimentRotate(float degree, float offsetX, float offsetY, float offsetZ, float rotateX, float rotateY, float rotateZ)
@@ -246,7 +241,6 @@ public class Sphere extends Circle
         }
         else
         {
-            System.out.println("Out of points");
             vertices.clear();
             return false;
         }
