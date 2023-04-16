@@ -70,6 +70,15 @@ public class Sphere extends Circle
         {
             createFrontIntake();
         }
+        else if (option == 41) {
+            createTrapezoidwithSquare();
+        }
+        else if (option == 42) {
+            createTrapezoidwithLine();
+        }
+        else if (option == 43) {
+            createTireSupport();
+        }
 
         setupVAOVBO();
     }
@@ -246,7 +255,8 @@ public class Sphere extends Circle
 
             //kotak yg sisi bawah
             vertices.add(tempVertices.get(3));
-            vertices.add(tempVertices.get(2));
+            vertices.add(tempVertices.get(0));
+            vertices.add(tempVertices.get(3));
             vertices.add(tempVertices.get(7));
             vertices.add(tempVertices.get(6));
         }
@@ -533,6 +543,283 @@ public class Sphere extends Circle
             vertices.add(tempVertices.get(5));
             vertices.add(tempVertices.get(3));
             vertices.add(tempVertices.get(1));
+        }
+    }
+
+    public void createTrapezoidwithSquare()
+    {
+        Vector3f temp = new Vector3f();
+        ArrayList<Vector3f> tempVertices = new ArrayList<>();
+
+        //titik 1 kiri atas belakang
+        temp.x = (float)cpx - radiusX/2;
+        temp.y = (float)cpy + radiusY/2;
+        temp.z = (float)cpz - radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 2 kiri bawah belakang
+        temp.x = (float)cpx - radiusX/1.5f;
+        temp.y = (float)cpy - radiusY/1.95f;
+        temp.z = (float)cpz - radiusZ/1.5f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 3 kanan bawah belakang
+        temp.x = (float)cpx + radiusX/1.9f;
+        temp.y = (float)cpy - radiusY/1.95f;
+        temp.z = (float)cpz - radiusZ/1.5f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 4 kanan atas belakang
+        temp.x = (float)cpx + radiusX/2;
+        temp.y = (float)cpy + radiusY/2;
+        temp.z = (float)cpz - radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 5 kiri atas depan
+        temp.x = (float)cpx - radiusX/2;
+        temp.y = (float)cpy + radiusY/2;
+        temp.z = (float)cpz + radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 6 kiri bawah depan
+        temp.x = (float)cpx - radiusX/1.5f;
+        temp.y = (float)cpy - radiusY/1.95f;
+        temp.z = (float)cpz + radiusZ/1.5f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 7 kanan bawah depan
+        temp.x = (float)cpx + radiusX/1.9f;
+        temp.y = (float)cpy - radiusY/1.95f;
+        temp.z = (float)cpz + radiusZ/1.5f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 8 kanan atas depan
+        temp.x = (float)cpx + radiusX/2;
+        temp.y = (float)cpy + radiusY/2;
+        temp.z = (float)cpz + radiusZ/2;
+        tempVertices.add(temp);
+
+        vertices.clear();
+        {
+            //BAGIAN ATAS KOTAK
+            vertices.add(tempVertices.get(0));
+            vertices.add(tempVertices.get(3));
+            vertices.add(tempVertices.get(7));
+            vertices.add(tempVertices.get(4));
+            vertices.add(tempVertices.get(0));
+
+            //TITIK MIRING KANAN DEPAN DAN TITIK MIRING KIRI DEPAN SERTA SAMBUNGKAN DEPAN
+            vertices.add(tempVertices.get(1));
+            vertices.add(tempVertices.get(0));
+            vertices.add(tempVertices.get(4));
+            vertices.add(tempVertices.get(5));
+            vertices.add(tempVertices.get(1));
+
+            //TITIK MIRING KANAN BELAKANG DAN SAMBUNGKAN KANAN
+            vertices.add(tempVertices.get(0));
+            vertices.add(tempVertices.get(3));
+            vertices.add(tempVertices.get(2));
+            vertices.add(tempVertices.get(1));
+
+            //TITIK MIRING KIRI BELAKANG DAN SAMBUNGKAN BELAKANG
+            vertices.add(tempVertices.get(0));
+            vertices.add(tempVertices.get(3));
+            vertices.add(tempVertices.get(7));
+            vertices.add(tempVertices.get(6));
+            vertices.add(tempVertices.get(2));
+
+            //SAMBUNGKAN KIRI
+            vertices.add(tempVertices.get(6));
+            vertices.add(tempVertices.get(5));
+        }
+
+    }
+
+    public void createTrapezoidwithLine()
+    {
+        Vector3f temp = new Vector3f();
+        ArrayList<Vector3f> tempVertices = new ArrayList<>();
+
+        //titik 1 kiri atas belakang
+        temp.x = (float)cpx - radiusX/2;
+        temp.y = (float)cpy + radiusY/2;
+        temp.z = (float)cpz - radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 2 kiri bawah belakang
+        temp.x = (float)cpx - radiusX/1.08f;
+        temp.y = (float)cpy - radiusY/1.95f;
+        temp.z = (float)cpz - radiusZ/2f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 3 kanan bawah belakang
+        temp.x = (float)cpx + radiusX/2f;
+        temp.y = (float)cpy - radiusY/2f;
+        temp.z = (float)cpz - radiusZ/2f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 4 kanan atas belakang
+        temp.x = (float)cpx + radiusX/2;
+        temp.y = (float)cpy + radiusY/2;
+        temp.z = (float)cpz - radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 5 kiri atas depan
+        temp.x = (float)cpx - radiusX/2;
+        temp.y = (float)cpy + radiusY/2;
+        temp.z = (float)cpz + radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 6 kiri bawah depan
+        temp.x = (float)cpx - radiusX/1.08f;
+        temp.y = (float)cpy - radiusY/1.95f;
+        temp.z = (float)cpz + radiusZ/2f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 7 kanan bawah depan
+        temp.x = (float)cpx + radiusX/2f;
+        temp.y = (float)cpy - radiusY/2f;
+        temp.z = (float)cpz + radiusZ/2f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 8 kanan atas depan
+        temp.x = (float)cpx + radiusX/2;
+        temp.y = (float)cpy + radiusY/2;
+        temp.z = (float)cpz + radiusZ/2;
+        tempVertices.add(temp);
+
+        vertices.clear();
+        {
+            //BAGIAN ATAS KOTAK
+            vertices.add(tempVertices.get(0));
+            vertices.add(tempVertices.get(3));
+            vertices.add(tempVertices.get(7));
+            vertices.add(tempVertices.get(4));
+            vertices.add(tempVertices.get(0));
+
+            //TITIK MIRING KANAN DEPAN DAN TITIK MIRING KIRI DEPAN SERTA SAMBUNGKAN DEPAN
+            vertices.add(tempVertices.get(1));
+            vertices.add(tempVertices.get(0));
+            vertices.add(tempVertices.get(4));
+            vertices.add(tempVertices.get(5));
+            vertices.add(tempVertices.get(1));
+
+            //TITIK MIRING KANAN BELAKANG DAN SAMBUNGKAN KANAN
+            vertices.add(tempVertices.get(0));
+            vertices.add(tempVertices.get(3));
+            vertices.add(tempVertices.get(2));
+            vertices.add(tempVertices.get(1));
+
+            //TITIK MIRING KIRI BELAKANG DAN SAMBUNGKAN BELAKANG
+            vertices.add(tempVertices.get(0));
+            vertices.add(tempVertices.get(3));
+            vertices.add(tempVertices.get(7));
+            vertices.add(tempVertices.get(6));
+            vertices.add(tempVertices.get(2));
+
+            //SAMBUNGKAN KIRI
+            vertices.add(tempVertices.get(6));
+            vertices.add(tempVertices.get(5));
+        }
+    }
+
+    public void createTireSupport() {
+        Vector3f temp = new Vector3f();
+        ArrayList<Vector3f> tempVertices = new ArrayList<>();
+
+        //titik 1 kiri atas belakang
+        temp.x = (float)cpx - radiusX/2;
+        temp.y = (float)cpy + radiusY/2;
+        temp.z = (float)cpz - radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 2 kiri bawah belakang
+        temp.x = (float)cpx - radiusX/0.35f;
+        temp.y = (float)cpy - radiusY/2f;
+        temp.z = (float)cpz - radiusZ/2f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 3 kanan bawah belakang
+        temp.x = (float)cpx + radiusX/0.4f;
+        temp.y = (float)cpy - radiusY/2f;
+        temp.z = (float)cpz - radiusZ/2f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 4 kanan atas belakang
+        temp.x = (float)cpx + radiusX/2;
+        temp.y = (float)cpy + radiusY/2;
+        temp.z = (float)cpz - radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 5 kiri atas depan
+        temp.x = (float)cpx - radiusX/2;
+        temp.y = (float)cpy + radiusY/2;
+        temp.z = (float)cpz + radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 6 kiri bawah depan
+        temp.x = (float)cpx - radiusX/0.35f;
+        temp.y = (float)cpy - radiusY/2f;
+        temp.z = (float)cpz + radiusZ/2f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 7 kanan bawah depan
+        temp.x = (float)cpx + radiusX/0.4f;
+        temp.y = (float)cpy - radiusY/2f;
+        temp.z = (float)cpz + radiusZ/2f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 8 kanan atas depan
+        temp.x = (float)cpx + radiusX/2;
+        temp.y = (float)cpy + radiusY/2;
+        temp.z = (float)cpz + radiusZ/2;
+        tempVertices.add(temp);
+
+        vertices.clear();
+        {
+            //BAGIAN ATAS
+            vertices.add(tempVertices.get(0));
+            vertices.add(tempVertices.get(3));
+            vertices.add(tempVertices.get(7));
+            vertices.add(tempVertices.get(4));
+            vertices.add(tempVertices.get(0));
+
+            //BAGIAN KIRI MELENGKUNG
+            vertices.add(tempVertices.get(1));
+            vertices.add(tempVertices.get(0));
+            vertices.add(tempVertices.get(4));
+            vertices.add(tempVertices.get(5));
+            vertices.add(tempVertices.get(1));
+
+            //BAGIAN KANAN MELENGKUNG
+            vertices.add(tempVertices.get(0));
+            vertices.add(tempVertices.get(3));
+            vertices.add(tempVertices.get(2));
+            vertices.add(tempVertices.get(7));
+            vertices.add(tempVertices.get(6));
+            vertices.add(tempVertices.get(2));
+
         }
     }
 
