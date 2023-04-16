@@ -13,12 +13,14 @@ public class Sphere extends Circle
 
     int ibo, stackCount, sectorCount;
     double cpz;
-    float radiusX, radiusY, radiusZ;
+    float radiusX, radiusY, radiusZ, rotateX, rotateY, rotateZ;
+    public double rotationLimit;
 
     public Sphere(List<ShaderModuleData> shaderModuleDataList, List<Vector3f> vertices, Vector4f color, double rx, double ry, double rz, double cpx, double cpy, double cpz, int option)
     {
         super(shaderModuleDataList, vertices, color, rx, cpx, cpy);
         this.cpz = cpz;
+
         this.radiusX = (float) rx;
         this.radiusY = (float) ry;
         this.radiusZ = (float) rz;
@@ -79,6 +81,30 @@ public class Sphere extends Circle
         else if (option == 43) {
             createTireSupport();
         }
+        else if(option == 12)
+        {
+            createTrapezoid();
+        }
+        else if(option == 13)
+        {
+            createTail();
+        }
+        else if(option == 14)
+        {
+            createEmpennage();
+        }
+        else if(option == 20)
+        {
+            createTrapesium();
+        }
+        else if(option == 21)
+        {
+            createRoda();
+        }
+        else if(option == 22)
+        {
+            createCorong();
+        }
 
         setupVAOVBO();
     }
@@ -100,8 +126,15 @@ public class Sphere extends Circle
         //offset x, y, sama z itu maksudnya rotasi terhadap sumbunya misal z=1 berarti rotasi thd sb z
         model = new Matrix4f().rotate((float)(Math.toRadians(degree)), offsetX, offsetY, offsetZ).mul(new Matrix4f(model));
 
-        float newcpx =(float) (cpx * Math.cos((double) degree) - cpy * Math.sin((double) degree));
-        float newcpy =(float) (cpx * Math.sin((double) degree) + cpy * Math.cos((double) degree));
+        this.rotateX += degree * offsetX;
+        this.rotateX %= 360;
+        this.rotateY += degree * offsetY;
+        this.rotateY %= 360;
+        this.rotateZ += degree * offsetZ;
+        this.rotateZ %= 360;
+
+        float newcpx =(float) (cpx * Math.cos(degree) - cpy * Math.sin(degree));
+        float newcpy =(float) (cpx * Math.sin(degree) + cpy * Math.cos(degree));
 
         cpx = newcpx;
         cpy = newcpy;
@@ -120,6 +153,13 @@ public class Sphere extends Circle
 
         model = new Matrix4f().rotate((float)(Math.toRadians(degree)), offsetX, offsetY, offsetZ).mul(new Matrix4f(model));
 
+        this.rotateX += degree * offsetX;
+        this.rotateX %= 360;
+        this.rotateY += degree * offsetY;
+        this.rotateY %= 360;
+        this.rotateZ += degree * offsetZ;
+        this.rotateZ %= 360;
+
         float newcpx =(float) (cpx * Math.cos((float)(Math.toRadians(degree))) - cpy * Math.sin((float)(Math.toRadians(degree))));
         float newcpy =(float) (cpx * Math.sin((float)(Math.toRadians(degree))) + cpy * Math.cos((float)(Math.toRadians(degree))));
 
@@ -132,17 +172,35 @@ public class Sphere extends Circle
         {
             ((Sphere)i).rotateObjectOnPoint(degree, offsetX, offsetY, offsetZ, rotateX, rotateY, rotateZ);
         }
+
     }
 
-    public void centralize()
+    public void experimentRotate(float degree, float offsetX, float offsetY, float offsetZ, float rotateX, float rotateY, float rotateZ)
     {
-        createSphere();
-        setupVAOVBO();
-    }
+        translateObject(-rotateX, -rotateY, -rotateZ);
 
-    public void returnPosition()
-    {
-        translateObject((float) cpx, (float) cpy, (float) cpz);
+        model = new Matrix4f().rotate((float)(Math.toRadians(-this.rotateX)), 1, 0, 0).mul(new Matrix4f(model));
+        model = new Matrix4f().rotate((float)(Math.toRadians(-this.rotateY)), 0, 1, 0).mul(new Matrix4f(model));
+        model = new Matrix4f().rotate((float)(Math.toRadians(-this.rotateZ)), 0, 0, 1).mul(new Matrix4f(model));
+
+        model = new Matrix4f().rotate((float)(Math.toRadians(degree)), offsetX, offsetY, offsetZ).mul(new Matrix4f(model));
+
+        model = new Matrix4f().rotate((float)(Math.toRadians(this.rotateX)), 1, 0, 0).mul(new Matrix4f(model));
+        model = new Matrix4f().rotate((float)(Math.toRadians(this.rotateY)), 0, 1, 0).mul(new Matrix4f(model));
+        model = new Matrix4f().rotate((float)(Math.toRadians(this.rotateZ)), 0, 0, 1).mul(new Matrix4f(model));
+
+        float newcpx =(float) (cpx * Math.cos((float)(Math.toRadians(degree))) - cpy * Math.sin((float)(Math.toRadians(degree))));
+        float newcpy =(float) (cpx * Math.sin((float)(Math.toRadians(degree))) + cpy * Math.cos((float)(Math.toRadians(degree))));
+
+        cpx = newcpx;
+        cpy = newcpy;
+
+        translateObject(rotateX, rotateY, rotateZ);
+
+        for (Objects i: childObjects)
+        {
+            ((Sphere)i).rotateObjectOnPoint(degree, offsetX, offsetY, offsetZ, rotateX, rotateY, rotateZ);
+        }
     }
 
     public void createSphere()
@@ -223,42 +281,31 @@ public class Sphere extends Circle
 
         vertices.clear();
         {
+
+
             //kotak yg sisi belakang
             vertices.add(tempVertices.get(0));
             vertices.add(tempVertices.get(1));
             vertices.add(tempVertices.get(2));
             vertices.add(tempVertices.get(3));
+            vertices.add(tempVertices.get(0));
 
             //kotak yg sisi depan
             vertices.add(tempVertices.get(4));
             vertices.add(tempVertices.get(5));
             vertices.add(tempVertices.get(6));
             vertices.add(tempVertices.get(7));
-
-            //kotak yg sisi kiri
-            vertices.add(tempVertices.get(0));
             vertices.add(tempVertices.get(4));
-            vertices.add(tempVertices.get(7));
-            vertices.add(tempVertices.get(3));
 
-            //kotak yg sisi kanan
-            vertices.add(tempVertices.get(1));
+            //sisi kiri
             vertices.add(tempVertices.get(5));
-            vertices.add(tempVertices.get(6));
+            vertices.add(tempVertices.get(1));
+
+            //sisi kanan
             vertices.add(tempVertices.get(2));
-
-            //kotak yg sisi atas
-            vertices.add(tempVertices.get(0));
-            vertices.add(tempVertices.get(1));
-            vertices.add(tempVertices.get(5));
-            vertices.add(tempVertices.get(4));
-
-            //kotak yg sisi bawah
-            vertices.add(tempVertices.get(3));
-            vertices.add(tempVertices.get(0));
-            vertices.add(tempVertices.get(3));
-            vertices.add(tempVertices.get(7));
             vertices.add(tempVertices.get(6));
+            vertices.add(tempVertices.get(7));
+            vertices.add(tempVertices.get(3));
         }
     }
 
@@ -417,42 +464,40 @@ public class Sphere extends Circle
         //titik 3 ujung paling jauh sayap (4, 5)
         temp.x = (float)cpx + radiusX * 1.15f;
         temp.y = 0;
-        temp.z = (float)cpz + radiusZ/4;
+        temp.z = (float)cpz + radiusZ/3;
         tempVertices.add(temp);
         temp = new Vector3f();
 
         temp.x = (float)cpx + radiusX * 1.15f;
         temp.y = -radiusY;
-        temp.z = (float)cpz + radiusZ/4;
+        temp.z = (float)cpz + radiusZ/3;
         tempVertices.add(temp);
         temp = new Vector3f();
 
         //titik 4 ujung belakang sayap yg agak kelebihan (6, 7)
         temp.x = (float)cpx + radiusX;
         temp.y = 0;
-        temp.z = (float)cpz + radiusZ * 0.55f;
+        temp.z = (float)cpz + radiusZ * 0.6f;
         tempVertices.add(temp);
         temp = new Vector3f();
 
         temp.x = (float)cpx + radiusX;
         temp.y = -radiusY;
-        temp.z = (float)cpz + radiusZ * 0.55f;
+        temp.z = (float)cpz + radiusZ * 0.6f;
         tempVertices.add(temp);
         temp = new Vector3f();
 
         //titik 5 ujung belakang sayap yg rata (8, 9)
         temp.x = (float)cpx + radiusX/2;
         temp.y = 0;
-        temp.z = (float)cpz + radiusZ/2;
+        temp.z = (float)cpz + radiusZ * 0.5f;
         tempVertices.add(temp);
         temp = new Vector3f();
 
         temp.x = (float)cpx + radiusX/2;
         temp.y = -radiusY;
-        temp.z = (float)cpz + radiusZ/2;
+        temp.z = (float)cpz + radiusZ * 0.5f;
         tempVertices.add(temp);
-        temp = new Vector3f();
-
 
         vertices.clear();
         {
@@ -525,7 +570,6 @@ public class Sphere extends Circle
         temp.y = -0.5f * radiusY;
         temp.z = 0;
         tempVertices.add(temp);
-        temp = new Vector3f();
 
         vertices.clear();
         {
@@ -539,6 +583,278 @@ public class Sphere extends Circle
             vertices.add(tempVertices.get(2));
             vertices.add(tempVertices.get(0));
             vertices.add(tempVertices.get(1));
+
+            vertices.add(tempVertices.get(5));
+            vertices.add(tempVertices.get(3));
+            vertices.add(tempVertices.get(1));
+        }
+    }
+
+    //trapesium secara horizontal (berdiri biasa) dan 1 sisinya rata
+    public void createTrapezoid()
+    {
+        Vector3f temp = new Vector3f();
+        ArrayList<Vector3f> tempVertices = new ArrayList<>();
+
+        //atas kiri depan
+        temp.x = (float) cpx - radiusX / 2;
+        temp.y = (float) cpy + radiusY / 2;
+        temp.z = (float) cpz + radiusZ / 2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //atas kanan depan
+        temp.x = (float) cpx + radiusX / 2;
+        temp.y = (float) cpy + radiusY / 2;
+        temp.z = (float) cpz + radiusZ / 2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //atas kiri belakang
+        temp.x = (float) cpx - radiusX / 2;
+        temp.y = (float) cpy + radiusY / 2;
+        temp.z = (float) cpz - radiusZ;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //atas kanan belakang
+        temp.x = (float) cpx + radiusX / 2;
+        temp.y = (float) cpy + radiusY / 2;
+        temp.z = (float) cpz - radiusZ;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //bawah kiri depan
+        temp.x = (float) cpx - radiusX * 0.9f;
+        temp.y = (float) cpy - radiusY / 2;
+        temp.z = (float) cpz + radiusZ;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //bawah kanan depan
+        temp.x = (float) cpx + radiusX * 0.9f;
+        temp.y = (float) cpy - radiusY / 2;
+        temp.z = (float) cpz + radiusZ;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //bawah kiri belakang
+        temp.x = (float) cpx - radiusX * 0.9f;
+        temp.y = (float) cpy - radiusY / 2;
+        temp.z = (float) cpz - radiusZ;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //bawah kanan belakang
+        temp.x = (float) cpx + radiusX * 0.9f;
+        temp.y = (float) cpy - radiusY / 2;
+        temp.z = (float) cpz - radiusZ;
+        tempVertices.add(temp);
+
+        vertices.clear();
+        {
+            vertices.add(tempVertices.get(0));
+            vertices.add(tempVertices.get(1));
+            vertices.add(tempVertices.get(3));
+            vertices.add(tempVertices.get(2));
+            vertices.add(tempVertices.get(0));
+
+            vertices.add(tempVertices.get(4));
+            vertices.add(tempVertices.get(5));
+            vertices.add(tempVertices.get(7));
+            vertices.add(tempVertices.get(6));
+            vertices.add(tempVertices.get(4));
+
+            vertices.add(tempVertices.get(5));
+            vertices.add(tempVertices.get(1));
+
+            vertices.add(tempVertices.get(3));
+            vertices.add(tempVertices.get(7));
+            vertices.add(tempVertices.get(6));
+
+            vertices.add(tempVertices.get(2));
+        }
+    }
+
+    public void createTail()
+    {
+        Vector3f temp = new Vector3f();
+        ArrayList<Vector3f> tempVertices = new ArrayList<>();
+
+        //titik 1 depan bawah ekor (0, 1)
+        temp.x = 0;
+        temp.y = 0;
+        temp.z = (float)cpz - radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        temp.x = 0;
+        temp.y = -radiusY;
+        temp.z = (float)cpz - radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 2 belakang bahah ekor (2, 3)
+        temp.x = 0;
+        temp.y = 0;
+        temp.z = (float)cpz + radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        temp.x = 0;
+        temp.y = -radiusY;
+        temp.z = (float)cpz + radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 3 ujung atas ekor (4, 5)
+        temp.x = (float)cpx + radiusX;
+        temp.y = 0;
+        temp.z = (float)cpz + radiusZ/4;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        temp.x = (float)cpx + radiusX;
+        temp.y = -radiusY;
+        temp.z = (float)cpz + radiusZ/4;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 4 ujung belakang atas ekor (6, 7)
+        temp.x = (float)cpx + radiusX;
+        temp.y = 0;
+        temp.z = (float)cpz + radiusZ * 0.55f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        temp.x = (float)cpx + radiusX;
+        temp.y = -radiusY;
+        temp.z = (float)cpz + radiusZ * 0.55f;
+        tempVertices.add(temp);
+
+        vertices.clear();
+        {
+            vertices.add(tempVertices.get(0));
+            vertices.add(tempVertices.get(1));
+            vertices.add(tempVertices.get(3));
+            vertices.add(tempVertices.get(2));
+            vertices.add(tempVertices.get(0));
+
+            vertices.add(tempVertices.get(4));
+            vertices.add(tempVertices.get(5));
+            vertices.add(tempVertices.get(1));
+
+            vertices.add(tempVertices.get(5));
+            vertices.add(tempVertices.get(7));
+            vertices.add(tempVertices.get(6));
+            vertices.add(tempVertices.get(4));
+            vertices.add(tempVertices.get(6));
+
+            vertices.add(tempVertices.get(6));
+            vertices.add(tempVertices.get(6));
+            vertices.add(tempVertices.get(6));
+            vertices.add(tempVertices.get(6));
+
+            vertices.add(tempVertices.get(2));
+            vertices.add(tempVertices.get(3));
+            vertices.add(tempVertices.get(7));
+            vertices.add(tempVertices.get(6));
+        }
+        rotateObject(90f, 0, 0, 1f);
+    }
+
+    //empennage = sayap belakang
+    public void createEmpennage()
+    {
+        Vector3f temp = new Vector3f();
+        ArrayList<Vector3f> tempVertices = new ArrayList<>();
+
+        this.rotationLimit = 45;
+
+        //titik 1 depan sayap (0, 1)
+        temp.x = 0;
+        temp.y = 0;
+        temp.z = (float)cpz - radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        temp.x = 0;
+        temp.y = -radiusY;
+        temp.z = (float)cpz - radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 2 dalam tengah sayap (2, 3)
+        temp.x = (float) cpx + radiusX * 0.4f;
+        temp.y = 0;
+        temp.z = (float)cpz - radiusZ * 0.17f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        temp.x = (float) cpx + radiusX * 0.4f;
+        temp.y = -radiusY;
+        temp.z = (float)cpz - radiusZ * 0.17f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 3 depan tengah sayap (4, 5)
+        temp.x = (float) cpx + radiusX * 0.4f;
+        temp.y = 0;
+        temp.z = (float)cpz - radiusZ * 0.27f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        temp.x = (float) cpx + radiusX * 0.4f;
+        temp.y = -radiusY;
+        temp.z = (float)cpz - radiusZ * 0.27f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 4 ujung luar sayap (6, 7)
+        temp.x = (float) cpx + radiusX;
+        temp.y = 0;
+        temp.z = (float) cpz + radiusZ * 0.2f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        temp.x = (float) cpx + radiusX;
+        temp.y = -radiusY;
+        temp.z = (float) cpz + radiusZ * 0.2f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 5 ujung luar belakang sayap (8, 9)
+        temp.x = (float)cpx + radiusX * 0.9f;
+        temp.y = 0;
+        temp.z = (float)cpz + radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        temp.x = (float)cpx + radiusX * 0.9f;
+        temp.y = -radiusY;
+        temp.z = (float)cpz + radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 6 ujung belakang sayap (10, 11)
+        temp.x = (float) cpx;
+        temp.y = 0;
+        temp.z = (float)cpz + radiusZ * 0.4f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        temp.x = (float) cpx;
+        temp.y = -radiusY;
+        temp.z = (float)cpz + radiusZ * 0.4f;
+        tempVertices.add(temp);
+
+        vertices.clear();
+        {
+            vertices.add(tempVertices.get(0));
+            vertices.add(tempVertices.get(1));
+            vertices.add(tempVertices.get(3));
+            vertices.add(tempVertices.get(2));
+            vertices.add(tempVertices.get(0));
 
             vertices.add(tempVertices.get(5));
             vertices.add(tempVertices.get(3));
@@ -619,6 +935,8 @@ public class Sphere extends Circle
             vertices.add(tempVertices.get(1));
             vertices.add(tempVertices.get(0));
             vertices.add(tempVertices.get(4));
+            vertices.add(tempVertices.get(2));
+            vertices.add(tempVertices.get(4));
             vertices.add(tempVertices.get(5));
             vertices.add(tempVertices.get(1));
 
@@ -626,6 +944,24 @@ public class Sphere extends Circle
             vertices.add(tempVertices.get(0));
             vertices.add(tempVertices.get(3));
             vertices.add(tempVertices.get(2));
+            vertices.add(tempVertices.get(5));
+
+            vertices.add(tempVertices.get(7));
+            vertices.add(tempVertices.get(6));
+            vertices.add(tempVertices.get(4));
+            vertices.add(tempVertices.get(6));
+
+            vertices.add(tempVertices.get(8));
+            vertices.add(tempVertices.get(9));
+            vertices.add(tempVertices.get(7));
+            vertices.add(tempVertices.get(9));
+
+            vertices.add(tempVertices.get(11));
+            vertices.add(tempVertices.get(10));
+            vertices.add(tempVertices.get(8));
+            vertices.add(tempVertices.get(10));
+
+            vertices.add(tempVertices.get(0));
             vertices.add(tempVertices.get(1));
 
             //TITIK MIRING KIRI BELAKANG DAN SAMBUNGKAN BELAKANG
@@ -820,7 +1156,157 @@ public class Sphere extends Circle
             vertices.add(tempVertices.get(6));
             vertices.add(tempVertices.get(2));
 
+            vertices.add(tempVertices.get(11));
         }
+    }
+
+    public void createCorong()
+    {
+        this.vertices.clear();
+        ArrayList<Vector3f> temp = new ArrayList<>();
+
+        for(double i = 0.0; i < 360.0; i += 0.1) {
+            this.x = this.cpx - this.r * (double)((float)Math.sin(Math.toRadians(i)));
+            this.y = this.cpy - this.r * (double)((float)Math.cos(Math.toRadians(i)));
+            temp.add(new Vector3f(0.0F, (float)this.x, (float)this.y));
+            temp.add(new Vector3f(-this.radiusZ, (float)this.x, (float)this.y));
+        }
+
+        this.vertices = temp;
+    }
+
+    public void createRoda()
+    {
+        this.vertices.clear();
+        ArrayList<Vector3f> temp = new ArrayList<>();
+
+        for(double i = 0.0; i < 360.0; i += 0.1) {
+            if (i >= 85.0 && i <= 95.0) {
+                this.x = this.cpx + (this.r - 0.03) * (double)((float)Math.cos(Math.toRadians(i)));
+                this.y = this.cpy + (this.r - 0.03) * (double)((float)Math.sin(Math.toRadians(i)));
+            } else if (i >= 175.0 && i <= 185.0) {
+                this.x = this.cpx + (this.r - 0.03) * (double)((float)Math.cos(Math.toRadians(i)));
+                this.y = this.cpy + (this.r - 0.03) * (double)((float)Math.sin(Math.toRadians(i)));
+            } else if (i >= 265.0 && i <= 275.0) {
+                this.x = this.cpx + (this.r - 0.03) * (double)((float)Math.cos(Math.toRadians(i)));
+                this.y = this.cpy + (this.r - 0.03) * (double)((float)Math.sin(Math.toRadians(i)));
+            } else if ((!(i >= 0.0) || !(i <= 5.0)) && (!(i >= 355.0) || !(i < 360.0))) {
+                this.x = this.cpx + this.r * (double)((float)Math.cos(Math.toRadians(i)));
+                this.y = this.cpy + this.r * (double)((float)Math.sin(Math.toRadians(i)));
+            } else {
+                this.x = this.cpx + (this.r - 0.03) * (double)((float)Math.cos(Math.toRadians(i)));
+                this.y = this.cpy + (this.r - 0.03) * (double)((float)Math.sin(Math.toRadians(i)));
+            }
+
+            temp.add(new Vector3f((float)this.x, (float)this.y, 0.0F));
+            temp.add(new Vector3f((float)this.x, (float)this.y, -this.radiusZ));
+        }
+
+        this.vertices = temp;
+    }
+
+    public void createTrapesium()
+    {
+        float a = 0.23F;
+        float b = 0.08F;
+        Vector3f temp = new Vector3f();
+        ArrayList<Vector3f> tempVertices = new ArrayList<>();
+        temp.x = (float)this.cpx - this.radiusX / 2.0F;
+        temp.y = (float)this.cpy + this.radiusY / 2.0F;
+        temp.z = (float)this.cpz - this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        temp.x = (float)this.cpx - this.radiusX / 2.0F;
+        temp.y = (float)this.cpy - this.radiusY / 2.0F;
+        temp.z = (float)this.cpz - this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        temp.x = (float)this.cpx + this.radiusX / 2.0F;
+        temp.y = (float)this.cpy - this.radiusY / 2.0F;
+        temp.z = (float)this.cpz - this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        temp.x = (float)this.cpx + this.radiusX / 2.0F;
+        temp.y = (float)this.cpy + this.radiusY / 2.0F;
+        temp.z = (float)this.cpz - this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        temp.x = (float)this.cpx - this.radiusX / 2.0F;
+        temp.y = (float)this.cpy + this.radiusY / 2.0F;
+        temp.z = (float)this.cpz + this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        temp.x = (float)this.cpx - this.radiusX / 2.0F;
+        temp.y = (float)this.cpy - this.radiusY / 2.0F;
+        temp.z = (float)this.cpz + this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        temp.x = (float)this.cpx + this.radiusX / 2.0F;
+        temp.y = (float)this.cpy - this.radiusY / 2.0F;
+        temp.z = (float)this.cpz + this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        temp.x = (float)this.cpx + this.radiusX / 2.0F;
+        temp.y = (float)this.cpy + this.radiusY / 2.0F;
+        temp.z = (float)this.cpz + this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        temp.x = (float)this.cpx - (this.radiusX - a) / 2.0F;
+        temp.y = (float)this.cpy - (this.radiusY + b) / 2.0F;
+        temp.z = (float)this.cpz - this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        temp.x = (float)this.cpx + (this.radiusX - a) / 2.0F;
+        temp.y = (float)this.cpy - (this.radiusY + b) / 2.0F;
+        temp.z = (float)this.cpz - this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        temp.x = (float)this.cpx + (this.radiusX - a) / 2.0F;
+        temp.y = (float)this.cpy - (this.radiusY + b) / 2.0F;
+        temp.z = (float)this.cpz + this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        temp.x = (float)this.cpx - (this.radiusX - a) / 2.0F;
+        temp.y = (float)this.cpy - (this.radiusY + b) / 2.0F;
+        temp.z = (float)this.cpz + this.radiusZ / 2.0F;
+        tempVertices.add(temp);
+        this.vertices.clear();
+        this.vertices.add(tempVertices.get(0));
+        this.vertices.add(tempVertices.get(1));
+        this.vertices.add(tempVertices.get(2));
+        this.vertices.add(tempVertices.get(3));
+        this.vertices.add(tempVertices.get(4));
+        this.vertices.add(tempVertices.get(5));
+        this.vertices.add(tempVertices.get(6));
+        this.vertices.add(tempVertices.get(7));
+        this.vertices.add(tempVertices.get(0));
+        this.vertices.add(tempVertices.get(4));
+        this.vertices.add(tempVertices.get(7));
+        this.vertices.add(tempVertices.get(3));
+        this.vertices.add(tempVertices.get(1));
+        this.vertices.add(tempVertices.get(5));
+        this.vertices.add(tempVertices.get(6));
+        this.vertices.add(tempVertices.get(2));
+        this.vertices.add(tempVertices.get(0));
+        this.vertices.add(tempVertices.get(1));
+        this.vertices.add(tempVertices.get(5));
+        this.vertices.add(tempVertices.get(4));
+        this.vertices.add(tempVertices.get(3));
+        this.vertices.add(tempVertices.get(2));
+        this.vertices.add(tempVertices.get(7));
+        this.vertices.add(tempVertices.get(6));
+        this.vertices.add(tempVertices.get(2));
+        this.vertices.add(tempVertices.get(9));
+        this.vertices.add(tempVertices.get(10));
+        this.vertices.add(tempVertices.get(6));
+        this.vertices.add(tempVertices.get(8));
+        this.vertices.add(tempVertices.get(1));
+        this.vertices.add(tempVertices.get(5));
+        this.vertices.add(tempVertices.get(11));
+        this.vertices.add(tempVertices.get(8));
+        this.vertices.add(tempVertices.get(9));
+        this.vertices.add(tempVertices.get(10));
+        this.vertices.add(tempVertices.get(11));
     }
 
     public float getCpz()
@@ -828,15 +1314,39 @@ public class Sphere extends Circle
         return (float) cpz;
     }
 
-    public float getRadiusX() {
+    public float getRadiusX()
+    {
         return radiusX;
     }
 
-    public float getRadiusY() {
+    public float getRadiusY()
+    {
         return radiusY;
     }
 
-    public float getRadiusZ() {
+    public float getRadiusZ()
+    {
         return radiusZ;
     }
+
+    public float getRotateX()
+    {
+        return rotateX;
+    }
+
+    public float getRotateY()
+    {
+        return rotateY;
+    }
+
+    public float getRotateZ()
+    {
+        return rotateZ;
+    }
+
+    public double getRotationLimit()
+    {
+        return rotationLimit;
+    }
+
 }
