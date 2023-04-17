@@ -5,9 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7265bded-3803-4b65-8f98-d5b995e8343e" name="Changes" comment="TURRET JADI ~ Emen">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Engine/Line.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Clement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Clement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Engine/Sphere.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Engine/Sphere.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Okky.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Okky.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +68,7 @@
   <component name="RunManager" selected="Application.Clement">
     <configuration name="Clement" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Clement" />
-      <module name="Project-Grafkom-2023" />
+      <module name="untitled" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

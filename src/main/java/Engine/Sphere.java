@@ -1395,108 +1395,150 @@ public class Sphere extends Circle
         this.vertices = temp;
     }
 
-    public void createTrapesium()
-    {
-        float a = 0.23F;
-        float b = 0.08F;
+    public void createTrapesium() {
+        float a = 0.21F;
+        float b = 0.1F;
         Vector3f temp = new Vector3f();
         ArrayList<Vector3f> tempVertices = new ArrayList<>();
-        temp.x = (float)this.cpx - this.radiusX / 2.0F;
-        temp.y = (float)this.cpy + this.radiusY / 2.0F;
-        temp.z = (float)this.cpz - this.radiusZ / 2.0F;
+
+        //titik 0 kiri atas belakang
+        temp.x = (float)cpx - radiusX/2;
+        temp.y = (float)cpy + radiusY/2;
+        temp.z = (float)cpz - radiusZ/2;
         tempVertices.add(temp);
         temp = new Vector3f();
-        temp.x = (float)this.cpx - this.radiusX / 2.0F;
-        temp.y = (float)this.cpy - this.radiusY / 2.0F;
-        temp.z = (float)this.cpz - this.radiusZ / 2.0F;
+
+        //titik 1 kiri bawah belakang
+        temp.x = (float)cpx - radiusX/2;
+        temp.y = (float)cpy - radiusY/2;
+        temp.z = (float)cpz - radiusZ/2;
         tempVertices.add(temp);
         temp = new Vector3f();
-        temp.x = (float)this.cpx + this.radiusX / 2.0F;
-        temp.y = (float)this.cpy - this.radiusY / 2.0F;
-        temp.z = (float)this.cpz - this.radiusZ / 2.0F;
+
+        //titik 2 kanan bawah belakang
+        temp.x = (float)cpx + radiusX/2;
+        temp.y = (float)cpy - radiusY/2;
+        temp.z = (float)cpz - radiusZ/2;
         tempVertices.add(temp);
         temp = new Vector3f();
-        temp.x = (float)this.cpx + this.radiusX / 2.0F;
-        temp.y = (float)this.cpy + this.radiusY / 2.0F;
-        temp.z = (float)this.cpz - this.radiusZ / 2.0F;
+
+        //titik 3 kanan atas belakang
+        temp.x = (float)cpx + radiusX/2;
+        temp.y = (float)cpy + radiusY/2;
+        temp.z = (float)cpz - radiusZ/2;
         tempVertices.add(temp);
         temp = new Vector3f();
-        temp.x = (float)this.cpx - this.radiusX / 2.0F;
-        temp.y = (float)this.cpy + this.radiusY / 2.0F;
-        temp.z = (float)this.cpz + this.radiusZ / 2.0F;
+
+        //titik 4 kiri atas depan
+        temp.x = (float)cpx - radiusX/2;
+        temp.y = (float)cpy + radiusY/2;
+        temp.z = (float)cpz + radiusZ/2;
         tempVertices.add(temp);
         temp = new Vector3f();
-        temp.x = (float)this.cpx - this.radiusX / 2.0F;
-        temp.y = (float)this.cpy - this.radiusY / 2.0F;
-        temp.z = (float)this.cpz + this.radiusZ / 2.0F;
+
+        //titik 5 kiri bawah depan
+        temp.x = (float)cpx - radiusX/2;
+        temp.y = (float)cpy - radiusY/2;
+        temp.z = (float)cpz + radiusZ/2;
         tempVertices.add(temp);
         temp = new Vector3f();
-        temp.x = (float)this.cpx + this.radiusX / 2.0F;
-        temp.y = (float)this.cpy - this.radiusY / 2.0F;
-        temp.z = (float)this.cpz + this.radiusZ / 2.0F;
+
+        //titik 6 kanan bawah depan
+        temp.x = (float)cpx + radiusX/2;
+        temp.y = (float)cpy - radiusY/2;
+        temp.z = (float)cpz + radiusZ/2;
         tempVertices.add(temp);
         temp = new Vector3f();
-        temp.x = (float)this.cpx + this.radiusX / 2.0F;
-        temp.y = (float)this.cpy + this.radiusY / 2.0F;
-        temp.z = (float)this.cpz + this.radiusZ / 2.0F;
+
+        //titik 7 kanan atas depan
+        temp.x = (float)cpx + radiusX/2;
+        temp.y = (float)cpy + radiusY/2;
+        temp.z = (float)cpz + radiusZ/2;
         tempVertices.add(temp);
+
+        //titik 8 kiri bawah belakang
         temp = new Vector3f();
         temp.x = (float)this.cpx - (this.radiusX - a) / 2.0F;
         temp.y = (float)this.cpy - (this.radiusY + b) / 2.0F;
         temp.z = (float)this.cpz - this.radiusZ / 2.0F;
         tempVertices.add(temp);
+
+        //titik 9 kanan bawah belakang
         temp = new Vector3f();
         temp.x = (float)this.cpx + (this.radiusX - a) / 2.0F;
         temp.y = (float)this.cpy - (this.radiusY + b) / 2.0F;
         temp.z = (float)this.cpz - this.radiusZ / 2.0F;
         tempVertices.add(temp);
+
+        //titik 10 kanan bawah depan
         temp = new Vector3f();
         temp.x = (float)this.cpx + (this.radiusX - a) / 2.0F;
         temp.y = (float)this.cpy - (this.radiusY + b) / 2.0F;
         temp.z = (float)this.cpz + this.radiusZ / 2.0F;
         tempVertices.add(temp);
+
+        //titik 11 kiri bawah depan
         temp = new Vector3f();
         temp.x = (float)this.cpx - (this.radiusX - a) / 2.0F;
         temp.y = (float)this.cpy - (this.radiusY + b) / 2.0F;
         temp.z = (float)this.cpz + this.radiusZ / 2.0F;
         tempVertices.add(temp);
         this.vertices.clear();
-        this.vertices.add(tempVertices.get(0));
-        this.vertices.add(tempVertices.get(1));
-        this.vertices.add(tempVertices.get(2));
-        this.vertices.add(tempVertices.get(3));
-        this.vertices.add(tempVertices.get(4));
-        this.vertices.add(tempVertices.get(5));
-        this.vertices.add(tempVertices.get(6));
-        this.vertices.add(tempVertices.get(7));
-        this.vertices.add(tempVertices.get(0));
-        this.vertices.add(tempVertices.get(4));
-        this.vertices.add(tempVertices.get(7));
-        this.vertices.add(tempVertices.get(3));
-        this.vertices.add(tempVertices.get(1));
-        this.vertices.add(tempVertices.get(5));
-        this.vertices.add(tempVertices.get(6));
-        this.vertices.add(tempVertices.get(2));
-        this.vertices.add(tempVertices.get(0));
-        this.vertices.add(tempVertices.get(1));
-        this.vertices.add(tempVertices.get(5));
-        this.vertices.add(tempVertices.get(4));
-        this.vertices.add(tempVertices.get(3));
-        this.vertices.add(tempVertices.get(2));
-        this.vertices.add(tempVertices.get(7));
-        this.vertices.add(tempVertices.get(6));
-        this.vertices.add(tempVertices.get(2));
-        this.vertices.add(tempVertices.get(9));
-        this.vertices.add(tempVertices.get(10));
-        this.vertices.add(tempVertices.get(6));
-        this.vertices.add(tempVertices.get(8));
-        this.vertices.add(tempVertices.get(1));
-        this.vertices.add(tempVertices.get(5));
-        this.vertices.add(tempVertices.get(11));
-        this.vertices.add(tempVertices.get(8));
-        this.vertices.add(tempVertices.get(9));
-        this.vertices.add(tempVertices.get(10));
-        this.vertices.add(tempVertices.get(11));
+
+        //kotak yg sisi belakang
+        vertices.add(tempVertices.get(0));
+        vertices.add(tempVertices.get(1));
+        vertices.add(tempVertices.get(8));
+        vertices.add(tempVertices.get(9));
+        vertices.add(tempVertices.get(2));
+        vertices.add(tempVertices.get(3));
+
+        //kotak yg sisi depan
+        vertices.add(tempVertices.get(4));
+        vertices.add(tempVertices.get(5));
+        vertices.add(tempVertices.get(10));
+        vertices.add(tempVertices.get(11));
+        vertices.add(tempVertices.get(6));
+        vertices.add(tempVertices.get(7));
+
+        //kotak yg sisi atas
+        vertices.add(tempVertices.get(0));
+        vertices.add(tempVertices.get(4));
+        vertices.add(tempVertices.get(7));
+        vertices.add(tempVertices.get(3));
+
+        //kotak yg sisi kanan
+        vertices.add(tempVertices.get(1));
+        vertices.add(tempVertices.get(5));
+        vertices.add(tempVertices.get(6));
+        vertices.add(tempVertices.get(2));
+
+        //kotak yg sisi kiri
+        vertices.add(tempVertices.get(0));
+        vertices.add(tempVertices.get(1));
+        vertices.add(tempVertices.get(5));
+        vertices.add(tempVertices.get(4));
+
+        //kotak yg sisi kiri miring
+        vertices.add(tempVertices.get(5));
+        vertices.add(tempVertices.get(1));
+        vertices.add(tempVertices.get(8));
+        vertices.add(tempVertices.get(11));
+        vertices.add(tempVertices.get(5));
+
+        //kotak yg sisi bawah
+        vertices.add(tempVertices.get(11));
+        vertices.add(tempVertices.get(10));
+        vertices.add(tempVertices.get(8));
+        vertices.add(tempVertices.get(9));
+        vertices.add(tempVertices.get(10));
+
+        //kotak yg sisi kanan miring
+        vertices.add(tempVertices.get(9));
+        vertices.add(tempVertices.get(2));
+        vertices.add(tempVertices.get(6));
+        vertices.add(tempVertices.get(10));
+
     }
 
     public void createSideGlass()
