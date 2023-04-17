@@ -9,15 +9,16 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.glClearColor;
 import static org.lwjgl.opengl.GL20.*;
 
-public class Tiro
+public class Main
 {
-    private final Window window = new Window(800, 800, "window");
+    private final Window window = new Window(1000, 1000, "window");
     Camera camera = new Camera();
     Projection projection = new Projection(window.getWidth(), window.getHeight());
 
     Sphere leftMissile, rightMissile;
 
     ArrayList<Sphere> spheres = new ArrayList<>();
+    ArrayList<Sphere> environment = new ArrayList<>();
 
     ArrayList<Vector3f> leftPath, rightPath;
 
@@ -25,7 +26,7 @@ public class Tiro
 
     public static void main(String[] args)
     {
-        new Tiro().run();
+        new Main().run();
     }
 
     public void run()
@@ -39,9 +40,10 @@ public class Tiro
         window.init();
         GL.createCapabilities();
         glEnable(GL_DEPTH_TEST);
-        camera.setPosition(0, 0, 0.5f);
-        camera.setRotation((float) Math.toRadians(0f), (float) Math.toRadians(0f));
-        camera.moveBackwards(2.66f);
+        camera.setPosition(0f, 2.3f, -2.5f);
+        camera.setRotation((float) Math.toRadians(0f), (float) Math.toRadians(180f));
+
+        //VINCENTIUS I. TIRO C14210047
         {
             //NOSE (PARENT)
             {
@@ -394,6 +396,66 @@ public class Tiro
                 spheres.get(0).getChildObjects().get(22).rotateObject(45f, 0, 0, 1);
                 spheres.get(0).getChildObjects().get(22).translateObject(0.335f, 0.007f, 0.73f);
             }
+            }
+        spheres.get(0).translateObject(0f, 4.5f, 3f);
+
+
+
+        //CLEMENT GUNADI C14210183
+        {
+
+        }
+
+
+
+        //FABIAN OKKY D. S. C14210196
+        {
+
+        }
+
+
+        //ENVIRONMENT
+        {
+            //TANAH
+            {
+                environment.add(new Sphere
+                        (
+                                Arrays.asList
+                                        (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                                new ArrayList<>(),
+                                new Vector4f(0.36f, 0.36f, 0.36f, 1.0f), 15, 1, 15, 0f, 0, 0, 2
+                        )
+                );
+            }
+
+
+            //HANGAR KIRI
+            {
+                environment.add(new Sphere
+                        (
+                                Arrays.asList
+                                        (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                                new ArrayList<>(),
+                                new Vector4f(0f, 0f, 1f, 1.0f), 0.02, 1, 2, 0f, 0, 0, 16
+                        )
+                );
+                environment.get(1).rotateObject(30f, 0, 1 , 0);
+                environment.get(1).translateObject(3f, 1, 2.5f);
+            }
+
+            //HANGAR KANAN
+            {
+                environment.add(new Sphere
+                        (
+                                Arrays.asList
+                                        (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                                new ArrayList<>(),
+                                new Vector4f(0f, 0f, 1f, 1.0f), 0.02, 1, 2, 0f, 0, 0, 16
+                        )
+                );
+                environment.get(2).rotateObject(-30f, 0, 1 , 0);
+                environment.get(2).translateObject(-3f, 1, 2.5f);
+            }
         }
     }
 
@@ -401,73 +463,84 @@ public class Tiro
     {
         //ANIMASI
         {
-            //luncurkan misil kiri
-            if(window.isKeyPressed(GLFW_KEY_V))
+            //VINCENT
             {
-                if(!leftMissileLaunch)
+                //luncurkan misil kiri
+                if(window.isKeyPressed(GLFW_KEY_V))
                 {
-                    leftMissile = ((Sphere) spheres.get(0).getChildObjects().get(21));
-                    leftPath = leftMissile.generateBezierPoints(leftMissile.getCpx(), leftMissile.getCpy(), leftMissile.getCpz(),
-                            leftMissile.getCpx(), leftMissile.getCpy(), -2,
-                            -5, leftMissile.getCpy()-2, -5);
-                    leftMissileLaunch = true;
+//                    if(leftMissileLaunch)
+//                    {
+//                        leftMissileLaunch = leftMissile.moveToNextPoint(leftPath);
+//                    }
+                    if(!leftMissileLaunch)
+                    {
+                        leftMissile = ((Sphere) spheres.get(0).getChildObjects().get(21));
+                        leftPath = leftMissile.generateBezierPoints(leftMissile.getCpx(), leftMissile.getCpy(), leftMissile.getCpz(),
+                                leftMissile.getCpx(), leftMissile.getCpy(), leftMissile.getCpz()-2,
+                                leftMissile.getCpx()-5, leftMissile.getCpy()-2, leftMissile.getCpz()-5);
+                        leftMissileLaunch = true;
+                    }
                 }
-            }
-            if(leftMissileLaunch)
-            {
-                leftMissileLaunch = leftMissile.moveToNextPoint(leftPath);
-            }
-
-            //luncurkan misil kanan
-            if(window.isKeyPressed(GLFW_KEY_B))
-            {
-                if(!rightMissileLaunch)
+                if(leftMissileLaunch)
                 {
-                    rightMissile = ((Sphere) spheres.get(0).getChildObjects().get(22));
-                    rightPath = rightMissile.generateBezierPoints(rightMissile.getCpx(), rightMissile.getCpy(), rightMissile.getCpz(),
-                            rightMissile.getCpx(), rightMissile.getCpy(), -5,
-                            5, rightMissile.getCpy()+5, -20);
-                    rightMissileLaunch = true;
+                    leftMissileLaunch = leftMissile.moveToNextPoint(leftPath);
                 }
-            }
-            if(rightMissileLaunch)
-            {
-                rightMissileLaunch = rightMissile.moveToNextPoint(rightPath);
-            }
 
-            //sayap belakang keatas
-            if(window.isKeyPressed(GLFW_KEY_N))
-            {
-                Sphere i = ((Sphere) spheres.get(0).getChildObjects().get(15));
-                Sphere j = ((Sphere) spheres.get(0).getChildObjects().get(16));
-
-                if(i.getTotalRotateX() > -i.getRotationLimit() && i.getTotalRotateX() < i.getRotationLimit())
+                //luncurkan misil kanan
+                if(window.isKeyPressed(GLFW_KEY_B))
                 {
-                    i.rotateObjectOnPoint(1f, 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
-                    j.rotateObjectOnPoint(1f, 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+//                    if(rightMissileLaunch)
+//                    {
+//                        rightMissileLaunch = rightMissile.moveToNextPoint(rightPath);
+//                    }
+                    if(!rightMissileLaunch)
+                    {
+                        rightMissile = ((Sphere) spheres.get(0).getChildObjects().get(22));
+                        rightPath = rightMissile.generateBezierPoints(rightMissile.getCpx(), rightMissile.getCpy(), rightMissile.getCpz(),
+                                rightMissile.getCpx(), rightMissile.getCpy(), rightMissile.getCpz()-5,
+                                rightMissile.getCpx()+5, rightMissile.getCpy()+5, rightMissile.getCpz()-20);
+                        rightMissileLaunch = true;
+                    }
                 }
-                else
+                if(rightMissileLaunch)
                 {
-                    i.rotateObjectOnPoint(-(float) (i.getTotalRotateX()-i.getRotationLimit() + 1), 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
-                    j.rotateObjectOnPoint(-(float) (j.getTotalRotateX()-j.getRotationLimit() + 1), 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+                    rightMissileLaunch = rightMissile.moveToNextPoint(rightPath);
                 }
-            }
 
-            //sayap belakang ke bawah
-            if(window.isKeyPressed(GLFW_KEY_M))
-            {
-                Sphere i = ((Sphere) spheres.get(0).getChildObjects().get(15));
-                Sphere j = ((Sphere) spheres.get(0).getChildObjects().get(16));
-
-                if(i.getTotalRotateX() > -i.getRotationLimit() && i.getTotalRotateX() < i.getRotationLimit())
+                //sayap belakang keatas
+                if(window.isKeyPressed(GLFW_KEY_N))
                 {
-                    i.rotateObjectOnPoint(-1f, 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
-                    j.rotateObjectOnPoint(-1f, 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+                    Sphere i = ((Sphere) spheres.get(0).getChildObjects().get(15));
+                    Sphere j = ((Sphere) spheres.get(0).getChildObjects().get(16));
+
+                    if(i.getTotalRotateX() > -i.getRotationLimit() && i.getTotalRotateX() < i.getRotationLimit())
+                    {
+                        i.rotateObjectOnPoint(1f, 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
+                        j.rotateObjectOnPoint(1f, 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+                    }
+                    else
+                    {
+                        i.rotateObjectOnPoint(-(float) (i.getTotalRotateX()-i.getRotationLimit() + 1), 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
+                        j.rotateObjectOnPoint(-(float) (j.getTotalRotateX()-j.getRotationLimit() + 1), 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+                    }
                 }
-                else
+
+                //sayap belakang ke bawah
+                if(window.isKeyPressed(GLFW_KEY_M))
                 {
-                    i.rotateObjectOnPoint((float) (i.getTotalRotateX()+i.getRotationLimit() + 1), 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
-                    j.rotateObjectOnPoint((float) (j.getTotalRotateX()+j.getRotationLimit() + 1), 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+                    Sphere i = ((Sphere) spheres.get(0).getChildObjects().get(15));
+                    Sphere j = ((Sphere) spheres.get(0).getChildObjects().get(16));
+
+                    if(i.getTotalRotateX() > -i.getRotationLimit() && i.getTotalRotateX() < i.getRotationLimit())
+                    {
+                        i.rotateObjectOnPoint(-1f, 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
+                        j.rotateObjectOnPoint(-1f, 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+                    }
+                    else
+                    {
+                        i.rotateObjectOnPoint((float) (i.getTotalRotateX()+i.getRotationLimit() + 1), 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
+                        j.rotateObjectOnPoint((float) (j.getTotalRotateX()+j.getRotationLimit() + 1), 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+                    }
                 }
             }
         }
@@ -560,7 +633,7 @@ public class Tiro
                 {
                     for (Sphere i: spheres)
                     {
-                    i.rotateObjectOnPoint(-1f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
+                        i.rotateObjectOnPoint(-1f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
                     }
                 }
                 else
@@ -648,8 +721,6 @@ public class Tiro
             }
         }
 
-        //================================================================================
-
         //EXTRAS
         {
             //ZOOM IN
@@ -686,13 +757,20 @@ public class Tiro
         {
             //Restore State
             window.update();
-            glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+            glClearColor(0.5f, 0.5f, 0.5f, 0.0f);
             GL.createCapabilities();
 
             //Code
             for (Sphere objects : this.spheres)
             {
                 //gambar sekalian child
+                //tambahkan "true" untuk gambar pakai LINE_LOOP
+                //objects.draw(camera, projection, true);
+                objects.draw(camera, projection);
+            }
+
+            for (Sphere objects : this.environment)
+            {
                 objects.draw(camera, projection);
             }
 

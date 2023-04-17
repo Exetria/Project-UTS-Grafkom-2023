@@ -146,6 +146,11 @@ public class Objects extends ShaderProgram
         setupVAOVBO();
     }
 
+    public void setVertices(ArrayList<Vector3f> newVertices)
+    {
+        vertices = newVertices;
+    }
+
     //update vertices dalam ArrayList index ke x
     public void updateVertice(int index, Vector3f value)
     {

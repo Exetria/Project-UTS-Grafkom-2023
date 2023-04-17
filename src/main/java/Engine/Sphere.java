@@ -92,6 +92,10 @@ public class Sphere extends Circle
         {
             createMissile();
         }
+        else if(option == 16)
+        {
+            createHangar();
+        }
         else if(option == 20)
         {
             createTrapesium();
@@ -104,13 +108,16 @@ public class Sphere extends Circle
         {
             createCorong();
         }
-        else if (option == 41) {
+        else if (option == 41)
+        {
             createTrapezoidwithSquare();
         }
-        else if (option == 42) {
+        else if (option == 42)
+        {
             createTrapezoidwithLine();
         }
-        else if (option == 43) {
+        else if (option == 43)
+        {
             createTireSupport();
         }
         else if (option == 44) {
@@ -142,22 +149,6 @@ public class Sphere extends Circle
     {
         //offset x, y, sama z itu maksudnya rotasi terhadap sumbunya misal z=1 berarti rotasi thd sb z
         model = new Matrix4f().rotate((float)(Math.toRadians(degree)), offsetX, offsetY, offsetZ).mul(new Matrix4f(model));
-
-        if(offsetX == 1f)
-        {
-            this.totalRotateX += degree;
-            this.totalRotateX %= 360;
-        }
-        else if (offsetY == 1f)
-        {
-            this.totalRotateY += degree;
-            this.totalRotateY %= 360;
-        }
-        else if (offsetZ == 1f)
-        {
-            this.totalRotateZ += degree;
-            this.totalRotateZ %= 360;
-        }
 
         float newcpx =(float) (cpx * Math.cos(degree) - cpy * Math.sin(degree));
         float newcpy =(float) (cpx * Math.sin(degree) + cpy * Math.cos(degree));
@@ -207,11 +198,6 @@ public class Sphere extends Circle
         {
             ((Sphere)i).rotateObjectOnPoint(degree, offsetX, offsetY, offsetZ, rotateX, rotateY, rotateZ);
         }
-        System.out.println(totalRotateX);
-        System.out.println(totalRotateY);
-        System.out.println(totalRotateZ);
-        System.out.println();
-
     }
 
     public void experimentRotate(float degree, float offsetX, float offsetY, float offsetZ, float rotateX, float rotateY, float rotateZ)
@@ -242,7 +228,7 @@ public class Sphere extends Circle
         }
     }
 
-    public void moveToNextPoint(ArrayList<Vector3f> path)
+    public boolean moveToNextPoint(ArrayList<Vector3f> path)
     {
         if(path.size() != 0)
         {
@@ -252,10 +238,13 @@ public class Sphere extends Circle
             diffZ = (float) (path.get(0).z - cpz);
             translateObject(diffX, diffY, diffZ);
             path.remove(0);
+            return true;
         }
         else
         {
-            System.out.println("Out of points for path :(");
+            vertices.clear();
+            childObjects.clear();
+            return false;
         }
     }
 
@@ -270,6 +259,21 @@ public class Sphere extends Circle
             newZ = (float) ((Math.pow((1-i), 2) * firstZ) + (2 * (1-i) * i * secondZ) + (Math.pow(i, 2) * thirdZ));
             result.add(new Vector3f(newX, newY, newZ));
         }
+
+        childObjects.add(new Objects(
+                Arrays.asList
+                        (
+                                new ShaderProgram.ShaderModuleData
+                                        ("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                                new ShaderProgram.ShaderModuleData
+                                        ("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+                        ),
+                new ArrayList<>(),
+                new Vector4f(0.0f, 1.0f, 0.0f, 1.0f)    //color
+        )
+        );
+//        childObjects.get(5).setVertices(result);
+
         return result;
     }
 
@@ -365,8 +369,6 @@ public class Sphere extends Circle
 
         vertices.clear();
         {
-
-
             //kotak yg sisi belakang
             vertices.add(tempVertices.get(0));
             vertices.add(tempVertices.get(1));
@@ -969,7 +971,7 @@ public class Sphere extends Circle
 
     public void createMissile()
     {
-        //KEPALA MISIL
+        //KEPALA MISIL (PARENT)
         createSphere();
 
         //BODY MISIL
@@ -1025,6 +1027,49 @@ public class Sphere extends Circle
         );
         childObjects.get(4).translateObject(0f, radiusY/2f, 19 * radiusZ);
         childObjects.get(4).rotateObject(180f, 0, 0, 1);
+    }
+
+    public void createHangar()
+    {
+        //TEMBOK KIRI (PARENT)
+        createBox();
+        translateObject(-1f, 0, 0);
+
+        //TEMBOK KANAN
+        childObjects.add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(0f, 0f, 1f, 1.0f), radiusX, radiusY, radiusZ, 0, 0, 0, 2
+                )
+        );
+        childObjects.get(0).translateObject(1f, 0, 0);
+
+        //TEMBOK BELAKANG
+        childObjects.add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f), radiusX, radiusY, radiusZ, 0, 0, 0, 2
+                )
+        );
+        childObjects.get(1).rotateObject(90f, 0, 1, 0);
+        childObjects.get(1).translateObject(0, 0, 1);
+
+        //TEMBOK BELAKANG
+        childObjects.add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f), radiusX, 2 * radiusY, radiusZ, 0, 0, 0, 2
+                )
+        );
+        childObjects.get(2).rotateObject(90f, 0, 0, 1);
+        childObjects.get(2).translateObject(0, 0.5f, 0);
+
     }
 
     public void createTrapezoidwithSquare()
