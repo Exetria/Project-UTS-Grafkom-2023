@@ -114,10 +114,13 @@ public class Sphere extends Circle
             createTireSupport();
         }
         else if (option == 44) {
-            createGlass();
+            createSideGlass();
         }
         else if (option == 45) {
-            createKepalaTembakan();
+            createTurret();
+        }
+        else if (option == 46) {
+            createFrontGlass();
         }
 
         setupVAOVBO();
@@ -1451,7 +1454,7 @@ public class Sphere extends Circle
         this.vertices.add(tempVertices.get(11));
     }
 
-    public void createGlass()
+    public void createSideGlass()
     {
         Vector3f temp = new Vector3f();
         ArrayList<Vector3f> tempVertices = new ArrayList<>();
@@ -1491,6 +1494,184 @@ public class Sphere extends Circle
             vertices.add(tempVertices.get(1));
             vertices.add(tempVertices.get(0));
         }
+    }
+
+    public void createTurret()
+    {
+        this.rotationLimit = 75;
+        //BUAT BAGIAN BELAKANG TURRET
+        createBox();
+
+        //BUAT SELANJUTNYA UNTUK TURRET
+
+        childObjects.add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(0.427f, 0.176f, 0.09f, 1.0f),0.1, 0.1, 0.1,
+                        0, 0, 0, 3
+                )
+        );
+
+        childObjects.get(0).rotateObject(90f,0f, 1f, 0f);
+        childObjects.get(0).scaleObject(0.7f, 0.4f, 0.4f);
+        childObjects.get(0).translateObject(-0.05f, -0.006f, 0f);
+
+        childObjects.add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(0.0f, 0.0f, 0.0f, 1.0f),0.1, 0.1, 0.1,
+                        0, 0, 0, 3
+                )
+        );
+
+        childObjects.get(1).rotateObject(90f,0f, 1f, 0f);
+        childObjects.get(1).scaleObject(0.2f, 0.6f, 0.6f);
+        childObjects.get(1).translateObject(-0.11f, -0.006f, 0f);
+
+        childObjects.add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(0.427f, 0.176f, 0.09f, 1.0f),0.1, 0.1, 0.1,
+                        0, 0, 0, 3
+                )
+        );
+
+        childObjects.get(2).rotateObject(90f,0f, 1f, 0f);
+        childObjects.get(2).scaleObject(1f, 0.3f, 0.3f);
+        childObjects.get(2).translateObject(-0.13f, -0.006f, 0f);
+
+        childObjects.add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(0.0f, 0.0f, 0.0f, 1.0f),0.1, 0.1, 0.1,
+                        0, 0, 0, 3
+                )
+        );
+
+        childObjects.get(3).rotateObject(90f,0f, 1f, 0f);
+        childObjects.get(3).scaleObject(0.2f, 0.35f, 0.35f);
+        childObjects.get(3).translateObject(-0.23f, -0.006f, 0f);
+
+        childObjects.add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(0.427f, 0.176f, 0.09f, 1.0f),0.1, 0.1, 0.1,
+                        0, 0, 0, 3
+                )
+        );
+
+        childObjects.get(4).rotateObject(90f,0f, 1f, 0f);
+        childObjects.get(4).scaleObject(0.3f, 0.4f, 0.4f);
+        childObjects.get(4).translateObject(-0.25f, -0.006f, 0f);
+
+        childObjects.add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(0.427f, 0.176f, 0.09f, 1.0f),0.1, 0.1, 0.1,
+                        0, 0, 0, 3
+                )
+        );
+
+        childObjects.get(5).rotateObject(90f,0f, 1f, 0f);
+        childObjects.get(5).scaleObject(0.2f, 0.26f, 0.26f);
+        childObjects.get(5).translateObject(-0.28f, -0.006f, 0f);
+
+        childObjects.add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.1, 0.1, 0.1,
+                        0, 0, 0, 4
+                )
+        );
+
+        childObjects.get(6).rotateObject(90f,0f, 1f, 0f);
+        childObjects.get(6).scaleObject(0.15f, 0.1f, 0.1f);
+        childObjects.get(6).translateObject(-0.294f, -0.006f, 0f);
+
+        //LOBANG KOSONG 1
+        childObjects.add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(0.0f, 0.0f, 0.0f, 1.0f),0.1, 0.1, 0,
+                        0, 0, 0, 2
+                )
+        );
+
+        childObjects.get(7).scaleObject(0.2f, 0.3f, 0f);
+        childObjects.get(7).translateObject(-0.265f, -0.006f, -0.042f);
+    }
+
+    public void createFrontGlass()
+    {
+
+        Vector3f temp = new Vector3f();
+        ArrayList<Vector3f> tempVertices = new ArrayList<>();
+
+        //titik 1 kiri atas belakang
+        temp.x = (float)cpx - radiusX/2;
+        temp.y = (float)cpy + radiusY/2;
+        temp.z = (float)cpz - radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 2 kiri bawah belakang
+        temp.x = (float)cpx - radiusX/1.35f;
+        temp.y = (float)cpy - radiusY/2f;
+        temp.z = (float)cpz - radiusZ/2f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 3 kanan bawah belakang
+        temp.x = (float)cpx + radiusX/1.35f;
+        temp.y = (float)cpy - radiusY/2f;
+        temp.z = (float)cpz - radiusZ/2f;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+
+        //titik 4 kanan atas belakang
+        temp.x = (float)cpx + radiusX/2;
+        temp.y = (float)cpy + radiusY/2;
+        temp.z = (float)cpz - radiusZ/2;
+        tempVertices.add(temp);
+        temp = new Vector3f();
+        vertices.clear();
+        {
+            vertices.add(tempVertices.get(0));
+            vertices.add(tempVertices.get(3));
+            vertices.add(tempVertices.get(2));
+            vertices.add(tempVertices.get(1));
+            vertices.add(tempVertices.get(0));
+        }
+
+    }
+
+    public void createCable()
+    {
+
     }
 
     public void createKepalaTembakan()

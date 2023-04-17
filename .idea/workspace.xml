@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7265bded-3803-4b65-8f98-d5b995e8343e" name="Changes" comment="Merge Selesai - Clement">
+    <list default="true" id="7265bded-3803-4b65-8f98-d5b995e8343e" name="Changes" comment="TURRET JADI ~ Emen">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Clement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Clement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Engine/Objects.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Engine/Objects.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Engine/Sphere.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Engine/Sphere.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -325,7 +324,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681625648773</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="TURRET JADI ~ Emen">
+      <created>1681647917151</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1681647917151</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -361,6 +367,7 @@
     <MESSAGE value="Model selesai&#10;- Tiro" />
     <MESSAGE value="Camera selesai&#10;- Tiro" />
     <MESSAGE value="Merge sama punya Clement&#10;- Tiro" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge sama punya Clement&#10;- Tiro" />
+    <MESSAGE value="TURRET JADI ~ Emen" />
+    <option name="LAST_COMMIT_MESSAGE" value="TURRET JADI ~ Emen" />
   </component>
 </project>
