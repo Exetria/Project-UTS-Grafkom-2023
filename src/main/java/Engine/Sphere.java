@@ -242,6 +242,7 @@ public class Sphere extends Circle
         else
         {
             vertices.clear();
+            childObjects.clear();
             return false;
         }
     }
@@ -257,6 +258,21 @@ public class Sphere extends Circle
             newZ = (float) ((Math.pow((1-i), 2) * firstZ) + (2 * (1-i) * i * secondZ) + (Math.pow(i, 2) * thirdZ));
             result.add(new Vector3f(newX, newY, newZ));
         }
+
+        childObjects.add(new Objects(
+                Arrays.asList
+                        (
+                                new ShaderProgram.ShaderModuleData
+                                        ("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                                new ShaderProgram.ShaderModuleData
+                                        ("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+                        ),
+                new ArrayList<>(),
+                new Vector4f(0.0f, 1.0f, 0.0f, 1.0f)    //color
+        )
+        );
+//        childObjects.get(5).setVertices(result);
+
         return result;
     }
 

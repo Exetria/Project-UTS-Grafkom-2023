@@ -50,7 +50,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(1.0f, 0.0f, 0.0f, 1.0f), 0.1, 0.1, 0.1, 0f, 0, 0, 8
+                                new Vector4f(0.784f, 0.831f, 0.831f, 1.0f), 0.1, 0.1, 0.1, 0f, 0, 0, 8
                         )
                 );
                 spheres.get(0).scaleObject(0.1f, 0.1f, 0.1f);
@@ -66,7 +66,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(1.0f, 0.0f, 0.0f, 1.0f), 0.1, 0.1, 0.2, 0f, 0, 0, 3
+                                new Vector4f(0.62f, 0.68f, 0.67f, 1.0f), 0.1, 0.1, 0.2, 0f, 0, 0, 3
                         )
                 );
                 spheres.get(0).getChildObjects().get(0).scaleObject(0.65f, 0.65f, 3f);
@@ -100,7 +100,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(1.0f, 0.0f, 0.0f, 1.0f), 0.1, 0.1, 0.5, 0f, 0, 0, 2
+                                new Vector4f(0.372f, 0.46f, 0.5f, 1.0f), 0.1, 0.1, 0.5, 0f, 0, 0, 2
                         )
                 );
                 spheres.get(0).getChildObjects().get(2).translateObject(-0.11f, 0.02f, 0.75f);
@@ -115,7 +115,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(1.0f, 0.0f, 0.0f, 1.0f), 0.1, 0.1, 0.5, 0f, 0, 0, 2
+                                new Vector4f(0.372f, 0.46f, 0.5f, 1.0f), 0.1, 0.1, 0.5, 0f, 0, 0, 2
                         )
                 );
                 spheres.get(0).getChildObjects().get(3).translateObject(0.11f, 0.02f, 0.75f);
@@ -129,7 +129,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(1.0f, 0.0f, 0.0f, 1.0f), 0.322, 0.1, 0.5, 0f, 0, 0, 2
+                                new Vector4f(0.372f, 0.46f, 0.5f, 1.0f), 0.322, 0.1, 0.5, 0f, 0, 0, 2
                         )
                 );
                 spheres.get(0).getChildObjects().get(4).translateObject(0f, 0.02f, 1.2f);
@@ -143,7 +143,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(0.0f, 0.0f, 1.0f, 1.0f), 0.5, 0.01, 0.55, 0f, 0, 0, 10
+                                new Vector4f(0.839f, 0.227f, 0.274f, 1.0f), 0.5, 0.01, 0.55, 0f, 0, 0, 10
                         )
                 );
                 spheres.get(0).getChildObjects().get(5).rotateObject(180f, 0f, 0f, 1f);
@@ -158,7 +158,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(0.0f, 0.0f, 1.0f, 1.0f), 0.5, 0.01, 0.55, 0f, 0, 0, 10
+                                new Vector4f(0.62f, 0.68f, 0.67f, 1.0f), 0.5, 0.01, 0.55, 0f, 0, 0, 10
                         )
                 );
                 spheres.get(0).getChildObjects().get(6).translateObject(0.161f, 0.05f, 0.83f);
@@ -172,7 +172,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(0.0f, 0.0f, 1.0f, 1.0f), 0.1, 0.1, 0.2, 0f, 0, 0, 11
+                                new Vector4f(0.584f, 0.631f, 0.631f, 1.0f), 0.1, 0.1, 0.2, 0f, 0, 0, 11
                         )
                 );
                 spheres.get(0).getChildObjects().get(7).translateObject(-0.11f, 0.02f, 0.5f);
@@ -186,7 +186,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(0.0f, 0.0f, 1.0f, 1.0f), 0.1, 0.1, 0.2, 0f, 0, 0, 11
+                                new Vector4f(0.584f, 0.631f, 0.631f, 1.0f), 0.1, 0.1, 0.2, 0f, 0, 0, 11
                         )
                 );
                 spheres.get(0).getChildObjects().get(8).translateObject(0.11f, 0.02f, 0.5f);
@@ -200,7 +200,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(0.44f, 0.44f, 0.44f, 1.0f), 0.1, 0.1, 0.2, 0f, 0, 0, 8
+                                new Vector4f(0.48f, 0.549f, 0.584f, 1.0f), 0.1, 0.1, 0.2, 0f, 0, 0, 8
                         )
                 );
                 spheres.get(0).getChildObjects().get(9).scaleObject(0.1f, 0.1f, 0.2f);
@@ -216,7 +216,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(0.44f, 0.44f, 0.44f, 1.0f), 0.1, 0.1, 0.2, 0f, 0, 0, 8
+                                new Vector4f(0.48f, 0.549f, 0.584f, 1.0f), 0.1, 0.1, 0.2, 0f, 0, 0, 8
                         )
                 );
                 spheres.get(0).getChildObjects().get(10).scaleObject(0.1f, 0.1f, 0.2f);
@@ -232,7 +232,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(1.0f, 1.0f, 1.0f, 1.0f), 0.01, 0.09, 0.017, 0f, 0, 0, 12
+                                new Vector4f(0.62f, 0.68f, 0.67f, 1.0f), 0.01, 0.09, 0.017, 0f, 0, 0, 12
                         )
                 );
                 spheres.get(0).getChildObjects().get(11).rotateObject(90f, 1f, 0, 0);
@@ -247,7 +247,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(1.0f, 1.0f, 1.0f, 1.0f), 0.01, 0.09, 0.017, 0f, 0, 0, 12
+                                new Vector4f(0.62f, 0.68f, 0.67f, 1.0f), 0.01, 0.09, 0.017, 0f, 0, 0, 12
                         )
                 );
                 spheres.get(0).getChildObjects().get(12).rotateObject(90f, 1f, 0, 0);
@@ -262,7 +262,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(1.0f, 1.0f, 1.0f, 1.0f), 0.2, 0.005, 0.2, 0f, 0, 0, 13
+                                new Vector4f(0.466f, 0.07f, 0.11f, 1.0f), 0.2, 0.005, 0.2, 0f, 0, 0, 13
                         )
                 );
                 spheres.get(0).getChildObjects().get(13).translateObject(-0.152f, 0.07f, 1.45f);
@@ -276,7 +276,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(1.0f, 1.0f, 1.0f, 1.0f), 0.2, 0.005, 0.2, 0f, 0, 0, 13
+                                new Vector4f(0.466f, 0.07f, 0.11f, 1.0f), 0.2, 0.005, 0.2, 0f, 0, 0, 13
                         )
                 );
                 spheres.get(0).getChildObjects().get(14).translateObject(0.152f, 0.07f, 1.45f);
@@ -290,7 +290,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(1.0f, 1.0f, 1.0f, 1.0f), 0.23, 0.005, 0.23, 0f, 0, 0, 14
+                                new Vector4f(0.48f, 0.549f, 0.584f, 1.0f), 0.23, 0.005, 0.23, 0f, 0, 0, 14
                         )
                 );
                 spheres.get(0).getChildObjects().get(15).rotateObject(180f, 0f, 0f, 1f);
@@ -305,7 +305,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(1.0f, 1.0f, 1.0f, 1.0f), 0.23, 0.005, 0.23, 0f, 0, 0, 14
+                                new Vector4f(0.48f, 0.549f, 0.584f, 1.0f), 0.23, 0.005, 0.23, 0f, 0, 0, 14
                         )
                 );
                 spheres.get(0).getChildObjects().get(16).translateObject(0.16f, 0.06f, 1.45f);
@@ -319,7 +319,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(1.0f, 1.0f, 0.0f, 1.0f), 0.002, 0.04, 0.2, 0f, 0, 0, 2
+                                new Vector4f(0.784f, 0.831f, 0.831f, 1.0f), 0.002, 0.04, 0.2, 0f, 0, 0, 2
                         )
                 );
                 spheres.get(0).getChildObjects().get(17).translateObject(-0.3f, 0.027f, 0.83f);
@@ -330,7 +330,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(1.0f, 1.0f, 0.0f, 1.0f), 0.003, 0.05, 0.2, 0f, 0, 0, 2
+                                new Vector4f(0.784f, 0.831f, 0.831f, 1.0f), 0.003, 0.05, 0.2, 0f, 0, 0, 2
                         )
                 );
                 spheres.get(0).getChildObjects().get(18).rotateObject(90f, 0, 0, 1);
@@ -345,7 +345,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(1.0f, 1.0f, 0.0f, 1.0f), 0.002, 0.04, 0.2, 0f, 0, 0, 2
+                                new Vector4f(0.784f, 0.831f, 0.831f, 1.0f), 0.002, 0.04, 0.2, 0f, 0, 0, 2
                         )
                 );
                 spheres.get(0).getChildObjects().get(19).translateObject(0.3f, 0.027f, 0.83f);
@@ -356,7 +356,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(1.0f, 1.0f, 0.0f, 1.0f), 0.003, 0.05, 0.2, 0f, 0, 0, 2
+                                new Vector4f(0.784f, 0.831f, 0.831f, 1.0f), 0.003, 0.05, 0.2, 0f, 0, 0, 2
                         )
                 );
                 spheres.get(0).getChildObjects().get(20).rotateObject(90f, 0, 0, 1);
@@ -371,7 +371,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(1.0f, 0.0f, 0.0f, 1.0f), 0.1, 0.1, 0.1, 0, 0, 0, 15
+                                new Vector4f(1.0f, 1.0f, 1.0f, 1.0f), 0.1, 0.1, 0.1, 0, 0, 0, 15
                         )
                 );
                 spheres.get(0).getChildObjects().get(21).scaleObject(0.1f, 0.1f, 0.1f);
@@ -387,7 +387,7 @@ public class Tiro
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(1.0f, 0.0f, 0.0f, 1.0f), 0.1, 0.1, 0.1, 0, 0, 0, 15
+                                new Vector4f(1.0f, 1.0f, 1.0f, 1.0f), 0.1, 0.1, 0.1, 0, 0, 0, 15
                         )
                 );
                 spheres.get(0).getChildObjects().get(22).scaleObject(0.1f, 0.1f, 0.1f);
@@ -408,8 +408,8 @@ public class Tiro
                 {
                     leftMissile = ((Sphere) spheres.get(0).getChildObjects().get(21));
                     leftPath = leftMissile.generateBezierPoints(leftMissile.getCpx(), leftMissile.getCpy(), leftMissile.getCpz(),
-                            leftMissile.getCpx(), leftMissile.getCpy(), -5,
-                            -5, leftMissile.getCpy()+2, -10);
+                            leftMissile.getCpx(), leftMissile.getCpy(), -2,
+                            -5, leftMissile.getCpy()-2, -5);
                     leftMissileLaunch = true;
                 }
             }
