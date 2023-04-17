@@ -13,7 +13,7 @@ import static org.lwjgl.opengl.GL20.*;
 
 public class Clement
 {
-    private final Window window = new Window(800, 800, "window");
+    private final Window window = new Window(1000, 1000, "window");
     Camera camera = new Camera();
     Projection projection = new Projection(window.getWidth(), window.getHeight());
 
@@ -741,9 +741,20 @@ public class Clement
             spheres.get(0).getChildObjects().get(42).translateObject(0.235f, 0.07f, 0.0f);
         }
 
-        //BEIZER
+        //PELURU
         {
-
+            spheres.get(0).getChildObjects().add(new Sphere
+                    (
+                            Arrays.asList
+                                    (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                                            new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                            new ArrayList<>(),
+                            new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.1, 0.1, 0.1,
+                            0, 0, 0, 4
+                    )
+            );
+            spheres.get(0).getChildObjects().get(43).scaleObject(0.05f, 0.05f, 0.05f);
+            spheres.get(0).getChildObjects().get(43).translateObject(0f, 0.163f, 0f);
         }
     }
 
@@ -783,18 +794,18 @@ public class Clement
                 }
             }
 
-//            if(window.isKeyPressed(GLFW_KEY_V)) {
-//                if (turretLaunch) {
-//                    turret.moveToNextPoint(path);
-//                }
-//                else {
-//                    turret = ((Sphere) spheres.get(0).getChildObjects().get(43));
-//                    path = turret.generateBezierPoints(turret.getCpx(), turret.getCpy(), turret.getCpz(),
-//                            turret.getCpx(), turret.getCpy(),
-//                            -5,5, -5, -5);
-//                    turretLaunch = true;
-//                }
-//            }
+            if(window.isKeyPressed(GLFW_KEY_V)) {
+                if (turretLaunch) {
+                    turret.moveToNextPoint(path);
+                }
+                else {
+                    turret = ((Sphere) spheres.get(0).getChildObjects().get(43));
+                    path = turret.generateBezierPoints(turret.getCpx(), turret.getCpy(), turret.getCpz(),
+                            turret.getCpx()-2, turret.getCpy()-0.3f, turret.getCpz(),
+                            turret.getCpx()-4, turret.getCpy()-0.5f, turret.getCpz());
+                    turretLaunch = true;
+                }
+            }
 
             if(window.isKeyPressed(GLFW_KEY_Q))
             {

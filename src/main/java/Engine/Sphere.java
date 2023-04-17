@@ -68,6 +68,8 @@ public class Sphere extends Circle
         {
             createHyperboloidParaboloid();
         }
+
+        //VINCENTIUS I. TIRO
         else if(option == 10)
         {
             createWing();
@@ -96,6 +98,8 @@ public class Sphere extends Circle
         {
             createHangar();
         }
+
+        //FABIAN OKKY D. S.
         else if(option == 20)
         {
             createTrapesium();
@@ -108,6 +112,8 @@ public class Sphere extends Circle
         {
             createCorong();
         }
+
+        //CLEMENT GUNADI
         else if (option == 41)
         {
             createTrapezoidwithSquare();
@@ -128,6 +134,9 @@ public class Sphere extends Circle
         }
         else if (option == 46) {
             createFrontGlass();
+        }
+        else if (option == 47) {
+            createKepalaTembakan();
         }
 
         setupVAOVBO();
@@ -1681,21 +1690,6 @@ public class Sphere extends Circle
         childObjects.get(5).scaleObject(0.2f, 0.26f, 0.26f);
         childObjects.get(5).translateObject(-0.28f, -0.006f, 0f);
 
-        childObjects.add(new Sphere
-                (
-                        Arrays.asList
-                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
-                                        new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
-                        new ArrayList<>(),
-                        new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.1, 0.1, 0.1,
-                        0, 0, 0, 4
-                )
-        );
-
-        childObjects.get(6).rotateObject(90f,0f, 1f, 0f);
-        childObjects.get(6).scaleObject(0.15f, 0.1f, 0.1f);
-        childObjects.get(6).translateObject(-0.294f, -0.006f, 0f);
-
         //LOBANG KOSONG 1
         childObjects.add(new Sphere
                 (
@@ -1708,8 +1702,8 @@ public class Sphere extends Circle
                 )
         );
 
-        childObjects.get(7).scaleObject(0.2f, 0.3f, 0f);
-        childObjects.get(7).translateObject(-0.265f, -0.006f, -0.042f);
+        childObjects.get(6).scaleObject(0.2f, 0.3f, 0f);
+        childObjects.get(6).translateObject(-0.265f, -0.006f, -0.042f);
     }
 
     public void createFrontGlass()

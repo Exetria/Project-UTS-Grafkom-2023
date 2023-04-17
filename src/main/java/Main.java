@@ -15,15 +15,15 @@ public class Main
     Camera camera = new Camera();
     Projection projection = new Projection(window.getWidth(), window.getHeight());
 
-    Sphere missile, leftMissile, rightMissile;
+    Sphere turret, missile, leftMissile, rightMissile;
 
     ArrayList<Sphere> spheres = new ArrayList<>();
     ArrayList<Sphere> environment = new ArrayList<>();
 
-    ArrayList<Vector3f> jalur, leftPath, rightPath;
+    ArrayList<Vector3f> path, jalur, leftPath, rightPath;
 
     int objectChoice = 0;
-    boolean missileLaunch, leftMissileLaunch, rightMissileLaunch, rotateMode = false;
+    boolean turretLaunch, missileLaunch, leftMissileLaunch, rightMissileLaunch, rotateMode = false;
 
     public static void main(String[] args)
     {
@@ -564,7 +564,7 @@ public class Main
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(0.5f, 0.5f, 0.5f, 1.0f),0.1, 0.1, 0.1, 0f, 0, 0, 2
+                                new Vector4f(0.937f, 0.741f, 0.662f, 1.0f),0.1, 0.1, 0.1, 0f, 0, 0, 2
                         )
                 );
                 spheres.get(1).getChildObjects().get(10).scaleObject(1.5f, 1f, 1f);
@@ -1354,11 +1354,23 @@ public class Main
                 spheres.get(2).getChildObjects().get(42).translateObject(0.235f, 0.07f, 0.0f);
             }
 
-            //BEIZER
+            //PELURU
             {
-
+                spheres.get(2).getChildObjects().add(new Sphere
+                        (
+                                Arrays.asList
+                                        (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                                                new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                                new ArrayList<>(),
+                                new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),0.1, 0.1, 0.1,
+                                0, 0, 0, 4
+                        )
+                );
+                spheres.get(2).getChildObjects().get(43).scaleObject(0.05f, 0.05f, 0.05f);
+                spheres.get(2).getChildObjects().get(43).translateObject(0f, 0.163f, 0f);
             }
         }
+        spheres.get(2).translateObject(-2f, 0.5651f, 1f);
 
 
         //ENVIRONMENT
@@ -1390,6 +1402,7 @@ public class Main
                 environment.get(1).translateObject(3f, 1, 2.5f);
             }
 
+
             //HANGAR KANAN
             {
                 environment.add(new Sphere
@@ -1411,89 +1424,91 @@ public class Main
         //ANIMASI
         {
             //VINCENT
+            if(objectChoice == 0)
             {
-                //luncurkan misil kiri
-                if(window.isKeyPressed(GLFW_KEY_V))
                 {
+                    //luncurkan misil kiri
+                    if(window.isKeyPressed(GLFW_KEY_V))
+                    {
 //                    if(leftMissileLaunch)
 //                    {
 //                        leftMissileLaunch = leftMissile.moveToNextPoint(leftPath);
 //                    }
-                    if(!leftMissileLaunch)
-                    {
-                        leftMissile = ((Sphere) spheres.get(0).getChildObjects().get(21));
-                        leftPath = leftMissile.generateBezierPoints(leftMissile.getCpx(), leftMissile.getCpy(), leftMissile.getCpz(),
-                                leftMissile.getCpx(), leftMissile.getCpy(), leftMissile.getCpz()-2,
-                                leftMissile.getCpx()-5, leftMissile.getCpy()-2, leftMissile.getCpz()-5);
-
-                        spheres.get(0).setVertices(leftPath);
-                        leftMissileLaunch = true;
+                        if(!leftMissileLaunch)
+                        {
+                            leftMissile = ((Sphere) spheres.get(0).getChildObjects().get(21));
+                            leftPath = leftMissile.generateBezierPoints(leftMissile.getCpx(), leftMissile.getCpy(), leftMissile.getCpz(),
+                                    leftMissile.getCpx(), leftMissile.getCpy(), leftMissile.getCpz()-2,
+                                    leftMissile.getCpx()-5, leftMissile.getCpy()-2, leftMissile.getCpz()-5);
+                            leftMissileLaunch = true;
+                        }
                     }
-                }
-                if(leftMissileLaunch)
-                {
-                    leftMissileLaunch = leftMissile.moveToNextPoint(leftPath);
-                }
+                    if(leftMissileLaunch)
+                    {
+                        leftMissileLaunch = leftMissile.moveToNextPoint(leftPath);
+                    }
 
-                //luncurkan misil kanan
-                if(window.isKeyPressed(GLFW_KEY_B))
-                {
+                    //luncurkan misil kanan
+                    if(window.isKeyPressed(GLFW_KEY_B))
+                    {
 //                    if(rightMissileLaunch)
 //                    {
 //                        rightMissileLaunch = rightMissile.moveToNextPoint(rightPath);
 //                    }
-                    if(!rightMissileLaunch)
-                    {
-                        rightMissile = ((Sphere) spheres.get(0).getChildObjects().get(22));
-                        rightPath = rightMissile.generateBezierPoints(rightMissile.getCpx(), rightMissile.getCpy(), rightMissile.getCpz(),
-                                rightMissile.getCpx(), rightMissile.getCpy(), rightMissile.getCpz()-5,
-                                rightMissile.getCpx()+5, rightMissile.getCpy()+5, rightMissile.getCpz()-20);
-                        rightMissileLaunch = true;
+                        if(!rightMissileLaunch)
+                        {
+                            rightMissile = ((Sphere) spheres.get(0).getChildObjects().get(22));
+                            rightPath = rightMissile.generateBezierPoints(rightMissile.getCpx(), rightMissile.getCpy(), rightMissile.getCpz(),
+                                    rightMissile.getCpx(), rightMissile.getCpy(), rightMissile.getCpz()-5,
+                                    rightMissile.getCpx()+5, rightMissile.getCpy()+5, rightMissile.getCpz()-20);
+                            rightMissileLaunch = true;
+                        }
                     }
-                }
-                if(rightMissileLaunch)
-                {
-                    rightMissileLaunch = rightMissile.moveToNextPoint(rightPath);
-                }
-
-                //sayap belakang keatas
-                if(window.isKeyPressed(GLFW_KEY_N))
-                {
-                    Sphere i = ((Sphere) spheres.get(0).getChildObjects().get(15));
-                    Sphere j = ((Sphere) spheres.get(0).getChildObjects().get(16));
-
-                    if(i.getTotalRotateX() > -i.getRotationLimit() && i.getTotalRotateX() < i.getRotationLimit())
+                    if(rightMissileLaunch)
                     {
-                        i.rotateObjectOnPoint(1f, 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
-                        j.rotateObjectOnPoint(1f, 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+                        rightMissileLaunch = rightMissile.moveToNextPoint(rightPath);
                     }
-                    else
-                    {
-                        i.rotateObjectOnPoint(-(float) (i.getTotalRotateX()-i.getRotationLimit() + 1), 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
-                        j.rotateObjectOnPoint(-(float) (j.getTotalRotateX()-j.getRotationLimit() + 1), 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
-                    }
-                }
 
-                //sayap belakang ke bawah
-                if(window.isKeyPressed(GLFW_KEY_M))
-                {
-                    Sphere i = ((Sphere) spheres.get(0).getChildObjects().get(15));
-                    Sphere j = ((Sphere) spheres.get(0).getChildObjects().get(16));
+                    //sayap belakang keatas
+                    if(window.isKeyPressed(GLFW_KEY_N))
+                    {
+                        Sphere i = ((Sphere) spheres.get(0).getChildObjects().get(15));
+                        Sphere j = ((Sphere) spheres.get(0).getChildObjects().get(16));
 
-                    if(i.getTotalRotateX() > -i.getRotationLimit() && i.getTotalRotateX() < i.getRotationLimit())
-                    {
-                        i.rotateObjectOnPoint(-1f, 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
-                        j.rotateObjectOnPoint(-1f, 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+                        if(i.getTotalRotateX() > -i.getRotationLimit() && i.getTotalRotateX() < i.getRotationLimit())
+                        {
+                            i.rotateObjectOnPoint(1f, 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
+                            j.rotateObjectOnPoint(1f, 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+                        }
+                        else
+                        {
+                            i.rotateObjectOnPoint(-(float) (i.getTotalRotateX()-i.getRotationLimit() + 1), 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
+                            j.rotateObjectOnPoint(-(float) (j.getTotalRotateX()-j.getRotationLimit() + 1), 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+                        }
                     }
-                    else
+
+                    //sayap belakang ke bawah
+                    if(window.isKeyPressed(GLFW_KEY_M))
                     {
-                        i.rotateObjectOnPoint((float) (i.getTotalRotateX()+i.getRotationLimit() + 1), 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
-                        j.rotateObjectOnPoint((float) (j.getTotalRotateX()+j.getRotationLimit() + 1), 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+                        Sphere i = ((Sphere) spheres.get(0).getChildObjects().get(15));
+                        Sphere j = ((Sphere) spheres.get(0).getChildObjects().get(16));
+
+                        if(i.getTotalRotateX() > -i.getRotationLimit() && i.getTotalRotateX() < i.getRotationLimit())
+                        {
+                            i.rotateObjectOnPoint(-1f, 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
+                            j.rotateObjectOnPoint(-1f, 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+                        }
+                        else
+                        {
+                            i.rotateObjectOnPoint((float) (i.getTotalRotateX()+i.getRotationLimit() + 1), 1, 0,0, i.getCpx(), i.getCpy(), i.getCpz());
+                            j.rotateObjectOnPoint((float) (j.getTotalRotateX()+j.getRotationLimit() + 1), 1, 0,0, j.getCpx(), j.getCpy(), j.getCpz());
+                        }
                     }
                 }
             }
 
             //OKKY
+            else if(objectChoice == 1)
             {
                 if(window.isKeyPressed(GLFW_KEY_SPACE))
                 {
@@ -1518,6 +1533,56 @@ public class Main
                                 missile.getCpx()-2, missile.getCpy(), missile.getCpz(),
                                 missile.getCpx()-5, -2, missile.getCpz());
                         missileLaunch = true;
+                    }
+                }
+            }
+
+            //CLEMENT
+            else if(objectChoice == 2)
+            {
+                if(window.isKeyPressed(GLFW_KEY_SPACE))
+                {
+                    Sphere a = ((Sphere)spheres.get(2).getChildObjects().get(7));
+                    a.rotateObjectOnPoint(
+                            1f,0f, 1f, 0f, a.getCpx(), a.getCpy(), a.getCpz());
+                }
+
+                if(window.isKeyPressed(GLFW_KEY_M)) {
+                    Sphere a = ((Sphere)spheres.get(2).getChildObjects().get(23));
+
+                    if(a.getTotalRotateY() > -a.getRotationLimit() && a.getTotalRotateY() < a.getRotationLimit())
+                    {
+                        a.rotateObjectOnPoint(-1f, 0f, 1f,0f, a.getCpx(), a.getCpy(), a.getCpz());
+                    }
+                    else
+                    {
+                        a.rotateObjectOnPoint(2f, 0f, 1f,0f, a.getCpx(), a.getCpy(), a.getCpz());
+                    }
+                }
+
+                if(window.isKeyPressed(GLFW_KEY_N)) {
+                    Sphere a = ((Sphere)spheres.get(2).getChildObjects().get(23));
+
+                    if(a.getTotalRotateY() > -a.getRotationLimit() && a.getTotalRotateY() < a.getRotationLimit())
+                    {
+                        a.rotateObjectOnPoint(1f, 0f, 1f,0f, a.getCpx(), a.getCpy(), a.getCpz());
+                    }
+                    else
+                    {
+                        a.rotateObjectOnPoint(-2f, 0f, 1f,0f, a.getCpx(), a.getCpy(), a.getCpz());
+                    }
+                }
+
+                if(window.isKeyPressed(GLFW_KEY_V)) {
+                    if (turretLaunch) {
+                        turret.moveToNextPoint(path);
+                    }
+                    else {
+                        turret = ((Sphere) spheres.get(2).getChildObjects().get(43));
+                        path = turret.generateBezierPoints(turret.getCpx(), turret.getCpy(), turret.getCpz(),
+                                turret.getCpx()-2, turret.getCpy()-0.3f, turret.getCpz(),
+                                turret.getCpx()-4, turret.getCpy()-0.5f, turret.getCpz());
+                        turretLaunch = true;
                     }
                 }
             }
@@ -1659,14 +1724,30 @@ public class Main
                     spheres.get(objectChoice).translateObject(-0.01f, 0f, 0f);
                     if(objectChoice == 1)
                     {
-                        ((Sphere)spheres.get(1).getChildObjects().get(0)).rotateObjectOnPoint(1,0,0,1,((Sphere)spheres.get(1).getChildObjects().get(0)).getCenterPoint().x, ((Sphere)spheres.get(1).getChildObjects().get(0)).getCenterPoint().y, ((Sphere)spheres.get(1).getChildObjects().get(0)).getCenterPoint().z);
-                        ((Sphere)spheres.get(1).getChildObjects().get(1)).rotateObjectOnPoint(1,0,0,1,((Sphere)spheres.get(1).getChildObjects().get(1)).getCenterPoint().x, ((Sphere)spheres.get(1).getChildObjects().get(1)).getCenterPoint().y, ((Sphere)spheres.get(1).getChildObjects().get(1)).getCenterPoint().z);
-                        ((Sphere)spheres.get(1).getChildObjects().get(2)).rotateObjectOnPoint(1,0,0,1,((Sphere)spheres.get(1).getChildObjects().get(2)).getCenterPoint().x, ((Sphere)spheres.get(1).getChildObjects().get(2)).getCenterPoint().y, ((Sphere)spheres.get(1).getChildObjects().get(2)).getCenterPoint().z);
-                        ((Sphere)spheres.get(1).getChildObjects().get(3)).rotateObjectOnPoint(1,0,0,1,((Sphere)spheres.get(1).getChildObjects().get(3)).getCenterPoint().x, ((Sphere)spheres.get(1).getChildObjects().get(3)).getCenterPoint().y, ((Sphere)spheres.get(1).getChildObjects().get(3)).getCenterPoint().z);
-                        ((Sphere)spheres.get(1).getChildObjects().get(5)).rotateObjectOnPoint(1,0,0,1,((Sphere)spheres.get(1).getChildObjects().get(5)).getCenterPoint().x, ((Sphere)spheres.get(1).getChildObjects().get(5)).getCenterPoint().y, ((Sphere)spheres.get(1).getChildObjects().get(5)).getCenterPoint().z);
-                        ((Sphere)spheres.get(1).getChildObjects().get(6)).rotateObjectOnPoint(1,0,0,1,((Sphere)spheres.get(1).getChildObjects().get(6)).getCenterPoint().x, ((Sphere)spheres.get(1).getChildObjects().get(6)).getCenterPoint().y, ((Sphere)spheres.get(1).getChildObjects().get(6)).getCenterPoint().z);
-                        ((Sphere)spheres.get(1).getChildObjects().get(7)).rotateObjectOnPoint(1,0,0,1,((Sphere)spheres.get(1).getChildObjects().get(7)).getCenterPoint().x, ((Sphere)spheres.get(1).getChildObjects().get(7)).getCenterPoint().y, ((Sphere)spheres.get(1).getChildObjects().get(7)).getCenterPoint().z);
-                        ((Sphere)spheres.get(1).getChildObjects().get(8)).rotateObjectOnPoint(1,0,0,1,((Sphere)spheres.get(1).getChildObjects().get(8)).getCenterPoint().x, ((Sphere)spheres.get(1).getChildObjects().get(8)).getCenterPoint().y, ((Sphere)spheres.get(1).getChildObjects().get(8)).getCenterPoint().z);
+                        ((Sphere)spheres.get(1).getChildObjects().get(0)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(0).getCenterPoint().x, spheres.get(1).getChildObjects().get(0).getCenterPoint().y, spheres.get(1).getChildObjects().get(0).getCenterPoint().z);
+                        ((Sphere)spheres.get(1).getChildObjects().get(1)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(1).getCenterPoint().x, spheres.get(1).getChildObjects().get(1).getCenterPoint().y, spheres.get(1).getChildObjects().get(1).getCenterPoint().z);
+                        ((Sphere)spheres.get(1).getChildObjects().get(2)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(2).getCenterPoint().x, spheres.get(1).getChildObjects().get(2).getCenterPoint().y, spheres.get(1).getChildObjects().get(2).getCenterPoint().z);
+                        ((Sphere)spheres.get(1).getChildObjects().get(3)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(3).getCenterPoint().x, spheres.get(1).getChildObjects().get(3).getCenterPoint().y, spheres.get(1).getChildObjects().get(3).getCenterPoint().z);
+                        ((Sphere)spheres.get(1).getChildObjects().get(5)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(5).getCenterPoint().x, spheres.get(1).getChildObjects().get(5).getCenterPoint().y, spheres.get(1).getChildObjects().get(5).getCenterPoint().z);
+                        ((Sphere)spheres.get(1).getChildObjects().get(6)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(6).getCenterPoint().x, spheres.get(1).getChildObjects().get(6).getCenterPoint().y, spheres.get(1).getChildObjects().get(6).getCenterPoint().z);
+                        ((Sphere)spheres.get(1).getChildObjects().get(7)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(7).getCenterPoint().x, spheres.get(1).getChildObjects().get(7).getCenterPoint().y, spheres.get(1).getChildObjects().get(7).getCenterPoint().z);
+                        ((Sphere)spheres.get(1).getChildObjects().get(8)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(8).getCenterPoint().x, spheres.get(1).getChildObjects().get(8).getCenterPoint().y, spheres.get(1).getChildObjects().get(8).getCenterPoint().z);
+                    }
+                    else if(objectChoice == 2)
+                    {
+                        Sphere a = ((Sphere)spheres.get(2).getChildObjects().get(38));
+                        Sphere b = ((Sphere)spheres.get(2).getChildObjects().get(39));
+                        Sphere c = ((Sphere)spheres.get(2).getChildObjects().get(40));
+                        Sphere d = ((Sphere)spheres.get(2).getChildObjects().get(41));
+
+                        a.rotateObjectOnPoint(2f, 0f, 0f,1f,
+                                a.getCpx(), a.getCpy(), a.getCpz());
+                        b.rotateObjectOnPoint(2f, 0f, 0f,1f,
+                                b.getCpx(), b.getCpy(), b.getCpz());
+                        c.rotateObjectOnPoint(2f, 0f, 0f,1f,
+                                c.getCpx(), c.getCpy(), c.getCpz());
+                        d.rotateObjectOnPoint(2f, 0f, 0f,1f,
+                                d.getCpx(), d.getCpy(), d.getCpz());
                     }
                 }
             }
@@ -1676,17 +1757,35 @@ public class Main
                 spheres.get(objectChoice).translateObject(0.01f, 0f, 0f);
                 if(objectChoice == 1)
                 {
-                    ((Sphere)spheres.get(1).getChildObjects().get(0)).rotateObjectOnPoint(-1,0,0,1,((Sphere)spheres.get(1).getChildObjects().get(0)).getCenterPoint().x, ((Sphere)spheres.get(1).getChildObjects().get(0)).getCenterPoint().y, ((Sphere)spheres.get(1).getChildObjects().get(0)).getCenterPoint().z);
-                    ((Sphere)spheres.get(1).getChildObjects().get(1)).rotateObjectOnPoint(-1,0,0,1,((Sphere)spheres.get(1).getChildObjects().get(1)).getCenterPoint().x, ((Sphere)spheres.get(1).getChildObjects().get(1)).getCenterPoint().y, ((Sphere)spheres.get(1).getChildObjects().get(1)).getCenterPoint().z);
-                    ((Sphere)spheres.get(1).getChildObjects().get(2)).rotateObjectOnPoint(-1,0,0,1,((Sphere)spheres.get(1).getChildObjects().get(2)).getCenterPoint().x, ((Sphere)spheres.get(1).getChildObjects().get(2)).getCenterPoint().y, ((Sphere)spheres.get(1).getChildObjects().get(2)).getCenterPoint().z);
-                    ((Sphere)spheres.get(1).getChildObjects().get(3)).rotateObjectOnPoint(-1,0,0,1,((Sphere)spheres.get(1).getChildObjects().get(3)).getCenterPoint().x, ((Sphere)spheres.get(1).getChildObjects().get(3)).getCenterPoint().y, ((Sphere)spheres.get(1).getChildObjects().get(3)).getCenterPoint().z);
-                    ((Sphere)spheres.get(1).getChildObjects().get(5)).rotateObjectOnPoint(-1,0,0,1,((Sphere)spheres.get(1).getChildObjects().get(5)).getCenterPoint().x, ((Sphere)spheres.get(1).getChildObjects().get(5)).getCenterPoint().y, ((Sphere)spheres.get(1).getChildObjects().get(5)).getCenterPoint().z);
-                    ((Sphere)spheres.get(1).getChildObjects().get(6)).rotateObjectOnPoint(-1,0,0,1,((Sphere)spheres.get(1).getChildObjects().get(6)).getCenterPoint().x, ((Sphere)spheres.get(1).getChildObjects().get(6)).getCenterPoint().y, ((Sphere)spheres.get(1).getChildObjects().get(6)).getCenterPoint().z);
-                    ((Sphere)spheres.get(1).getChildObjects().get(7)).rotateObjectOnPoint(-1,0,0,1,((Sphere)spheres.get(1).getChildObjects().get(7)).getCenterPoint().x, ((Sphere)spheres.get(1).getChildObjects().get(7)).getCenterPoint().y, ((Sphere)spheres.get(1).getChildObjects().get(7)).getCenterPoint().z);
-                    ((Sphere)spheres.get(1).getChildObjects().get(8)).rotateObjectOnPoint(-1,0,0,1,((Sphere)spheres.get(1).getChildObjects().get(8)).getCenterPoint().x, ((Sphere)spheres.get(1).getChildObjects().get(8)).getCenterPoint().y, ((Sphere)spheres.get(1).getChildObjects().get(8)).getCenterPoint().z);
+                    ((Sphere)spheres.get(1).getChildObjects().get(0)).rotateObjectOnPoint(-1,0,0,1,spheres.get(1).getChildObjects().get(0).getCenterPoint().x, spheres.get(1).getChildObjects().get(0).getCenterPoint().y, spheres.get(1).getChildObjects().get(0).getCenterPoint().z);
+                    ((Sphere)spheres.get(1).getChildObjects().get(1)).rotateObjectOnPoint(-1,0,0,1,spheres.get(1).getChildObjects().get(1).getCenterPoint().x, spheres.get(1).getChildObjects().get(1).getCenterPoint().y, spheres.get(1).getChildObjects().get(1).getCenterPoint().z);
+                    ((Sphere)spheres.get(1).getChildObjects().get(2)).rotateObjectOnPoint(-1,0,0,1,spheres.get(1).getChildObjects().get(2).getCenterPoint().x, spheres.get(1).getChildObjects().get(2).getCenterPoint().y, spheres.get(1).getChildObjects().get(2).getCenterPoint().z);
+                    ((Sphere)spheres.get(1).getChildObjects().get(3)).rotateObjectOnPoint(-1,0,0,1,spheres.get(1).getChildObjects().get(3).getCenterPoint().x, spheres.get(1).getChildObjects().get(3).getCenterPoint().y, spheres.get(1).getChildObjects().get(3).getCenterPoint().z);
+                    ((Sphere)spheres.get(1).getChildObjects().get(5)).rotateObjectOnPoint(-1,0,0,1,spheres.get(1).getChildObjects().get(5).getCenterPoint().x, spheres.get(1).getChildObjects().get(5).getCenterPoint().y, spheres.get(1).getChildObjects().get(5).getCenterPoint().z);
+                    ((Sphere)spheres.get(1).getChildObjects().get(6)).rotateObjectOnPoint(-1,0,0,1,spheres.get(1).getChildObjects().get(6).getCenterPoint().x, spheres.get(1).getChildObjects().get(6).getCenterPoint().y, spheres.get(1).getChildObjects().get(6).getCenterPoint().z);
+                    ((Sphere)spheres.get(1).getChildObjects().get(7)).rotateObjectOnPoint(-1,0,0,1,spheres.get(1).getChildObjects().get(7).getCenterPoint().x, spheres.get(1).getChildObjects().get(7).getCenterPoint().y, spheres.get(1).getChildObjects().get(7).getCenterPoint().z);
+                    ((Sphere)spheres.get(1).getChildObjects().get(8)).rotateObjectOnPoint(-1,0,0,1,spheres.get(1).getChildObjects().get(8).getCenterPoint().x, spheres.get(1).getChildObjects().get(8).getCenterPoint().y, spheres.get(1).getChildObjects().get(8).getCenterPoint().z);
+                }
+                else if(objectChoice == 2)
+                {
+                    Sphere a = ((Sphere)spheres.get(2).getChildObjects().get(38));
+                    Sphere b = ((Sphere)spheres.get(2).getChildObjects().get(39));
+                    Sphere c = ((Sphere)spheres.get(2).getChildObjects().get(40));
+                    Sphere d = ((Sphere)spheres.get(2).getChildObjects().get(41));
+
+                    a.rotateObjectOnPoint(-2f, 0f, 0f,1f,
+                            a.getCpx(), a.getCpy(), a.getCpz());
+                    b.rotateObjectOnPoint(-2f, 0f, 0f,1f,
+                            b.getCpx(), b.getCpy(), b.getCpz());
+                    c.rotateObjectOnPoint(-2f, 0f, 0f,1f,
+                            c.getCpx(), c.getCpy(), c.getCpz());
+                    d.rotateObjectOnPoint(-2f, 0f, 0f,1f,
+                            d.getCpx(), d.getCpy(), d.getCpz());
                 }
             }
         }
+
+        //================================================================================
 
         //EXTRAS
         {

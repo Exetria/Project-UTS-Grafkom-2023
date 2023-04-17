@@ -11,7 +11,7 @@ import static org.lwjgl.opengl.GL20.*;
 
 public class Tiro
 {
-    private final Window window = new Window(800, 800, "window");
+    private final Window window = new Window(1000, 1000, "window");
     Camera camera = new Camera();
     Projection projection = new Projection(window.getWidth(), window.getHeight());
 
@@ -404,35 +404,35 @@ public class Tiro
             //luncurkan misil kiri
             if(window.isKeyPressed(GLFW_KEY_V))
             {
+                if(leftMissileLaunch)
+                {
+                    leftMissileLaunch = leftMissile.moveToNextPoint(leftPath);
+                }
                 if(!leftMissileLaunch)
                 {
                     leftMissile = ((Sphere) spheres.get(0).getChildObjects().get(21));
                     leftPath = leftMissile.generateBezierPoints(leftMissile.getCpx(), leftMissile.getCpy(), leftMissile.getCpz(),
-                            leftMissile.getCpx(), leftMissile.getCpy(), -2,
-                            -5, leftMissile.getCpy()-2, -5);
+                            leftMissile.getCpx(), leftMissile.getCpy(), leftMissile.getCpz()-2,
+                            leftMissile.getCpx()-5, leftMissile.getCpy()-2, leftMissile.getCpz()-5);
                     leftMissileLaunch = true;
                 }
-            }
-            if(leftMissileLaunch)
-            {
-                leftMissileLaunch = leftMissile.moveToNextPoint(leftPath);
             }
 
             //luncurkan misil kanan
             if(window.isKeyPressed(GLFW_KEY_B))
             {
+                if(rightMissileLaunch)
+                {
+                    rightMissileLaunch = rightMissile.moveToNextPoint(rightPath);
+                }
                 if(!rightMissileLaunch)
                 {
                     rightMissile = ((Sphere) spheres.get(0).getChildObjects().get(22));
                     rightPath = rightMissile.generateBezierPoints(rightMissile.getCpx(), rightMissile.getCpy(), rightMissile.getCpz(),
-                            rightMissile.getCpx(), rightMissile.getCpy(), -5,
-                            5, rightMissile.getCpy()+5, -20);
+                            rightMissile.getCpx(), rightMissile.getCpy(), rightMissile.getCpz()-5,
+                            rightMissile.getCpx()+5, rightMissile.getCpy()+5, rightMissile.getCpz()-20);
                     rightMissileLaunch = true;
                 }
-            }
-            if(rightMissileLaunch)
-            {
-                rightMissileLaunch = rightMissile.moveToNextPoint(rightPath);
             }
 
             //sayap belakang keatas
