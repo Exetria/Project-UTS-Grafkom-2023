@@ -1719,36 +1719,33 @@ public class Main
 
             if(window.isKeyPressed(GLFW_KEY_J))
             {
-                for (Sphere i: spheres)
+                spheres.get(objectChoice).translateObject(-0.01f, 0f, 0f);
+                if(objectChoice == 1)
                 {
-                    spheres.get(objectChoice).translateObject(-0.01f, 0f, 0f);
-                    if(objectChoice == 1)
-                    {
-                        ((Sphere)spheres.get(1).getChildObjects().get(0)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(0).getCenterPoint().x, spheres.get(1).getChildObjects().get(0).getCenterPoint().y, spheres.get(1).getChildObjects().get(0).getCenterPoint().z);
-                        ((Sphere)spheres.get(1).getChildObjects().get(1)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(1).getCenterPoint().x, spheres.get(1).getChildObjects().get(1).getCenterPoint().y, spheres.get(1).getChildObjects().get(1).getCenterPoint().z);
-                        ((Sphere)spheres.get(1).getChildObjects().get(2)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(2).getCenterPoint().x, spheres.get(1).getChildObjects().get(2).getCenterPoint().y, spheres.get(1).getChildObjects().get(2).getCenterPoint().z);
-                        ((Sphere)spheres.get(1).getChildObjects().get(3)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(3).getCenterPoint().x, spheres.get(1).getChildObjects().get(3).getCenterPoint().y, spheres.get(1).getChildObjects().get(3).getCenterPoint().z);
-                        ((Sphere)spheres.get(1).getChildObjects().get(5)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(5).getCenterPoint().x, spheres.get(1).getChildObjects().get(5).getCenterPoint().y, spheres.get(1).getChildObjects().get(5).getCenterPoint().z);
-                        ((Sphere)spheres.get(1).getChildObjects().get(6)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(6).getCenterPoint().x, spheres.get(1).getChildObjects().get(6).getCenterPoint().y, spheres.get(1).getChildObjects().get(6).getCenterPoint().z);
-                        ((Sphere)spheres.get(1).getChildObjects().get(7)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(7).getCenterPoint().x, spheres.get(1).getChildObjects().get(7).getCenterPoint().y, spheres.get(1).getChildObjects().get(7).getCenterPoint().z);
-                        ((Sphere)spheres.get(1).getChildObjects().get(8)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(8).getCenterPoint().x, spheres.get(1).getChildObjects().get(8).getCenterPoint().y, spheres.get(1).getChildObjects().get(8).getCenterPoint().z);
-                    }
-                    else if(objectChoice == 2)
-                    {
-                        Sphere a = ((Sphere)spheres.get(2).getChildObjects().get(38));
-                        Sphere b = ((Sphere)spheres.get(2).getChildObjects().get(39));
-                        Sphere c = ((Sphere)spheres.get(2).getChildObjects().get(40));
-                        Sphere d = ((Sphere)spheres.get(2).getChildObjects().get(41));
+                    ((Sphere)spheres.get(1).getChildObjects().get(0)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(0).getCenterPoint().x, spheres.get(1).getChildObjects().get(0).getCenterPoint().y, spheres.get(1).getChildObjects().get(0).getCenterPoint().z);
+                    ((Sphere)spheres.get(1).getChildObjects().get(1)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(1).getCenterPoint().x, spheres.get(1).getChildObjects().get(1).getCenterPoint().y, spheres.get(1).getChildObjects().get(1).getCenterPoint().z);
+                    ((Sphere)spheres.get(1).getChildObjects().get(2)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(2).getCenterPoint().x, spheres.get(1).getChildObjects().get(2).getCenterPoint().y, spheres.get(1).getChildObjects().get(2).getCenterPoint().z);
+                    ((Sphere)spheres.get(1).getChildObjects().get(3)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(3).getCenterPoint().x, spheres.get(1).getChildObjects().get(3).getCenterPoint().y, spheres.get(1).getChildObjects().get(3).getCenterPoint().z);
+                    ((Sphere)spheres.get(1).getChildObjects().get(5)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(5).getCenterPoint().x, spheres.get(1).getChildObjects().get(5).getCenterPoint().y, spheres.get(1).getChildObjects().get(5).getCenterPoint().z);
+                    ((Sphere)spheres.get(1).getChildObjects().get(6)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(6).getCenterPoint().x, spheres.get(1).getChildObjects().get(6).getCenterPoint().y, spheres.get(1).getChildObjects().get(6).getCenterPoint().z);
+                    ((Sphere)spheres.get(1).getChildObjects().get(7)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(7).getCenterPoint().x, spheres.get(1).getChildObjects().get(7).getCenterPoint().y, spheres.get(1).getChildObjects().get(7).getCenterPoint().z);
+                    ((Sphere)spheres.get(1).getChildObjects().get(8)).rotateObjectOnPoint(1,0,0,1,spheres.get(1).getChildObjects().get(8).getCenterPoint().x, spheres.get(1).getChildObjects().get(8).getCenterPoint().y, spheres.get(1).getChildObjects().get(8).getCenterPoint().z);
+                }
+                else if(objectChoice == 2)
+                {
+                    Sphere a = ((Sphere)spheres.get(2).getChildObjects().get(38));
+                    Sphere b = ((Sphere)spheres.get(2).getChildObjects().get(39));
+                    Sphere c = ((Sphere)spheres.get(2).getChildObjects().get(40));
+                    Sphere d = ((Sphere)spheres.get(2).getChildObjects().get(41));
 
-                        a.rotateObjectOnPoint(2f, 0f, 0f,1f,
-                                a.getCpx(), a.getCpy(), a.getCpz());
-                        b.rotateObjectOnPoint(2f, 0f, 0f,1f,
-                                b.getCpx(), b.getCpy(), b.getCpz());
-                        c.rotateObjectOnPoint(2f, 0f, 0f,1f,
-                                c.getCpx(), c.getCpy(), c.getCpz());
-                        d.rotateObjectOnPoint(2f, 0f, 0f,1f,
-                                d.getCpx(), d.getCpy(), d.getCpz());
-                    }
+                    a.rotateObjectOnPoint(2f, 0f, 0f,1f,
+                            a.getCpx(), a.getCpy(), a.getCpz());
+                    b.rotateObjectOnPoint(2f, 0f, 0f,1f,
+                            b.getCpx(), b.getCpy(), b.getCpz());
+                    c.rotateObjectOnPoint(2f, 0f, 0f,1f,
+                            c.getCpx(), c.getCpy(), c.getCpz());
+                    d.rotateObjectOnPoint(2f, 0f, 0f,1f,
+                            d.getCpx(), d.getCpy(), d.getCpz());
                 }
             }
 
