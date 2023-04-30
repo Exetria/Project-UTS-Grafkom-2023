@@ -18,16 +18,16 @@ public class Main
     Camera camera = new Camera();
     Projection projection = new Projection(window.getWidth(), window.getHeight());
 
-    Sphere turret, missile, leftMissile, rightMissile, temp;
+    Sphere turret, leftMissile, rightMissile, temp;
 
     ArrayList<Sphere> spheres = new ArrayList<>();
     ArrayList<Sphere> environment = new ArrayList<>();
     ArrayList<Sphere> missileTrail = new ArrayList<>();
 
-    ArrayList<Vector3f> path, jalur, leftPath, rightPath;
+    ArrayList<Vector3f> path, leftPath, rightPath;
 
     float tempX, tempZ;
-    int objectChoice, smokeCounter, gunCounter = 0;
+    int objectChoice, smokeCounter, gunCounter, tankCounter = 0;
     boolean turretLaunch, missileLaunch, leftMissileLaunch, rightMissileLaunch, rotateMode = false;
 
     public static void main(String[] args)
@@ -665,7 +665,7 @@ public class Main
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(0.0f, 0.0f, 1.0f, 1.0f),0.1, 0.1, 0.1, 0f, 0, 0, 1
+                                new Vector4f(0.0f, 0.0f, 1.0f, 1.0f),0.01, 0.01, 0.01, 0f, 0, 0, 1
                         )
                 );
                 spheres.get(1).getChildObjects().get(16).scaleObject(0.1f, 0.1f, 0.1f);
@@ -1667,20 +1667,59 @@ public class Main
                     }
                 }
 
-                if(window.isKeyPressed(GLFW_KEY_V))
+                if (window.isKeyPressed(GLFW_KEY_C) && tankCounter == 20)
                 {
-                    if(missileLaunch)
+                    System.out.println("fire");
+                    tankCounter = 0;
+                    spheres.get(1).getChildObjects().get(16).getChildObjects().add(new Sphere
+                            (
+                                    Arrays.asList
+                                            (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                                    new ArrayList<>(),
+                                    new Vector4f(1.0f, 0, 0, 1.0f), 0.005, 0.005, 0.01, 0, 0, 0, 1
+                            )
+                    );
+
+
+                    temp = ((Sphere) spheres.get(1).getChildObjects().get(16).getChildObjects().get(spheres.get(1).getChildObjects().get(16).getChildObjects().size() - 1));
+                    temp.translateObject(((Sphere) spheres.get(1).getChildObjects().get(16)).getCpx(), ((Sphere) spheres.get(1).getChildObjects().get(16)).getCpy(), ((Sphere) spheres.get(1).getChildObjects().get(16)).getCpz());
+                    float x, y, z, x1, x2, z1, z2;
+                    x = ((Sphere) spheres.get(1).getChildObjects().get(16)).getCpx();
+                    y = 0.7f;
+                    z = ((Sphere) spheres.get(1).getChildObjects().get(16)).getCpz();
+
+                    //temp.translateObject(((Sphere)spheres.get(1).getChildObjects().get(16)).getCpx(), ((Sphere)spheres.get(1).getChildObjects().get(16)).getCpy()-0f, ((Sphere)spheres.get(1).getChildObjects().get(16)).getCpz());
+
+                    if (x >= spheres.get(1).getCpx())
                     {
-                        missile.moveToNextPoint(jalur);
+                        x1 = x + 2;
+                        x2 = x + 5;
                     }
                     else
                     {
-                        missile = ((Sphere) spheres.get(1).getChildObjects().get(16));
-                        jalur = missile.generateBezierPoints(missile.getCpx(), missile.getCpy(), missile.getCpz(),
-                                missile.getCpx()-2, missile.getCpy(), missile.getCpz(),
-                                missile.getCpx()-5, -2, missile.getCpz());
-                        missileLaunch = true;
+                        x1 = x - 2;
+                        x2 = x - 5;
                     }
+                    if (z >= spheres.get(1).getCpz())
+                    {
+                        z1 = z-1 * (float) Math.sqrt((3 * 3) - (x1 * x1));
+                    }
+                    else
+                    {
+                        z1 = z+(float) Math.sqrt((3 * 3) - (x1 * x1));
+                    }
+                    z2 = z1;
+
+                    temp.generateBezierPoints(x, y, z,
+                            x1, y, z1,
+                            x2, -1, z2);
+                }
+                else if (window.isKeyPressed(GLFW_KEY_C)) {
+                    tankCounter++;
+                }
+
+                for (Objects i : spheres.get(1).getChildObjects().get(16).getChildObjects()) {
+                    ((Sphere) i).moveToNextPoint(((Sphere) i).getPath());
                 }
             }
 

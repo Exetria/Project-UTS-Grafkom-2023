@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7265bded-3803-4b65-8f98-d5b995e8343e" name="Changes" comment="FINISH ALL sampe random tree generator&#10;- Tiro">
+    <list default="true" id="7265bded-3803-4b65-8f98-d5b995e8343e" name="Changes" comment="jam 10.40&#10;- Tiro">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Engine/Objects.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Engine/Objects.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Engine/Sphere.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Engine/Sphere.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Okky.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Okky.java" afterDir="false" />
     </list>
@@ -64,7 +62,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Tiro">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Clement" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Clement" />
       <module name="untitled" />
@@ -113,9 +111,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Tiro" />
-        <item itemvalue="Application.Okky" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Okky" />
+        <item itemvalue="Application.Tiro" />
         <item itemvalue="Application.Test" />
         <item itemvalue="Application.Clement" />
       </list>
@@ -368,7 +366,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682831931547</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="jam 10.40&#10;- Tiro">
+      <created>1682865539176</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1682865539176</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -383,7 +388,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Tugas week 3 tinggal bintang" />
     <MESSAGE value="Tugas week 3 SELESAI" />
     <MESSAGE value="Tugas Week III - smape kotak bisa spawn + collision detection" />
     <MESSAGE value="Tugas Week III - tinggal drag and drop" />
@@ -408,6 +412,7 @@
     <MESSAGE value="FINISH ALL revisi&#10;- Tiro" />
     <MESSAGE value="FINISH ALL mulai environment video&#10;- Tiro" />
     <MESSAGE value="FINISH ALL sampe random tree generator&#10;- Tiro" />
-    <option name="LAST_COMMIT_MESSAGE" value="FINISH ALL sampe random tree generator&#10;- Tiro" />
+    <MESSAGE value="jam 10.40&#10;- Tiro" />
+    <option name="LAST_COMMIT_MESSAGE" value="jam 10.40&#10;- Tiro" />
   </component>
 </project>

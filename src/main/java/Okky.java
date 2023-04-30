@@ -445,7 +445,7 @@ public class Okky
                 ((Sphere) spheres.get(0).getChildObjects().get(16)).rotateObjectOnPoint(-1, 0, 1, 0, ((Sphere) spheres.get(0).getChildObjects().get(10)).getCenterPoint().x, ((Sphere) spheres.get(0).getChildObjects().get(10)).getCenterPoint().y, ((Sphere) spheres.get(0).getChildObjects().get(10)).getCenterPoint().z);
             }
 
-            if (window.isKeyPressed(GLFW_KEY_C) && gunCounter == 300) {
+            if (window.isKeyPressed(GLFW_KEY_C) && gunCounter == 20) {
                 gunCounter = 0;
                 spheres.get(0).getChildObjects().get(16).getChildObjects().add(new Sphere
                         (
@@ -485,7 +485,8 @@ public class Okky
                 temp.generateBezierPoints(x, y, z,
                         x1, y, z1,
                         x2, -2, z2);
-            } else if (window.isKeyPressed(GLFW_KEY_C)) {
+            }
+            else if (window.isKeyPressed(GLFW_KEY_C)) {
                 gunCounter++;
             }
 
