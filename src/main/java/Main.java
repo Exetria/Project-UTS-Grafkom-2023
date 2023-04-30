@@ -12,7 +12,7 @@ import static org.lwjgl.opengl.GL20.*;
 
 public class Main
 {
-    private final Window window = new Window(1000, 1000, "window");
+    private final Window window = new Window(1366, 768, "window");
 
     Random rn = new Random();
     Camera camera = new Camera();
@@ -672,7 +672,7 @@ public class Main
                 spheres.get(1).getChildObjects().get(16).translateObject(-0.4f, 0.1f, 0);
             }
         }
-        spheres.get(1).translateObject(2f, 0.6f, 1f);
+        spheres.get(1).translateObject(0f, 0.6f, 0f);
 
 
         //CLEMENT GUNADI C14210183
@@ -1702,12 +1702,13 @@ public class Main
                     }
                     if (z >= spheres.get(1).getCpz())
                     {
-                        z1 = z-1 * (float) Math.sqrt((3 * 3) - (x1 * x1));
+                        z1 = z * (float) Math.sqrt((3 * 3) - (x1 * x1));
                     }
                     else
                     {
                         z1 = z+(float) Math.sqrt((3 * 3) - (x1 * x1));
                     }
+                    z1 += 1.9f;
                     z2 = z1;
 
                     temp.generateBezierPoints(x, y, z,
