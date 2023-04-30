@@ -222,7 +222,7 @@ public class Sphere extends Circle
 
         for (Objects i: childObjects)
         {
-            ((Sphere)i).rotateObjectOnPoint(degree, offsetX, offsetY, offsetZ, rotateX, rotateY, rotateZ);
+            i.rotateObjectOnPoint(degree, offsetX, offsetY, offsetZ, rotateX, rotateY, rotateZ);
         }
     }
 
@@ -240,8 +240,7 @@ public class Sphere extends Circle
         }
         else
         {
-            vertices.clear();
-            childObjects.clear();
+            clearVertices();
             return true;
         }
     }
@@ -1449,7 +1448,8 @@ public class Sphere extends Circle
         this.vertices = temp;
     }
 
-    public void createTrapesium() {
+    public void createTrapesium()
+    {
         float a = 0.21F;
         float b = 0.1F;
         Vector3f temp = new Vector3f();

@@ -198,6 +198,20 @@ public class Objects extends ShaderProgram
         }
     }
 
+    public void rotateObjectOnPoint(float degree, float offsetX, float offsetY, float offsetZ, float rotateX, float rotateY, float rotateZ)
+    {
+        translateObject(-rotateX, -rotateY, -rotateZ);
+
+        model = new Matrix4f().rotate((float)(Math.toRadians(degree)), offsetX, offsetY, offsetZ).mul(new Matrix4f(model));
+
+        translateObject(rotateX, rotateY, rotateZ);
+
+        for (Objects i: childObjects)
+        {
+            i.rotateObjectOnPoint(degree, offsetX, offsetY, offsetZ, rotateX, rotateY, rotateZ);
+        }
+    }
+
     //scale object + childnya
     public void scaleObject(float x, float y, float z)
     {
@@ -211,6 +225,10 @@ public class Objects extends ShaderProgram
     public void clearVertices()
     {
         vertices.clear();
+        for (Objects i : childObjects)
+        {
+            i.vertices.clear();
+        }
     }
 
     //draw standar tanpa

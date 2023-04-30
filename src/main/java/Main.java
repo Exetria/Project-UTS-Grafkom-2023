@@ -416,8 +416,7 @@ public class Main
                 spheres.get(0).getChildObjects().get(23).translateObject(0.154f, 0.054f, 0.41f);
             }
             }
-        spheres.get(0).translateObject(0f, 4.5f, 3f);
-
+        spheres.get(0).translateObject(0f, 4.5f, 10f);
 
 
         //FABIAN OKKY D. S. C14210196
@@ -1407,7 +1406,7 @@ public class Main
 
 
             //HANGAR KIRI
-            {
+            /*{
                 environment.add(new Sphere
                         (
                                 Arrays.asList
@@ -1418,11 +1417,11 @@ public class Main
                 );
                 environment.get(1).rotateObject(30f, 0, 1 , 0);
                 environment.get(1).translateObject(3f, 1, 2.5f);
-            }
+            }*/
 
 
             //HANGAR KANAN
-            {
+            /*{
                 environment.add(new Sphere
                         (
                                 Arrays.asList
@@ -1433,15 +1432,28 @@ public class Main
                 );
                 environment.get(2).rotateObject(-30f, 0, 1 , 0);
                 environment.get(2).translateObject(-3f, 1, 2.5f);
+            }*/
+
+            //MATAHARI
+            {
+                environment.add(new Sphere
+                        (
+                                Arrays.asList
+                                        (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                                new ArrayList<>(),
+                                new Vector4f(0.94f, 1f, 0.26f, 1.0f), 3, 3, 3, 0f, 0, 0, 1
+                        )
+                );
+                environment.get(1).translateObject(50, 50, 50);
             }
 
             //WARNA 1 HIJAU         0.26f, 0.47f, 0.13f
             //WARNA 2 AGAK KUNING   0.78f, 0.87f, 0.55f
-
-            for (int i = 0; i < 100; i++)
+            //LOOP UNTUK RANDOM PEMBUATAN TREE SEBANYAK I KALI
+            for (int i = 0; i < 150; i++)
             {
-                tempX = rn.nextFloat(-5, 5);
-                tempZ = rn.nextFloat(-5, 5);
+                tempX = rn.nextFloat(-7, 7);
+                tempZ = rn.nextFloat(-7, 7);
                 if(i % 2 == 1)
                 {
                     environment.add(new Sphere
@@ -1464,8 +1476,8 @@ public class Main
                             )
                     );
                 }
-                environment.get(i+3).translateObject(tempX, 0.64f, tempZ);
-                environment.get(i+3).scaleObject(2.5f, 2.5f, 2.5f);
+                environment.get(i+2).translateObject(tempX, 0.64f, tempZ);
+                environment.get(i+2).scaleObject(2.5f, 2.5f, 2.5f);
             }
         }
     }
@@ -1478,76 +1490,84 @@ public class Main
             if(objectChoice == 0)
             {
                 {
-                    //luncurkan misil kiri
+                    //scale matahari
                     if(window.isKeyPressed(GLFW_KEY_V))
+                        environment.get(1).scaleObject(1.001f, 1.001f, 1.001f);
+
+                    //luncurkan misil kiri
                     {
-                        //if buat misilnya tidak ajlan otomatis, kalo ini nyala, moveToNextPoint di if yg bawah harus dimatikan
+                        if(window.isKeyPressed(GLFW_KEY_V))
+                        {
+                            //if buat misilnya tidak jalan otomatis, kalo ini nyala, moveToNextPoint di if yg bawah harus dimatikan
 //                    if(leftMissileLaunch)
 //                    {
 //                        leftMissileLaunch = leftMissile.moveToNextPoint(leftPath);
 //                    }
-                        if(!leftMissileLaunch)
-                        {
-                            leftMissile = ((Sphere) spheres.get(0).getChildObjects().get(21));
-                            leftPath = leftMissile.generateBezierPoints(leftMissile.getCpx(), leftMissile.getCpy(), leftMissile.getCpz(),
-                                    leftMissile.getCpx(), leftMissile.getCpy(), leftMissile.getCpz()-2,
-                                    spheres.get(2).getCpx(), spheres.get(2).getCpy(), spheres.get(2).getCpz());
-                            leftMissileLaunch = true;
+                            if(!leftMissileLaunch)
+                            {
+                                leftMissile = ((Sphere) spheres.get(0).getChildObjects().get(21));
+                                leftPath = leftMissile.generateBezierPoints(leftMissile.getCpx(), leftMissile.getCpy(), leftMissile.getCpz(),
+                                        leftMissile.getCpx(), leftMissile.getCpy(), leftMissile.getCpz()-2,
+                                        spheres.get(2).getCpx(), spheres.get(2).getCpy(), spheres.get(2).getCpz());
+                                leftMissileLaunch = true;
+                            }
                         }
-                    }
-                    if(leftMissileLaunch)
-                    {
-                        //add smoke kalo masih ada titik di path
-                        if(leftPath.size() > 0)
+                        if(leftMissileLaunch)
                         {
-                            missileTrail.add(new Sphere
-                                    (
-                                            Arrays.asList
-                                                    (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
-                                            new ArrayList<>(),
-                                            new Vector4f(0.35f, 0.35f, 0.35f, 1.0f), 0.03, 0.03, 0.03, 0, 0, 0, 1
-                                    )
-                            );
-                            missileTrail.get(missileTrail.size()-1).translateObject(leftPath.get(0).x, leftPath.get(0).y, leftPath.get(0).z + 0.2f);
-                        }
+                            //add smoke kalo masih ada titik di path
+                            if(leftPath.size() > 0)
+                            {
+                                missileTrail.add(new Sphere
+                                        (
+                                                Arrays.asList
+                                                        (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                                                new ArrayList<>(),
+                                                new Vector4f(0.35f, 0.35f, 0.35f, 1.0f), 0.03, 0.03, 0.03, 0, 0, 0, 1
+                                        )
+                                );
+                                missileTrail.get(missileTrail.size()-1).translateObject(leftPath.get(0).x, leftPath.get(0).y, leftPath.get(0).z + 0.2f);
+                            }
 
-                        leftMissileLaunch = leftMissile.moveToNextPoint(leftPath);
+                            leftMissileLaunch = leftMissile.moveToNextPoint(leftPath);
+                        }
                     }
 
                     //luncurkan misil kanan
-                    if(window.isKeyPressed(GLFW_KEY_B))
                     {
-                        //if buat misilnya tidak ajlan otomatis, kalo ini nyala, moveToNextPoint di if yg bawah harus dimatikan
+                        if(window.isKeyPressed(GLFW_KEY_B))
+                        {
+                            //if buat misilnya tidak ajlan otomatis, kalo ini nyala, moveToNextPoint di if yg bawah harus dimatikan
 //                    if(rightMissileLaunch)
 //                    {
 //                        rightMissileLaunch = rightMissile.moveToNextPoint(rightPath);
 //                    }
-                        if(!rightMissileLaunch)
-                        {
-                            rightMissile = ((Sphere) spheres.get(0).getChildObjects().get(22));
-                            rightPath = rightMissile.generateBezierPoints(rightMissile.getCpx(), rightMissile.getCpy(), rightMissile.getCpz(),
-                                    rightMissile.getCpx(), rightMissile.getCpy(), rightMissile.getCpz()-5,
-                                    spheres.get(1).getCpx(), spheres.get(1).getCpy(), spheres.get(1).getCpz());
-                            rightMissileLaunch = true;
+                            if(!rightMissileLaunch)
+                            {
+                                rightMissile = ((Sphere) spheres.get(0).getChildObjects().get(22));
+                                rightPath = rightMissile.generateBezierPoints(rightMissile.getCpx(), rightMissile.getCpy(), rightMissile.getCpz(),
+                                        rightMissile.getCpx(), rightMissile.getCpy(), rightMissile.getCpz()-5,
+                                        spheres.get(1).getCpx(), spheres.get(1).getCpy(), spheres.get(1).getCpz());
+                                rightMissileLaunch = true;
+                            }
                         }
-                    }
-                    if(rightMissileLaunch)
-                    {
-                        //add smoke kalo masih ada titik di path
-                        if(rightPath.size() > 0)
+                        if(rightMissileLaunch)
                         {
-                            missileTrail.add(new Sphere
-                                    (
-                                            Arrays.asList
-                                                    (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
-                                            new ArrayList<>(),
-                                            new Vector4f(0.35f, 0.35f, 0.35f, 1.0f), 0.03, 0.03, 0.03, 0, 0, 0, 1
-                                    )
-                            );
-                            missileTrail.get(missileTrail.size()-1).translateObject(rightPath.get(0).x, rightPath.get(0).y, rightPath.get(0).z + 0.2f);
-                        }
+                            //add smoke kalo masih ada titik di path
+                            if(rightPath.size() > 0)
+                            {
+                                missileTrail.add(new Sphere
+                                        (
+                                                Arrays.asList
+                                                        (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                                                new ArrayList<>(),
+                                                new Vector4f(0.35f, 0.35f, 0.35f, 1.0f), 0.03, 0.03, 0.03, 0, 0, 0, 1
+                                        )
+                                );
+                                missileTrail.get(missileTrail.size()-1).translateObject(rightPath.get(0).x, rightPath.get(0).y, rightPath.get(0).z + 0.2f);
+                            }
 
-                        rightMissileLaunch = rightMissile.moveToNextPoint(rightPath);
+                            rightMissileLaunch = rightMissile.moveToNextPoint(rightPath);
+                        }
                     }
 
                     //PELURU
@@ -1635,7 +1655,7 @@ public class Main
             }
 
             //OKKY
-            else if(objectChoice == 1)
+            if(objectChoice == 1)
             {
                 if(window.isKeyPressed(GLFW_KEY_SPACE))
                 {
@@ -1665,7 +1685,7 @@ public class Main
             }
 
             //CLEMENT
-            else if(objectChoice == 2)
+            if(objectChoice == 2)
             {
                 if(window.isKeyPressed(GLFW_KEY_SPACE))
                 {
@@ -1826,12 +1846,12 @@ public class Main
         {
             if(window.isKeyPressed(GLFW_KEY_U))
             {
-                spheres.get(objectChoice).translateObject(0f, 0, 0.01f);
+                spheres.get(objectChoice).translateObject(0f, 0, 0.1f);
             }
 
             if(window.isKeyPressed(GLFW_KEY_O))
             {
-                spheres.get(objectChoice).translateObject(0f, 0, -0.01f);
+                spheres.get(objectChoice).translateObject(0f, 0, -0.1f);
             }
 
             if(window.isKeyPressed(GLFW_KEY_I))
@@ -1965,7 +1985,7 @@ public class Main
         {
             //Restore State
             window.update();
-            glClearColor(0.5f, 0.5f, 0.5f, 0.0f);
+            glClearColor(0.65f, 0.79f, 0.93f, 0.0f);
             GL.createCapabilities();
 
             //Code

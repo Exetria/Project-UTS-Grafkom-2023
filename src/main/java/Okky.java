@@ -22,7 +22,8 @@ public class Okky
     ArrayList<Objects> multipleColorObjects = new ArrayList<>();
     ArrayList<Objects> objectsPointControl =  new ArrayList<>();
     ArrayList<Vector3f> jalur;
-    Sphere missile;
+    Sphere missile, temp;
+    int smokeCounter, gunCounter = 0;
 
     boolean missileLaunch, rotateMode = false;
     ArrayList<Objects> titikBerzier = new ArrayList<>();
@@ -314,11 +315,25 @@ public class Okky
                             Arrays.asList
                                     (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                             new ArrayList<>(),
-                            new Vector4f(0.0f, 0.0f, 1.0f, 1.0f),0.1, 0.1, 0.1, 0f, 0, 0, 1
+                            new Vector4f(0.0f, 0.0f, 1.0f, 1.0f),0.01, 0.01, 0.01, 0f, 0, 0, 1
                     )
             );
-            spheres.get(0).getChildObjects().get(16).scaleObject(0.1f, 0.1f, 0.1f);
+            //spheres.get(0).getChildObjects().get(16).scaleObject(0.1f, 0.1f, 0.1f);
             spheres.get(0).getChildObjects().get(16).translateObject(-0.4f, 0.1f, 0);
+        }
+
+        //bola asap
+        {
+            spheres.get(0).getChildObjects().add(new Sphere
+                    (
+                            Arrays.asList
+                                    (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                            new ArrayList<>(),
+                            new Vector4f(0.81f, 0.81f, 0.81f, 1.0f),0.01, 0.01, 0.01, 0f, 0, 0, 1
+                    )
+            );
+            //spheres.get(0).getChildObjects().get(16).scaleObject(0.1f, 0.1f, 0.1f);
+            spheres.get(0).getChildObjects().get(17).translateObject(-0.4f, 0.1f, 0);
         }
 
     }
@@ -344,6 +359,7 @@ public class Okky
                 }
             }
 
+            /*
             if(window.isKeyPressed(GLFW_KEY_W))
             {
                 camera.addRotation(0.01f, 0);
@@ -383,8 +399,8 @@ public class Okky
                     //i.rotateObjectOnPoint(-1f, 0, 1, 0, i.getCpx(), i.getCpy(), i.getCpz());
                 }
             }
+            */
 
-/*
             if(window.isKeyPressed(GLFW_KEY_W))
             {
                 for (Sphere i: spheres)
@@ -421,28 +437,60 @@ public class Okky
                 }
             }
 
- */
+
 
             if(window.isKeyPressed(GLFW_KEY_SPACE)) {
-                ((Sphere)spheres.get(0).getChildObjects().get(10)).rotateObjectOnPoint(-1,0,1,0,((Sphere)spheres.get(0).getChildObjects().get(10)).getCenterPoint().x, ((Sphere)spheres.get(0).getChildObjects().get(10)).getCenterPoint().y, ((Sphere)spheres.get(0).getChildObjects().get(10)).getCenterPoint().z);
-                ((Sphere)spheres.get(0).getChildObjects().get(11)).rotateObjectOnPoint(-1,0,1,0,((Sphere)spheres.get(0).getChildObjects().get(10)).getCenterPoint().x, ((Sphere)spheres.get(0).getChildObjects().get(10)).getCenterPoint().y, ((Sphere)spheres.get(0).getChildObjects().get(10)).getCenterPoint().z);
-                ((Sphere)spheres.get(0).getChildObjects().get(16)).rotateObjectOnPoint(-1,0,1,0,((Sphere)spheres.get(0).getChildObjects().get(10)).getCenterPoint().x, ((Sphere)spheres.get(0).getChildObjects().get(10)).getCenterPoint().y, ((Sphere)spheres.get(0).getChildObjects().get(10)).getCenterPoint().z);
+                ((Sphere) spheres.get(0).getChildObjects().get(10)).rotateObjectOnPoint(-1, 0, 1, 0, ((Sphere) spheres.get(0).getChildObjects().get(10)).getCenterPoint().x, ((Sphere) spheres.get(0).getChildObjects().get(10)).getCenterPoint().y, ((Sphere) spheres.get(0).getChildObjects().get(10)).getCenterPoint().z);
+                ((Sphere) spheres.get(0).getChildObjects().get(11)).rotateObjectOnPoint(-1, 0, 1, 0, ((Sphere) spheres.get(0).getChildObjects().get(10)).getCenterPoint().x, ((Sphere) spheres.get(0).getChildObjects().get(10)).getCenterPoint().y, ((Sphere) spheres.get(0).getChildObjects().get(10)).getCenterPoint().z);
+                ((Sphere) spheres.get(0).getChildObjects().get(16)).rotateObjectOnPoint(-1, 0, 1, 0, ((Sphere) spheres.get(0).getChildObjects().get(10)).getCenterPoint().x, ((Sphere) spheres.get(0).getChildObjects().get(10)).getCenterPoint().y, ((Sphere) spheres.get(0).getChildObjects().get(10)).getCenterPoint().z);
             }
 
-            if(window.isKeyPressed(GLFW_KEY_V))
-            {
-                if(missileLaunch)
-                {
-                    missile.moveToNextPoint(jalur);
+            if (window.isKeyPressed(GLFW_KEY_C) && gunCounter == 300) {
+                gunCounter = 0;
+                spheres.get(0).getChildObjects().get(16).getChildObjects().add(new Sphere
+                        (
+                                Arrays.asList
+                                        (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                                new ArrayList<>(),
+                                new Vector4f(1.0f, 0, 0, 1.0f), 0.005, 0.005, 0.01, 0, 0, 0, 1
+                        )
+                );
+
+
+                temp = ((Sphere) spheres.get(0).getChildObjects().get(16).getChildObjects().get(spheres.get(0).getChildObjects().get(16).getChildObjects().size() - 1));
+                temp.translateObject(((Sphere) spheres.get(0).getChildObjects().get(16)).getCpx(), ((Sphere) spheres.get(0).getChildObjects().get(16)).getCpy(), ((Sphere) spheres.get(0).getChildObjects().get(16)).getCpz());
+                float x, y, z, x1, x2, z1, z2;
+                x = ((Sphere) spheres.get(0).getChildObjects().get(16)).getCpx();
+                y = 0.1f;
+                z = ((Sphere) spheres.get(0).getChildObjects().get(16)).getCpz();
+
+                //temp.translateObject(((Sphere)spheres.get(0).getChildObjects().get(16)).getCpx(), ((Sphere)spheres.get(0).getChildObjects().get(16)).getCpy()-0f, ((Sphere)spheres.get(0).getChildObjects().get(16)).getCpz());
+
+                if (x >= 0) {
+                    x1 = x + 2;
+                    x2 = x + 5;
+                } else {
+                    x1 = x - 2;
+                    x2 = x - 5;
                 }
-                else
-                {
-                    missile = ((Sphere) spheres.get(0).getChildObjects().get(16));
-                    jalur = missile.generateBezierPoints(missile.getCpx(), missile.getCpy(), missile.getCpz(),
-                            missile.getCpx()-2, missile.getCpy(), missile.getCpz(),
-                            missile.getCpx()-5, -2, missile.getCpz());
-                    missileLaunch = true;
+                if (z >= 0) {
+                    z1 = -1 * (float) Math.sqrt((3 * 3) - (x1 * x1));
+                } else {
+                    z1 = (float) Math.sqrt((3 * 3) - (x1 * x1));
                 }
+                z2 = z1;
+
+                System.out.println(((Sphere) spheres.get(0).getChildObjects().get(16)).getCpy());
+                System.out.println(y);
+                temp.generateBezierPoints(x, y, z,
+                        x1, y, z1,
+                        x2, -2, z2);
+            } else if (window.isKeyPressed(GLFW_KEY_C)) {
+                gunCounter++;
+            }
+
+            for (Objects i : spheres.get(0).getChildObjects().get(16).getChildObjects()) {
+                ((Sphere) i).moveToNextPoint(((Sphere) i).getPath());
             }
 
         }
