@@ -11,17 +11,19 @@ import static org.lwjgl.opengl.GL20.*;
 
 public class Tiro
 {
-    private final Window window = new Window(800, 800, "window");
+    private final Window window = new Window(1000, 1000, "window");
     Camera camera = new Camera();
     Projection projection = new Projection(window.getWidth(), window.getHeight());
 
-    Sphere leftMissile, rightMissile;
+    Sphere leftMissile, rightMissile, temp;
 
     ArrayList<Sphere> spheres = new ArrayList<>();
+    ArrayList<Sphere> missileTrail = new ArrayList<>();
 
     ArrayList<Vector3f> leftPath, rightPath;
 
     boolean leftMissileLaunch, rightMissileLaunch, rotateMode = false;
+    int smokeCounter, gunCounter = 0;
 
     public static void main(String[] args)
     {
@@ -394,6 +396,19 @@ public class Tiro
                 spheres.get(0).getChildObjects().get(22).rotateObject(45f, 0, 0, 1);
                 spheres.get(0).getChildObjects().get(22).translateObject(0.335f, 0.007f, 0.73f);
             }
+
+            //CANNON KANAN
+            {
+                spheres.get(0).getChildObjects().add(new Sphere
+                        (
+                                Arrays.asList
+                                        (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                                new ArrayList<>(),
+                                new Vector4f(1.0f, 1.0f, 1.0f, 1.0f), 0.005, 0.005, 0.1, 0, 0, 0, 17
+                        )
+                );
+                spheres.get(0).getChildObjects().get(23).translateObject(0.154f, 0.054f, 0.41f);
+            }
         }
     }
 
@@ -404,35 +419,104 @@ public class Tiro
             //luncurkan misil kiri
             if(window.isKeyPressed(GLFW_KEY_V))
             {
+                if(leftMissileLaunch)
+                {
+                    if(leftPath.size() > 0)
+                    {
+                        missileTrail.add(new Sphere
+                                (
+                                        Arrays.asList
+                                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                                        new ArrayList<>(),
+                                        new Vector4f(0.35f, 0.35f, 0.35f, 1.0f), 0.03, 0.03, 0.03, 0, 0, 0, 1
+                                )
+                        );
+                        missileTrail.get(missileTrail.size()-1).translateObject(leftPath.get(0).x, leftPath.get(0).y, leftPath.get(0).z + 0.2f);
+                        System.out.println(leftPath.size());
+                    }
+
+                    leftMissileLaunch = leftMissile.moveToNextPoint(leftPath);
+                }
                 if(!leftMissileLaunch)
                 {
                     leftMissile = ((Sphere) spheres.get(0).getChildObjects().get(21));
                     leftPath = leftMissile.generateBezierPoints(leftMissile.getCpx(), leftMissile.getCpy(), leftMissile.getCpz(),
-                            leftMissile.getCpx(), leftMissile.getCpy(), -2,
-                            -5, leftMissile.getCpy()-2, -5);
+                            leftMissile.getCpx(), leftMissile.getCpy(), leftMissile.getCpz()-2,
+                            leftMissile.getCpx()-5, leftMissile.getCpy()-2, leftMissile.getCpz()-5);
                     leftMissileLaunch = true;
                 }
-            }
-            if(leftMissileLaunch)
-            {
-                leftMissileLaunch = leftMissile.moveToNextPoint(leftPath);
             }
 
             //luncurkan misil kanan
             if(window.isKeyPressed(GLFW_KEY_B))
             {
+                if(rightMissileLaunch)
+                {
+                    if(rightPath.size() > 0)
+                    {
+                        missileTrail.add(new Sphere
+                                (
+                                        Arrays.asList
+                                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                                        new ArrayList<>(),
+                                        new Vector4f(0.35f, 0.35f, 0.35f, 1.0f), 0.03, 0.03, 0.03, 0, 0, 0, 1
+                                )
+                        );
+                        missileTrail.get(missileTrail.size()-1).translateObject(rightPath.get(0).x, rightPath.get(0).y, rightPath.get(0).z + 0.2f);
+                        System.out.println(rightPath.size());
+                    }
+
+                    rightMissileLaunch = rightMissile.moveToNextPoint(rightPath);
+                }
                 if(!rightMissileLaunch)
                 {
                     rightMissile = ((Sphere) spheres.get(0).getChildObjects().get(22));
                     rightPath = rightMissile.generateBezierPoints(rightMissile.getCpx(), rightMissile.getCpy(), rightMissile.getCpz(),
-                            rightMissile.getCpx(), rightMissile.getCpy(), -5,
-                            5, rightMissile.getCpy()+5, -20);
+                            rightMissile.getCpx(), rightMissile.getCpy(), rightMissile.getCpz()-5,
+                            rightMissile.getCpx()+5, rightMissile.getCpy()+5, rightMissile.getCpz()-20);
                     rightMissileLaunch = true;
                 }
             }
-            if(rightMissileLaunch)
+
+            if(window.isKeyPressed(GLFW_KEY_C) && gunCounter == 8)
             {
-                rightMissileLaunch = rightMissile.moveToNextPoint(rightPath);
+                gunCounter = 0;
+                spheres.get(0).getChildObjects().get(23).getChildObjects().add(new Sphere
+                        (
+                                Arrays.asList
+                                        (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                                new ArrayList<>(),
+                                new Vector4f(1.0f, 0, 0, 1.0f), 0.005, 0.005, 0.01, 0, 0, 0, 1
+                        )
+                );
+
+                temp = ((Sphere)spheres.get(0).getChildObjects().get(23).getChildObjects().get(spheres.get(0).getChildObjects().get(23).getChildObjects().size()-1));
+                temp.translateObject(0.154f, 0.054f, 0.21f);
+                temp.generateBezierPoints(((Sphere)spheres.get(0).getChildObjects().get(23)).getCpx(), ((Sphere)spheres.get(0).getChildObjects().get(23)).getCpy(), ((Sphere)spheres.get(0).getChildObjects().get(23)).getCpz(),
+                        ((Sphere)spheres.get(0).getChildObjects().get(23)).getCpx(), ((Sphere)spheres.get(0).getChildObjects().get(23)).getCpy(), ((Sphere)spheres.get(0).getChildObjects().get(23)).getCpz() - 2,
+                        ((Sphere)spheres.get(0).getChildObjects().get(23)).getCpx(), ((Sphere)spheres.get(0).getChildObjects().get(23)).getCpy(), ((Sphere)spheres.get(0).getChildObjects().get(23)).getCpz() - 10);
+            }
+            else if(window.isKeyPressed(GLFW_KEY_C))
+            {
+                gunCounter++;
+            }
+
+            for (Objects i : spheres.get(0).getChildObjects().get(23).getChildObjects())
+            {
+                ((Sphere)i).moveToNextPoint(((Sphere) i).getPath());
+            }
+
+            if(missileTrail.size() > 0)
+            {
+                if(smokeCounter > 1)
+                {
+                    smokeCounter = 0;
+                    missileTrail.remove(0);
+                }
+                else
+                {
+                    smokeCounter++;
+                }
             }
 
             //sayap belakang keatas
@@ -693,6 +777,11 @@ public class Tiro
             for (Sphere objects : this.spheres)
             {
                 //gambar sekalian child
+                objects.draw(camera, projection);
+            }
+
+            for (Sphere objects : this.missileTrail)
+            {
                 objects.draw(camera, projection);
             }
 

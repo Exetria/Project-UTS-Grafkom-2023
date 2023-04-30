@@ -13,7 +13,7 @@ import static org.lwjgl.opengl.GL20.*;
 
 public class Okky
 {
-    private final Window window = new Window(800, 800, "window");
+    private final Window window = new Window(1000, 1000, "window");
     Camera camera = new Camera();
     Projection projection = new Projection(window.getWidth(), window.getHeight());
 
