@@ -4,6 +4,7 @@ import org.joml.Vector4f;
 import org.lwjgl.opengl.GL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.glClearColor;
@@ -12,6 +13,8 @@ import static org.lwjgl.opengl.GL20.*;
 public class Main
 {
     private final Window window = new Window(1000, 1000, "window");
+
+    Random rn = new Random();
     Camera camera = new Camera();
     Projection projection = new Projection(window.getWidth(), window.getHeight());
 
@@ -23,7 +26,8 @@ public class Main
 
     ArrayList<Vector3f> path, jalur, leftPath, rightPath;
 
-    int objectChoice, gunCounter = 0;
+    float tempX, tempZ;
+    int objectChoice, smokeCounter, gunCounter = 0;
     boolean turretLaunch, missileLaunch, leftMissileLaunch, rightMissileLaunch, rotateMode = false;
 
     public static void main(String[] args)
@@ -1396,7 +1400,7 @@ public class Main
                                 Arrays.asList
                                         (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
                                 new ArrayList<>(),
-                                new Vector4f(0.36f, 0.36f, 0.36f, 1.0f), 15, 1, 15, 0f, 0, 0, 2
+                                new Vector4f(0.7f, 1f, 0.3f, 1.0f), 40, 1, 40, 0f, 0, 0, 2
                         )
                 );
             }
@@ -1429,6 +1433,39 @@ public class Main
                 );
                 environment.get(2).rotateObject(-30f, 0, 1 , 0);
                 environment.get(2).translateObject(-3f, 1, 2.5f);
+            }
+
+            //WARNA 1 HIJAU         0.26f, 0.47f, 0.13f
+            //WARNA 2 AGAK KUNING   0.78f, 0.87f, 0.55f
+
+            for (int i = 0; i < 100; i++)
+            {
+                tempX = rn.nextFloat(-5, 5);
+                tempZ = rn.nextFloat(-5, 5);
+                if(i % 2 == 1)
+                {
+                    environment.add(new Sphere
+                            (
+                                    Arrays.asList
+                                            (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                                    new ArrayList<>(),
+                                    new Vector4f(0.26f, 0.47f, 0.13f, 1.0f), 1, 1, 1, 0f, 0, 0, 18
+                            )
+                    );
+                }
+                else
+                {
+                    environment.add(new Sphere
+                            (
+                                    Arrays.asList
+                                            (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                                    new ArrayList<>(),
+                                    new Vector4f(0.78f, 0.87f, 0.55f, 1.0f), 1, 1, 1, 0f, 0, 0, 18
+                            )
+                    );
+                }
+                environment.get(i+3).translateObject(tempX, 0.64f, tempZ);
+                environment.get(i+3).scaleObject(2.5f, 2.5f, 2.5f);
             }
         }
     }
@@ -1548,7 +1585,15 @@ public class Main
                     //hapus smoke yg sudah lama (pelan-pelan hilang)
                     if(missileTrail.size() > 0)
                     {
-                        missileTrail.remove(0);
+                        if(smokeCounter > 0)
+                        {
+                            smokeCounter = 0;
+                            missileTrail.remove(0);
+                        }
+                        else
+                        {
+                            smokeCounter++;
+                        }
                     }
 
                     //sayap belakang keatas

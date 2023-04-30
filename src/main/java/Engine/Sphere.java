@@ -139,16 +139,20 @@ public class Sphere extends Circle
         {
             createTireSupport();
         }
-        else if (option == 44) {
+        else if (option == 44)
+        {
             createSideGlass();
         }
-        else if (option == 45) {
+        else if (option == 45)
+        {
             createTurret();
         }
-        else if (option == 46) {
+        else if (option == 46)
+        {
             createFrontGlass();
         }
-        else if (option == 47) {
+        else if (option == 47)
+        {
             createKepalaTembakan();
         }
 
@@ -1091,7 +1095,35 @@ public class Sphere extends Circle
 
     public void createTree()
     {
+        //KEPALA POHON
+        createEllipticParaboloid();
+        scaleObject(0.01f, 0.01f, 0.1f);
 
+        //PENUTUP BAWAH PARABOLOID
+        childObjects.add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        color, radiusX, radiusY, 0.01, cpx, cpy, cpz, 1
+                )
+        );
+        childObjects.get(0).scaleObject(0.063f, 0.063f, 0.1f);
+        childObjects.get(0).translateObject(0, 0f, 0.353f);
+
+        //BATANG POHON
+        childObjects.add(new Sphere
+                (
+                        Arrays.asList
+                                (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                        new ArrayList<>(),
+                        new Vector4f(0.4f, 0.15f, 0.075f, 1.0f), radiusX, radiusY, radiusZ, cpx, cpy, cpz, 3
+                )
+        );
+        childObjects.get(1).scaleObject(0.025f, 0.025f, 0.09f);
+        childObjects.get(1).translateObject(0, 0f, 0.44f);
+
+        rotateObject(90f, 1, 0, 0);
     }
 
     public void createTrapezoidwithSquare()
