@@ -1,0 +1,48 @@
+if (window.isKeyPressed(GLFW_KEY_C) && tankCounter == 20)
+                {
+                    System.out.println("fire");
+                    tankCounter = 0;
+                    spheres.get(1).getChildObjects().get(16).getChildObjects().add(new Sphere
+                            (
+                                    Arrays.asList
+                                            (new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER), new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)),
+                                    new ArrayList<>(),
+                                    new Vector4f(1.0f, 0, 0, 1.0f), 0.005, 0.005, 0.01, 0, 0, 0, 1
+                            )
+                    );
+
+
+                    temp = ((Sphere) spheres.get(1).getChildObjects().get(16).getChildObjects().get(spheres.get(1).getChildObjects().get(16).getChildObjects().size() - 1));
+                    temp.translateObject(((Sphere) spheres.get(1).getChildObjects().get(16)).getCpx(), ((Sphere) spheres.get(1).getChildObjects().get(16)).getCpy(), ((Sphere) spheres.get(1).getChildObjects().get(16)).getCpz());
+                    float x, y, z, x1, x2, z1, z2;
+                    x = ((Sphere) spheres.get(1).getChildObjects().get(16)).getCpx();
+                    y = 0.7f;
+                    z = ((Sphere) spheres.get(1).getChildObjects().get(16)).getCpz();
+
+                    //temp.translateObject(((Sphere)spheres.get(1).getChildObjects().get(16)).getCpx(), ((Sphere)spheres.get(1).getChildObjects().get(16)).getCpy()-0f, ((Sphere)spheres.get(1).getChildObjects().get(16)).getCpz());
+
+                    if (x >= 0) {
+                        x1 = x + 2;
+                        x2 = x + 5;
+                    } else {
+                        x1 = x - 2;
+                        x2 = x - 5;
+                    }
+                    if (z >= 0) {
+                        z1 = -1 * (float) Math.sqrt((3 * 3) - (x1 * x1));
+                    } else {
+                        z1 = (float) Math.sqrt((3 * 3) - (x1 * x1));
+                    }
+                    z2 = z1;
+
+                    temp.generateBezierPoints(x, y, z,
+                            x1, y, z1,
+                            x2, -2, z2);
+                }
+                else if (window.isKeyPressed(GLFW_KEY_C)) {
+                    tankCounter++;
+                }
+
+                for (Objects i : spheres.get(1).getChildObjects().get(16).getChildObjects()) {
+                    ((Sphere) i).moveToNextPoint(((Sphere) i).getPath());
+                }
